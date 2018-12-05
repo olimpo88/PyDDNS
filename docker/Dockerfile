@@ -1,0 +1,16 @@
+FROM python:2.7-stretch
+
+
+RUN apt-get update && apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev python-ldap libkf5ldap-dev xfonts-base xfonts-75dpi -y --force-yes
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8000
+
+RUN mkdir /script 
+COPY runserver.sh /script
+CMD ["/script/runserver.sh"]
+#CMD ["python","manage.py","runserver","0.0.0.0:8000"]

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PYDDNS</title>
+	<meta name="author" content="Peralta Leandro">
+	<link rel="stylesheet" type="text/css" href="/static/common/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/static/common/css/jquery-ui.css" />
+	<script src="/static/common/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/common/js/bootstrap.min.js"></script>
+    <style>
+		.col-md-12.barra_superior {
+		    background: black;
+		    color: white;
+		    padding: 10px;
+		    padding-left: 25px;
+		    font-weight: bold;
+		    font-size: 1.5em;
+		}
+		.col-md-12.barra_superior span{
+			color:#ffa900;
+		}
+		#exit{
+			float: right;
+    		margin-right: 25px;
+		}
+
+		#exit a{
+			margin: 0px;
+		}
+		.cuerpo{
+			padding: 30px;
+    		padding-top: 0px;
+
+		}
+		.col-md-12.barra_inferior {
+		    background: #e5e5e5;
+		    text-align: center;
+		    margin-top: 100px;
+		    padding: 10px;
+		}
+		#mis_subdominios{
+		    border: 1px solid #dadada;
+		}
+    </style>
+</head>
+<body>
+	<div class="container">
+		<div class="row" style="border: 1px solid #cecece;margin-top: 20px;">
+			<div class="col-md-12 barra_superior">
+				<span>PY</span>DDNS
+				<div id="exit"><a type="button-sm" class="btn btn-default navbar-btn" href="/common/logout">Salir</a></div>
+			</div>
+			<div class="col-md-12 cuerpo">
+
+				<h3>Bienvenido {{ name }}  </h3>
+				<span>Su IP actual es  <span class="my_ip"></span></span><br/><br/>
+
+				<table class="table table-striped" id="mis_subdominios">
+					<tr>
+						<th>Mis dominios</th>
+						<th>IP</th>
+						<th>Última actualización</th>
+						<th>Sincronizar</th>
+					</tr>
+					{% for info in info_dominios %}
+						<tr>
+							<td>{{ info.dominio }}</td>
+							<td>{{ info.ip }}</td>
+							<td>{{ info.fecha }}</td>
+							<td>
+								<button type="button" class="btn btn-success btn-xs attr_ip" id="dominio_{{info.dominio}}" onclick="actualizarIp('{{info.dominio}}')">Actualizar a <span class="my_ip"></span></button>
+							</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<br><br>
+				<h3>Mis últimos registros</h3>
+				<table class="table table-striped">
+					<thead class="thead-dark" style="background:#dfdfdf;">
+						<tr>
+							<th>
+								#ID
+							</th>
+							<th>
+								Fecha
+							</th>
+							<th>
+								Código
+							</th>
+							<th>
+								Mensaje
+							</th>	
+							<th>
+								Dominio
+							</th>					
+							<th>
+								IP
+							</th>
+							<th>
+								Agente
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for a in lista_actividad %}
+							<tr>
+								<td>{{ a.id_log }}</td>
+								<td>{{ a.fecha_hora|date:"d/m/Y H:i" }}</td>
+								<td>{{ a.codigo }}</td>
+								<td>{{ a.resultado }}</td>
+								<td>{{ a.dominio }}</td>
+								<td>{{ a.origen }}</td>
+								<td title="{{ a.agente }}">{{ a.agente|slice:":30" }}...</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="pagination" style="float:right;margin-right: 5px;">
+					    <span class="step-links">
+					        {% if lista_actividad.has_previous %}
+					            <a href="?page={{ lista_actividad.previous_page_number }}">< Anterior</a>
+					        {% endif %}
+
+					        <span class="current">
+					            Página {{ lista_actividad.number }} de {{ lista_actividad.paginator.num_pages }}
+					        </span>
+
+					        {% if lista_actividad.has_next %}
+					            <a href="?page={{ lista_actividad.next_page_number }}">Siguiente ></a>
+					        {% endif %}
+					    </span>
+				</div>
+			</div>
+			<div class="col-md-12 barra_inferior">
+				Desarrollado por Altec S.E.
+			</div>
+		</div>
+	</div>
+	<script type="application/javascript">
+	var ip
+
+	function actualizarIp(dominio){
+		console.log(dominio);
+		console.log(ip);
+
+		$.ajax({url:"/ip/update/"+dominio+"/"+ip,
+			type: "GET",
+			processData: false,
+			contentType: false,
+			dataType:'json',
+			success:function(result){
+				console.log(result)
+		  		if(result['success']){
+	            	//alert("Contrato agregado correctamente");
+	            	location.reload(true);
+	            }
+	            else{
+	                mensaje(result['error']);
+	            }
+		  	}	
+		});
+
+	}
+
+	  $(function() {
+	    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+	      function(json) {
+	      	$('.my_ip').html(json.ip);
+	      	ip=json.ip;
+	      }
+	    );
+	  });
+	</script>
+</body>
+</html>

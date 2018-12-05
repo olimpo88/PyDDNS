@@ -1,0 +1,10 @@
+
+*.pyc
+pyntra.sock
+newenv/*
+logs/*
+appdata/pyddns/db.sqlite3
+appdata/pyddns/common/migrations/
+appdata/pyddns/pyddns/migrations/
+data/*
+docker-compose.yml

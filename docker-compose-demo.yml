@@ -1,0 +1,67 @@
+version: '3'
+services:
+  ddns:
+    image: davd/docker-ddns:1.2.1
+    restart: always
+    environment:
+      RECORD_TTL: 60
+      ZONE: ddns.demo.com
+      SHARED_SECRET: el@sadsadyS58
+    ports:
+      - "53:53"
+      - "53:53/udp"
+    volumes:
+       - ./data/bind-data:/var/cache/bind
+    networks:
+      red:
+  python:
+    image: pyddns:0.1
+    restart: always
+    volumes:
+      - ./appdata/pyddns:/usr/src/app
+      - ./appdata/static/node_modules:/usr/src/app/static/node_modules
+    environment:
+      DNS_HOST: ddns
+      DNS_API_PORT: 8080
+      DNS_DOMAIN: ddns.demo.com
+      DNS_SHARED_SECRET: el@sadsadyS58
+      DNS_ALLOW_AGENT: ddclient3,ddclient
+      DB_HOST: postgres
+      DB_NAME: pyddns
+      DB_USER: pyddns
+      DB_PASSWORD: PyDyn@m1cDNSP0s 
+      DJANGO_SU_NAME: admin
+      DJANGO_SU_EMAIL: admin@my.company
+      DJANGO_SU_PASSWORD: 1234
+    depends_on:
+      - "postgres"
+    networks:
+      red:
+
+  postgres:
+    image: postgres:9.6
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: PyDyn@m1cDNSP0s
+      POSTGRES_USER: pyddns
+      POSTGRES_DB: pyddns
+    volumes:
+     - ./data/dbdata:/var/lib/postgresql/data
+    networks:
+      red:
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:8000"
+    volumes:
+      - ./config/nginx_src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./appdata/static:/static
+    depends_on:
+      - "python"
+    networks:
+      red:
+networks:
+  red:
+

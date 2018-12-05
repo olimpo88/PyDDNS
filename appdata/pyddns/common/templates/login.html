@@ -1,0 +1,327 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Login Screen</title>
+  <meta name="author" content="Peralta Leandro">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/common/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link href="/static/common/css/style.css" rel="stylesheet" id="bootstrap-css">
+  <script src="/static/common/js/jquery-1.10.2.min.js"></script>
+  <script src="/static/common/js/bootstrap.min.js"></script>
+  <script src="/static/common/js/particles.js"></script>
+  <script>
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie != '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+        }
+      }
+      return cookieValue;
+    }
+  
+
+    function enviar(){
+      var passwd = document.getElementById("password").value;
+      var username = document.getElementById("username").value;
+
+        //data: { username: username, password: passwd, csrfmiddlewaretoken: getCookie('csrftoken')},
+        //{% csrf_token %}
+      var csr= $( "input[name$='csrfmiddlewaretoken']" ).val();
+      $.ajax({url:"/common/dologin/",
+        type: "POST",
+        data: { username: username, password: passwd, csrfmiddlewaretoken: csr },
+        success:function(result){
+          var myObject = eval('(' + result + ')');
+          console.log(myObject);
+            //Si el login es correcto lo mando a la pagina que corresponde
+            if (myObject['success']==true){
+              location.href="/main/";
+            }
+            else{
+              $('#error').html(myObject['errors']['reason']).show(200);
+            }
+        }
+      });
+    }
+  </script>
+    
+  <style>
+    body {
+      margin: 0;
+      font:normal 75% Arial, Helvetica, sans-serif;
+    }
+
+    canvas {
+      display: block;
+      vertical-align: bottom;
+    }
+
+    /* ---- particles.js container ---- */
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #FFF;
+      background-image: url("");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+    }
+
+    /* ---- stats.js ---- */
+
+    .count-particles{
+      background: #000022;
+      position: absolute;
+      top: 48px;
+      left: 0;
+      width: 80px;
+      color: #13E8E9;
+      font-size: .8em;
+      text-align: left;
+      text-indent: 4px;
+      line-height: 14px;
+      padding-bottom: 2px;
+      font-family: Helvetica, Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    .js-count-particles{
+      font-size: 1.1em;
+    }
+
+    #stats,
+    .count-particles{
+      -webkit-user-select: none;
+    }
+
+    #stats{
+      border-radius: 3px 3px 0 0;
+      overflow: hidden;
+    }
+
+    .count-particles{
+      border-radius: 0 0 3px 3px;
+    }
+
+    .fullscreen_bg{
+      background-image: none;
+    }
+
+    .form-signin{
+      background: rgba(0,0,0,0.6);
+      border-radius: 10px;
+      border: 1px solid #636363;
+      margin-top: 10%;
+    }
+
+    .form-signin .form-signin-heading{
+      margin: 5px;
+      margin-bottom: 20px;
+    }
+  
+    #logo_altec{
+      position: absolute;
+      width: 80px;
+      margin-top: 30px;
+      margin-left: 80px;
+    }
+
+    .form-signin input[type="text"], .form-signin input[type="password"]{
+        border:1px solid #444444;
+        margin-bottom: 5px;     
+    }
+
+    #error{
+      color: white;
+      font-size: 2em;
+      text-align: center;
+      background: #ff000073;
+      border: 1px solid #a32525;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      padding: 5px;
+      display: none;
+    }
+ </style>
+</head>
+<body cz-shortcut-listen="true"  id="particles-js" >
+
+	<div  class="fullscreen_bg">
+    <div class="">
+    	<form class="form-signin">
+    		<h1 class="form-signin-heading"><span style="color: #ffa900;">PY</span>DDNS</h1>
+        <div id="error"></div>
+        <input type="text" class="form-control" placeholder="Usuario" required="" autofocus="" id="username">
+        <input type="password" class="form-control" placeholder="Contraseña" required="" id="password">
+        {% csrf_token %}
+    		<button class="btn btn-lg btn-success btn-block" type="button" onclick="enviar()" style="margin-top: 15px;">Ingresar</button>
+    	</form>
+      <script>
+    </script>
+    </div>	
+  </div>
+  <script>
+  $('#password').keypress(function(e) 
+  {
+     if(e.which == 13) 
+     {
+        enviar()
+     }
+  });
+  $('#username').keypress(function(e) 
+  {
+     if(e.which == 13) 
+     {
+        enviar()
+     }
+  });
+
+    /* ---- particles.js config ---- */
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 300,
+          "density": {
+            "enable": true,
+            "value_area": 350
+          }
+        },
+        "color": {
+          "value": "#999999"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#FFFFFF"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 100,
+            "height": 100
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 5,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#AAAAAA",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 1.5,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+
+    /* ---- stats.js config ---- */
+
+    var count_particles, stats, update;
+    stats = new Stats;
+    stats.setMode(0);
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+    document.body.appendChild(stats.domElement);
+    count_particles = document.querySelector('.js-count-particles');
+    update = function() {
+      stats.begin();
+      stats.end();
+      if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) {
+        count_particles.innerText = window.pJSDom[0].pJS.particles.array.length;
+      }
+      requestAnimationFrame(update);
+    };
+    requestAnimationFrame(update);
+
+
+
+  </script>
+</body>
+</html>
