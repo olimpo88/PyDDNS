@@ -18,12 +18,21 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from common.views import *
 from views import *
+import os
+
 
 urlpatterns = [
     url(r'^main/', main),
-    url(r'^admin/', admin.site.urls),
     url(r'^common/', include('common.urls')),
     url(r'^nic/update', updateip),
     url(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),
     url(r'^$', login),
 ]
+
+#Add admin url
+admin_url='admin'
+if os.environ.get('DJANGO_ADMIN_URL'):
+    additional_settings = url(r'^'+ os.environ.get('DJANGO_ADMIN_URL') +"/", admin.site.urls),
+else:
+    additional_settings = url(r'^admin/', admin.site.urls),
+urlpatterns += additional_settings

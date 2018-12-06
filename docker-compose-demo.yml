@@ -29,7 +29,8 @@ services:
       DB_HOST: postgres
       DB_NAME: pyddns
       DB_USER: pyddns
-      DB_PASSWORD: PyDyn@m1cDNSP0s 
+      DB_PASSWORD: PyDyn@m1cDNSP0s
+      DJANGO_ADMIN_URL: administrator
       DJANGO_SU_NAME: admin
       DJANGO_SU_EMAIL: admin@my.company
       DJANGO_SU_PASSWORD: 1234
