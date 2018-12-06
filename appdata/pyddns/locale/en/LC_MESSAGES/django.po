@@ -1,0 +1,126 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-06 13:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: pyddns/settings.py:165
+msgid "Spanish"
+msgstr ""
+
+#: pyddns/settings.py:166
+msgid "English"
+msgstr ""
+
+#: pyddns/templates/dash.html:53
+msgid "Logout"
+msgstr ""
+
+#: pyddns/templates/dash.html:57
+msgid "Welcome"
+msgstr ""
+
+#: pyddns/templates/dash.html:58
+msgid "Your current IP is"
+msgstr ""
+
+#: pyddns/templates/dash.html:62 pyddns/templates/dash.html.py:64
+msgid "My domains"
+msgstr ""
+
+#: pyddns/templates/dash.html:65
+msgid "Action"
+msgstr ""
+
+#: pyddns/templates/dash.html:73
+msgid "Update to"
+msgstr ""
+
+#: pyddns/templates/dash.html:79
+msgid "My last records"
+msgstr ""
+
+#: pyddns/templates/dash.html:87
+msgid "Date"
+msgstr ""
+
+#: pyddns/templates/dash.html:90
+msgid "Code"
+msgstr ""
+
+#: pyddns/templates/dash.html:93
+msgid "Message"
+msgstr ""
+
+#: pyddns/templates/dash.html:96
+msgid "Domain"
+msgstr ""
+
+#: pyddns/templates/dash.html:102
+msgid "Agent"
+msgstr ""
+
+#: pyddns/templates/dash.html:123
+msgid "Previous"
+msgstr ""
+
+#: pyddns/templates/dash.html:127
+msgid "Page"
+msgstr ""
+
+#: pyddns/templates/dash.html:127
+msgid "of"
+msgstr ""
+
+#: pyddns/templates/dash.html:131
+msgid "Next"
+msgstr ""
+
+#: pyddns/templates/dash.html:137
+msgid "Develop by"
+msgstr ""
+
+#: pyddns/templates/dash.html:178
+msgid "The updatewas successful, and the hostname is now updated"
+msgstr ""
+
+#: pyddns/templates/dash.html:179
+msgid "The APP not sinc bind"
+msgstr ""
+
+#: pyddns/templates/dash.html:180
+msgid "The hostname specified does not exist in this user account"
+msgstr ""
+
+#: pyddns/templates/dash.html:181
+msgid "The username and password pair do not match a real user"
+msgstr ""
+
+#: pyddns/templates/dash.html:182 pyddns/templates/dash.html.py:183
+msgid "Incorrect authentication format"
+msgstr ""
+
+#: pyddns/templates/dash.html:184
+msgid "Missing header HTTP_AUTHORIZATION"
+msgstr ""
+
+#: pyddns/templates/dash.html:185
+msgid "Missing header HTTP_USER_AGENT"
+msgstr ""
+
+#: pyddns/templates/dash.html:186
+msgid "You have exceeded the maximum number of attempts"
+msgstr ""

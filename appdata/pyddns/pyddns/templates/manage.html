@@ -86,23 +86,23 @@
 			</div>
 			<div class="col-md-12 cuerpo">
 
-				<h3>{% trans "Welcome" %} {{ name }}  </h3>
+				<h3>{% trans "Administration" %} {{ name }}  </h3>
 				<span>{% trans "Your current IP is" %} <span class="my_ip"></span></span><br/><br/>
 
 				<table class="table table-striped" id="mis_subdominios">
 					<tr>
 						<th>{% trans "My domains" %}</th>
 						<th>IP</th>
-						<th>{% trans "Date" %}</th>
+						<th>{% trans "My domains" %}</th>
 						<th>{% trans "Action" %}</th>
 					</tr>
 					{% for info in info_domains %}
 						<tr>
-							<td>{{ info.domain }}</td>
+							<td>{{ info.dominio }}</td>
 							<td>{{ info.ip }}</td>
-							<td>{{ info.date }}</td>
+							<td>{{ info.fecha }}</td>
 							<td>
-								<button type="button" class="btn btn-success btn-xs attr_ip" id="date_{{info.domain}}" onclick="actualizarIp('{{info.domain}}')">{% trans "Update to" %} <span class="my_ip"></span></button>
+								<button type="button" class="btn btn-success btn-xs attr_ip" id="dominio_{{info.dominio}}" onclick="actualizarIp('{{info.dominio}}')">{% trans "Update to" %} <span class="my_ip"></span></button>
 							</td>
 						</tr>
 					{% endfor %}
@@ -136,31 +136,31 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for a in list_activity %}
+						{% for a in lista_actividad %}
 							<tr>
 								<td>{{ a.id_log }}</td>
-								<td>{{ a.date|date:"d/m/Y H:i" }}</td>
-								<td>{{ a.code }}</td>
-								<td>{% trans a.result %}</td>
-								<td>{{ a.domain }}</td>
-								<td>{{ a.ip }}</td>
-								<td title="{{ a.agent }}">{{ a.agent|slice:":30" }}...</td>
+								<td>{{ a.fecha_hora|date:"d/m/Y H:i" }}</td>
+								<td>{{ a.codigo }}</td>
+								<td>{% trans a.resultado %}</td>
+								<td>{{ a.dominio }}</td>
+								<td>{{ a.origen }}</td>
+								<td title="{{ a.agente }}">{{ a.agente|slice:":30" }}...</td>
 							</tr>
 						{% endfor %}
 					</tbody>
 				</table>
 				<div class="pagination" style="float:right;margin-right: 5px;">
 					    <span class="step-links">
-					        {% if list_activity.has_previous %}
-					            <a href="?page={{ list_activity.previous_page_number }}">< {% trans "Previous" %}</a>
+					        {% if lista_actividad.has_previous %}
+					            <a href="?page={{ lista_actividad.previous_page_number }}">< {% trans "Previous" %}</a>
 					        {% endif %}
 
 					        <span class="current">
-					            {% trans "Page" %} {{ list_activity.number }} {% trans "of" %} {{ list_activity.paginator.num_pages }}
+					            {% trans "Page" %} {{ lista_actividad.number }} {% trans "of" %} {{ lista_actividad.paginator.num_pages }}
 					        </span>
 
-					        {% if list_activity.has_next %}
-					            <a href="?page={{ list_activity.next_page_number }}">{% trans "Next" %} ></a>
+					        {% if lista_actividad.has_next %}
+					            <a href="?page={{ lista_actividad.next_page_number }}">{% trans "Next" %} ></a>
 					        {% endif %}
 					    </span>
 				</div>
@@ -170,29 +170,14 @@
 			</div>
 		</div>
 	</div>
-
-	<!--
-	Posibles menssajes:
-	{% trans "The updatewas successful and the hostname is now updated" %}
-	{% trans "The APP not sinc bind" %}
-	{% trans "The hostname specified does not exist in this user account" %}
-	{% trans "The username and password pair do not match a real user" %}
-	{% trans "Incorrect authentication format" %}
-	{% trans "Incorrect authentication format" %}
-	{% trans "Missing header HTTP_AUTHORIZATION" %}
-	{% trans "Missing header HTTP_USER_AGENT" %}
-	{% trans "You have exceeded the maximum number of attempts" %}
-	-->
-
-
 	<script type="application/javascript">
 	var ip
 
-	function actualizarIp(domain){
-		console.log(domain);
+	function actualizarIp(dominio){
+		console.log(dominio);
 		console.log(ip);
 
-		$.ajax({url:"/ip/update/"+domain+"/"+ip,
+		$.ajax({url:"/ip/update/"+dominio+"/"+ip,
 			type: "GET",
 			processData: false,
 			contentType: false,
@@ -204,7 +189,7 @@
 	            	location.reload(true);
 	            }
 	            else{
-	                alert(result['message']);
+	                mensaje(result['error']);
 	            }
 		  	}	
 		});
@@ -220,5 +205,17 @@
 	    );
 	  });
 	</script>
+	<!--
+	Posibles menssajes:
+	{% trans "The updatewas successful, and the hostname is now updated" %}
+	{% trans "The APP not sinc bind" %}
+	{% trans "The hostname specified does not exist in this user account" %}
+	{% trans "The username and password pair do not match a real user" %}
+	{% trans "Incorrect authentication format" %}
+	{% trans "Incorrect authentication format" %}
+	{% trans "Missing header HTTP_AUTHORIZATION" %}
+	{% trans "Missing header HTTP_USER_AGENT" %}
+	{% trans "You have exceeded the maximum number of attempts" %}
+	-->
 </body>
 </html>

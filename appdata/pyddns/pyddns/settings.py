@@ -54,6 +54,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'pyddns.urls'
@@ -71,6 +72,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.request",
             ],
         },
     },
@@ -131,7 +134,7 @@ AUTHENTICATION_BACKENDS = (
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'es-ES'
+LANGUAGE_CODE = 'es-Es'
 
 TIME_ZONE = 'UTC'
 
@@ -153,3 +156,17 @@ DNS_API_PORT= os.environ.get('DNS_API_PORT')
 DNS_SHARED_SECRET= os.environ.get('DNS_SHARED_SECRET')
 DNS_ALLOW_AGENT= os.environ.get('DNS_ALLOW_AGENT')
 DNS_DOMAIN= os.environ.get('DNS_DOMAIN')
+
+
+
+#Configuration for translation
+from django.utils.translation import ugettext_lazy as _
+LANGUAGES = (
+    ('es', _('Spanish')),
+    ('en', _('English')),
+)
+
+# Definimos la ruta de los archivos de idiomas
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)

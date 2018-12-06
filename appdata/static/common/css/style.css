@@ -39,7 +39,8 @@
       left: 0;
       background-size: cover;
       background-position: 50% 50%;
-      background-image: url('/static/common/img/portada.jpg');
+      background-image: url('/static/common/img/background.jpg');
+      background-size: 100%;
       background-repeat:repeat;
     }
     .form-signin {

@@ -25,7 +25,7 @@ def dologin(request):
 	}
 	username=request.POST['username']
 	if request.session.test_cookie_worked():
-		cant_fails=Activity_log.objects.filter(action='DOLOGIN', origen=getForwardedFor(request), fecha_hora__gt=(datetime.now()-timedelta(minutes=10)), resultado__startswith='False').count()
+		cant_fails=Activity_log.objects.filter(action='DOLOGIN', xforward=getForwardedFor(request), date__gt=(datetime.now()-timedelta(minutes=10)), result__startswith='False').count()
 		if cant_fails>=5:
 			myjson['errors']['reason']=u'Ha superado la cantidad máxima de intentos.'
 		else:
@@ -45,7 +45,7 @@ def dologin(request):
 				myjson['errors']['reason'] = 'Usuario y/o clave invalida.'
 	else:
 		myjson['errors']['reason'] = 'Por favor, habilite las Cookies en su navegador.'
-	Activity_log(action='DOLOGIN', origen=getForwardedFor(request), ip_origen=request.META['HTTP_X_FORWARDED_FOR'], afectado=username, resultado="%s - %s"%(myjson['success'], myjson['errors']['reason'])).save()
+	Activity_log(action='DOLOGIN', xforward=getForwardedFor(request), user_affected=username, result="%s - %s"%(myjson['success'], myjson['errors']['reason'])).save()
 
 	return HttpResponse(json.dumps(myjson))
 

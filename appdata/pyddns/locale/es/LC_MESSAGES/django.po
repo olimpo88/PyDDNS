@@ -1,0 +1,161 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-06 16:34+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: common/templates/login.html:154
+msgid "User"
+msgstr "Usuario"
+
+#: common/templates/login.html:155
+msgid "Password"
+msgstr "Contraseña"
+
+#: common/templates/login.html:157
+msgid "Login"
+msgstr "Ingresar"
+
+#: pyddns/settings.py:165
+msgid "Spanish"
+msgstr "Español"
+
+#: pyddns/settings.py:166
+msgid "English"
+msgstr "Ingles"
+
+#: pyddns/templates/dash.html:82 pyddns/templates/manage.html.py:82
+msgid "Logout"
+msgstr "Salir"
+
+#: pyddns/templates/dash.html:84 pyddns/templates/manage.html.py:84
+msgid "Administrator"
+msgstr "Administrador"
+
+#: pyddns/templates/dash.html:89
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: pyddns/templates/dash.html:90 pyddns/templates/manage.html.py:90
+msgid "Your current IP is"
+msgstr "Su IP actual es"
+
+#: pyddns/templates/dash.html:94 pyddns/templates/dash.html.py:96
+#: pyddns/templates/manage.html:94 pyddns/templates/manage.html.py:96
+msgid "My domains"
+msgstr "Mis dominios"
+
+#: pyddns/templates/dash.html:97 pyddns/templates/manage.html.py:97
+msgid "Action"
+msgstr "Acción"
+
+#: pyddns/templates/dash.html:105 pyddns/templates/manage.html.py:105
+msgid "Update to"
+msgstr "Actualizar a"
+
+#: pyddns/templates/dash.html:111 pyddns/templates/manage.html.py:111
+msgid "My last records"
+msgstr "Mis últimos registros"
+
+#: pyddns/templates/dash.html:119 pyddns/templates/manage.html.py:119
+msgid "Date"
+msgstr "Fecha"
+
+#: pyddns/templates/dash.html:122 pyddns/templates/manage.html.py:122
+msgid "Code"
+msgstr "Código"
+
+#: pyddns/templates/dash.html:125 pyddns/templates/manage.html.py:125
+msgid "Message"
+msgstr "Mensaje"
+
+#: pyddns/templates/dash.html:128 pyddns/templates/manage.html.py:128
+msgid "Domain"
+msgstr "Dominio"
+
+#: pyddns/templates/dash.html:134 pyddns/templates/manage.html.py:134
+msgid "Agent"
+msgstr "Agente"
+
+#: pyddns/templates/dash.html:155 pyddns/templates/manage.html.py:155
+msgid "Previous"
+msgstr "Anterior"
+
+#: pyddns/templates/dash.html:159 pyddns/templates/manage.html.py:159
+msgid "Page"
+msgstr "Página"
+
+#: pyddns/templates/dash.html:159 pyddns/templates/manage.html.py:159
+msgid "of"
+msgstr "de"
+
+#: pyddns/templates/dash.html:163 pyddns/templates/manage.html.py:163
+msgid "Next"
+msgstr "Siguiente"
+
+#: pyddns/templates/dash.html:210
+msgid "The updatewas successful and the hostname is now updated"
+msgstr ""
+"La actualización fue exitosa y el nombre de host ahora está actualizado"
+
+#: pyddns/templates/dash.html:211 pyddns/templates/manage.html.py:211
+msgid "The APP not sinc bind"
+msgstr ""
+"La aplicación no pudo sincronizar el servicio BIND (contacte con su "
+"administrador)"
+
+#: pyddns/templates/dash.html:212 pyddns/templates/manage.html.py:212
+msgid "The hostname specified does not exist in this user account"
+msgstr "El nombre de host especificado no existe en esta cuenta de usuario"
+
+#: pyddns/templates/dash.html:213 pyddns/templates/manage.html.py:213
+msgid "The username and password pair do not match a real user"
+msgstr ""
+"El par de nombre de usuario y contraseña no coinciden con un usuario real"
+
+#: pyddns/templates/dash.html:214 pyddns/templates/dash.html.py:215
+#: pyddns/templates/manage.html:214 pyddns/templates/manage.html.py:215
+msgid "Incorrect authentication format"
+msgstr "Formato de autenticación incorrecto"
+
+#: pyddns/templates/dash.html:216 pyddns/templates/manage.html.py:216
+msgid "Missing header HTTP_AUTHORIZATION"
+msgstr "Falta el encabezado HTTP_AUTHORIZATION"
+
+#: pyddns/templates/dash.html:217 pyddns/templates/manage.html.py:217
+msgid "Missing header HTTP_USER_AGENT"
+msgstr "Falta el encabezado HTTP_USER_AGENT"
+
+#: pyddns/templates/dash.html:218 pyddns/templates/manage.html.py:218
+msgid "You have exceeded the maximum number of attempts"
+msgstr "Has superado el número máximo de intentos."
+
+#: pyddns/templates/manage.html:89
+#, fuzzy
+#| msgid "Administrator"
+msgid "Administration"
+msgstr "Administrador"
+
+#: pyddns/templates/manage.html:210
+#, fuzzy
+#| msgid "The updatewas successful and the hostname is now updated"
+msgid "The updatewas successful, and the hostname is now updated"
+msgstr ""
+"La actualización fue exitosa y el nombre de host ahora está actualizado"
+
+#~ msgid "Develop by"
+#~ msgstr "Desarrollado por"
