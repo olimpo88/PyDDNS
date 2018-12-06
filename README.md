@@ -16,4 +16,4 @@ python manage.py makemessages --locale es
 
 Editar el archivo /locale/XXXX/LC_MESSAGES/django.po
 compilarlo con:
-python django-admin compilemessages
+python manage.py compilemessages
