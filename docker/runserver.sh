@@ -1,13 +1,13 @@
 #!/bin/bash
 
-sleep 10
+#sleep 10
 cd /usr/src/app
-if [ ! -f app/manage.py ]
+if [ ! -f manage.py ]
 then
 	django-admin startproject app .
 fi
 
-python manage.py migrate makemigrations
+python manage.py makemigrations
 python manage.py migrate --noinput
 
 if [[ ! -z "${DJANGO_SU_NAME}" ]]; then

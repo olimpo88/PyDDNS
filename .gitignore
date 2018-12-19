@@ -4,7 +4,7 @@ pyntra.sock
 newenv/*
 logs/*
 appdata/pyddns/db.sqlite3
-appdata/pyddns/common/migrations/
-appdata/pyddns/pyddns/migrations/
+appdata/pyddns/common/migrations/[0-9]*.py
+appdata/pyddns/pyddns/migrations/[0-9]*.py
 data/*
 docker-compose.yml

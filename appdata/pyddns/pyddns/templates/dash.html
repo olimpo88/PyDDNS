@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="/static/common/css/jquery-ui.css" />
 	<script src="/static/common/js/jquery-1.10.2.min.js"></script>
     <script src="/static/common/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <style>
 	    body{
 	    	background-image: url(/static/common/img/background_trans.png);
@@ -16,17 +17,32 @@
 		    background-size: 100%;
 		    background-color: #010103;
 	    }
-		.col-md-12.barra_superior {
+		.barra_superior {
 		    background: black;
 		    color: white;
-		    padding: 10px;
-		    padding-left: 25px;
-		    font-weight: bold;
-		    font-size: 1.5em;
+		    border: 0px;
+    		border-radius: 0px;
 		}
-		.col-md-12.barra_superior span{
+
+		.barra_superior a{
+		    color: white !important;
+		}
+
+		.barra_superior .navbar-nav a:hover{
+		    background: #87878c !important;;
+		}
+
+		.barra_superior .active a{
+		    color: black !important;
+		}
+
+		.barra_superior .logo{
+			font-weight: bold;
+		}
+		.barra_superior .logo span{
 			color:#ffa900;
 		}
+
 		#exit{
 			float: right;
 		}
@@ -72,18 +88,32 @@
 </head>
 <body>
 
-	<div class="container">
-		<div class="row" style="border: 1px solid #cecece;margin-top: 20px; margin-bottom: 30px; background:white">
 
-			<div class="col-md-12 barra_superior">
 
-				<span>PY</span>DDNS
+<div class="container">
 
-				<div id="exit"><a type="button-sm" class="btn btn-default navbar-btn" href="/manage/logout"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIxOHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAxOCAxOCIgd2lkdGg9IjE4cHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZXNjLz48ZGVmcy8+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PGcgZmlsbD0iIzAwMDAwMCIgaWQ9IkNvcmUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC04Ny4wMDAwMDAsIC0yMTMuMDAwMDAwKSI+PGcgaWQ9ImV4aXQtdG8tYXBwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4Ny4wMDAwMDAsIDIxMy4wMDAwMDApIj48cGF0aCBkPSJNNy4xLDEyLjYgTDguNSwxNCBMMTMuNSw5IEw4LjUsNCBMNy4xLDUuNCBMOS43LDggTDAsOCBMMCwxMCBMOS43LDEwIEw3LjEsMTIuNiBMNy4xLDEyLjYgWiBNMTYsMCBMMiwwIEMwLjksMCAwLDAuOSAwLDIgTDAsNiBMMiw2IEwyLDIgTDE2LDIgTDE2LDE2IEwyLDE2IEwyLDEyIEwwLDEyIEwwLDE2IEMwLDE3LjEgMC45LDE4IDIsMTggTDE2LDE4IEMxNy4xLDE4IDE4LDE3LjEgMTgsMTYgTDE4LDIgQzE4LDAuOSAxNy4xLDAgMTYsMCBMMTYsMCBaIiBpZD0iU2hhcGUiLz48L2c+PC9nPjwvZz48L3N2Zz4=" width="18px" /> {% trans "Logout" %}</a></div>
+	<div class="row" style="border: 1px solid #cecece;margin-top: 20px; margin-bottom: 30px; background:white">
 
-				<div id="administrator"><a type="button-sm" class="btn btn-default navbar-btn" href="/manage"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBpZD0ic2V0dGluZ3MiPjxnPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1NiIgcj0iMjUzLjQ0Ii8+PGc+PGNpcmNsZSBjeD0iMjU2IiBjeT0iMjUxLjg3MyIgcj0iMTA0Ljk0MSIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiLz48cGF0aCBkPSJNMzcxLjE2NywyODUuMzU1SDE0MC44MzNjLTkuNjE4LDAtMTcuNDE2LTcuNzk3LTE3LjQxNi0xNy40MTZ2LTIzLjg3OCAgICAgYzAtOS42MTgsNy43OTctMTcuNDE2LDE3LjQxNi0xNy40MTZoMjMwLjMzNGM5LjYxOCwwLDE3LjQxNiw3Ljc5NywxNy40MTYsMTcuNDE2djIzLjg3OCAgICAgQzM4OC41ODMsMjc3LjU1NywzODAuNzg1LDI4NS4zNTUsMzcxLjE2NywyODUuMzU1eiIgc3R5bGU9ImZpbGw6I0ZGRkZGRjsiLz48cGF0aCBkPSJNMjg1LjM1NCwxNDAuODMzbDAsMjMwLjMzNGMwLDkuNjE4LTcuNzk3LDE3LjQxNi0xNy40MTYsMTcuNDE2bC0yMy44NzcsMCAgICAgYy05LjYxOSwwLTE3LjQxNi03Ljc5Ny0xNy40MTYtMTcuNDE2bDAtMjMwLjMzNGMwLTkuNjE4LDcuNzk3LTE3LjQxNiwxNy40MTYtMTcuNDE2bDIzLjg3NywwICAgICBDMjc3LjU1NywxMjMuNDE3LDI4NS4zNTQsMTMxLjIxNSwyODUuMzU0LDE0MC44MzN6IiBzdHlsZT0iZmlsbDojRkZGRkZGOyIvPjxwYXRoIGQ9Ik0zNTguMTkyLDE5NS4zMjJsLTE2Mi44NzEsMTYyLjg3Yy02LjgwMSw2LjgwMS0xNy44MjgsNi44MDEtMjQuNjMsMGwtMTYuODg0LTE2Ljg4NCAgICAgYy02LjgwMS02LjgwMS02LjgwMS0xNy44MjgsMC0yNC42M2wxNjIuODcxLTE2Mi44N2M2LjgwMS02LjgwMSwxNy44MjgtNi44MDEsMjQuNjMsMGwxNi44ODQsMTYuODg0ICAgICBDMzY0Ljk5NCwxNzcuNDk0LDM2NC45OTQsMTg4LjUyMSwzNTguMTkyLDE5NS4zMjJ6IiBzdHlsZT0iZmlsbDojRkZGRkZGOyIvPjxwYXRoIGQ9Ik0xOTUuMzIxLDE1My44MDhsMTYyLjg3MSwxNjIuODcxYzYuODAxLDYuODAxLDYuODAxLDE3LjgyOCwwLDI0LjYzbC0xNi44ODQsMTYuODg0ICAgICBjLTYuODAxLDYuODAxLTE3LjgyOCw2LjgwMS0yNC42MywwTDE1My44MDgsMTk1LjMyMmMtNi44MDEtNi44MDEtNi44MDEtMTcuODI4LDAtMjQuNjNsMTYuODg0LTE2Ljg4NCAgICAgQzE3Ny40OTMsMTQ3LjAwNywxODguNTIsMTQ3LjAwNywxOTUuMzIxLDE1My44MDh6IiBzdHlsZT0iZmlsbDojRkZGRkZGOyIvPjxjaXJjbGUgY3g9IjI1NiIgY3k9IjI1MS44NzMiIHI9IjU3LjYzMiIvPjwvZz48L2c+PC9nPjxnIGlkPSJMYXllcl8xIi8+PC9zdmc+" width="18px" /> {% trans "Administrator" %}</a></div>
-
-			</div>
+		<nav class="navbar navbar-default barra_superior">
+			<div class="container-fluid">
+			  <div class="navbar-header">
+			    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand logo" href="#"><span>PY</span>DDNS</a>
+			  </div>
+			  <div id="navbar" class="navbar-collapse collapse">
+			    <ul class="nav navbar-nav navbar-right">
+			      <li><a href="/manage"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
+			      <li><a href="/manage"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			      <li><a href="/common/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
+			    </ul>
+			  </div><!--/.nav-collapse -->
+			</div><!--/.container-fluid -->
+		</nav>
 			<div class="col-md-12 cuerpo">
 
 				<h3>{% trans "Welcome" %} {{ name }}  </h3>
@@ -166,9 +196,8 @@
 				</div>
 			</div>
 			<div class="col-md-12 barra_inferior">
-				<a href="https://github.com/olimpo88/PyDDNS"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIxMDI0IiB3aWR0aD0iMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTEyIDBDMjI5LjI1IDAgMCAyMjkuMjUgMCA1MTJjMCAyMjYuMjUgMTQ2LjY4OCA0MTguMTI1IDM1MC4xNTYgNDg1LjgxMiAyNS41OTQgNC42ODggMzQuOTM4LTExLjEyNSAzNC45MzgtMjQuNjI1IDAtMTIuMTg4LTAuNDY5LTUyLjU2Mi0wLjcxOS05NS4zMTJDMjQyIDkwOC44MTIgMjExLjkwNiA4MTcuNSAyMTEuOTA2IDgxNy41Yy0yMy4zMTItNTkuMTI1LTU2Ljg0NC03NC44NzUtNTYuODQ0LTc0Ljg3NS00Ni41MzEtMzEuNzUgMy41My0zMS4xMjUgMy41My0zMS4xMjUgNTEuNDA2IDMuNTYyIDc4LjQ3IDUyLjc1IDc4LjQ3IDUyLjc1IDQ1LjY4OCA3OC4yNSAxMTkuODc1IDU1LjYyNSAxNDkgNDIuNSA0LjY1NC0zMyAxNy45MDQtNTUuNjI1IDMyLjUtNjguMzc1QzMwNC45MDYgNzI1LjQzOCAxODUuMzQ0IDY4MS41IDE4NS4zNDQgNDg1LjMxMmMwLTU1LjkzOCAxOS45NjktMTAxLjU2MiA1Mi42NTYtMTM3LjQwNi01LjIxOS0xMy0yMi44NDQtNjUuMDk0IDUuMDYyLTEzNS41NjIgMCAwIDQyLjkzOC0xMy43NSAxNDAuODEyIDUyLjUgNDAuODEyLTExLjQwNiA4NC41OTQtMTcuMDMxIDEyOC4xMjUtMTcuMjE5IDQzLjUgMC4xODggODcuMzEyIDUuODc1IDEyOC4xODggMTcuMjgxIDk3LjY4OC02Ni4zMTIgMTQwLjY4OC01Mi41IDE0MC42ODgtNTIuNSAyOCA3MC41MzEgMTAuMzc1IDEyMi41NjIgNS4xMjUgMTM1LjUgMzIuODEyIDM1Ljg0NCA1Mi42MjUgODEuNDY5IDUyLjYyNSAxMzcuNDA2IDAgMTk2LjY4OC0xMTkuNzUgMjQwLTIzMy44MTIgMjUyLjY4OCAxOC40MzggMTUuODc1IDM0Ljc1IDQ3IDM0Ljc1IDk0Ljc1IDAgNjguNDM4LTAuNjg4IDEyMy42MjUtMC42ODggMTQwLjUgMCAxMy42MjUgOS4zMTIgMjkuNTYyIDM1LjI1IDI0LjU2MkM4NzcuNDM4IDkzMCAxMDI0IDczOC4xMjUgMTAyNCA1MTIgMTAyNCAyMjkuMjUgNzk0Ljc1IDAgNTEyIDB6Ii8+PC9zdmc+" width="20px"/> PYDDNS</a>
+				<a href="https://github.com/olimpo88/PyDDNS" target="_blank"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIxMDI0IiB3aWR0aD0iMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTEyIDBDMjI5LjI1IDAgMCAyMjkuMjUgMCA1MTJjMCAyMjYuMjUgMTQ2LjY4OCA0MTguMTI1IDM1MC4xNTYgNDg1LjgxMiAyNS41OTQgNC42ODggMzQuOTM4LTExLjEyNSAzNC45MzgtMjQuNjI1IDAtMTIuMTg4LTAuNDY5LTUyLjU2Mi0wLjcxOS05NS4zMTJDMjQyIDkwOC44MTIgMjExLjkwNiA4MTcuNSAyMTEuOTA2IDgxNy41Yy0yMy4zMTItNTkuMTI1LTU2Ljg0NC03NC44NzUtNTYuODQ0LTc0Ljg3NS00Ni41MzEtMzEuNzUgMy41My0zMS4xMjUgMy41My0zMS4xMjUgNTEuNDA2IDMuNTYyIDc4LjQ3IDUyLjc1IDc4LjQ3IDUyLjc1IDQ1LjY4OCA3OC4yNSAxMTkuODc1IDU1LjYyNSAxNDkgNDIuNSA0LjY1NC0zMyAxNy45MDQtNTUuNjI1IDMyLjUtNjguMzc1QzMwNC45MDYgNzI1LjQzOCAxODUuMzQ0IDY4MS41IDE4NS4zNDQgNDg1LjMxMmMwLTU1LjkzOCAxOS45NjktMTAxLjU2MiA1Mi42NTYtMTM3LjQwNi01LjIxOS0xMy0yMi44NDQtNjUuMDk0IDUuMDYyLTEzNS41NjIgMCAwIDQyLjkzOC0xMy43NSAxNDAuODEyIDUyLjUgNDAuODEyLTExLjQwNiA4NC41OTQtMTcuMDMxIDEyOC4xMjUtMTcuMjE5IDQzLjUgMC4xODggODcuMzEyIDUuODc1IDEyOC4xODggMTcuMjgxIDk3LjY4OC02Ni4zMTIgMTQwLjY4OC01Mi41IDE0MC42ODgtNTIuNSAyOCA3MC41MzEgMTAuMzc1IDEyMi41NjIgNS4xMjUgMTM1LjUgMzIuODEyIDM1Ljg0NCA1Mi42MjUgODEuNDY5IDUyLjYyNSAxMzcuNDA2IDAgMTk2LjY4OC0xMTkuNzUgMjQwLTIzMy44MTIgMjUyLjY4OCAxOC40MzggMTUuODc1IDM0Ljc1IDQ3IDM0Ljc1IDk0Ljc1IDAgNjguNDM4LTAuNjg4IDEyMy42MjUtMC42ODggMTQwLjUgMCAxMy42MjUgOS4zMTIgMjkuNTYyIDM1LjI1IDI0LjU2MkM4NzcuNDM4IDkzMCAxMDI0IDczOC4xMjUgMTAyNCA1MTIgMTAyNCAyMjkuMjUgNzk0Ljc1IDAgNTEyIDB6Ii8+PC9zdmc+" width="20px"/> PYDDNS</a>
 			</div>
-		</div>
 	</div>
 
 	<!--
