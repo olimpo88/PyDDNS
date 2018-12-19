@@ -19,14 +19,14 @@ class Activity_log(models.Model):
     result=models.CharField(max_length=4096, verbose_name=u'Result', null=True, blank=True, default=None)
 
     def __unicode__(self):
-	return '%s - %s - %s -%s' % (self.fecha_hora, self.action, self.afectado[:40], self.resultado[:40])
+        return '%s - %s - %s - %s' % (self.date, self.action, self.user_affected, self.result)
 
     def __str__(self):
-	return '%s - %s - %s - %s' % (self.fecha_hora, self.action, self.afectado[:40], self.resultado[:40])
+        return '%s - %s - %s - %s' % (self.date, self.action, self.user_affected, self.result)
 
     class Meta:
-	db_table=u'activity_log'
-	ordering = ['-id_log']
+	   db_table=u'activity_log'
+	   ordering = ['-id_log']
 
     class Admin:
 	pass
