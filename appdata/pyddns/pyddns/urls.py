@@ -23,7 +23,7 @@ import os
 
 urlpatterns = [
     url(r'^main/', main),
-    url(r'^manage/', manage),
+    url(r'^users/', users),
     url(r'^common/', include('common.urls')),
     url(r'^nic/update', updateip),
     url(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),

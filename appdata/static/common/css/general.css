@@ -1,0 +1,73 @@
+body{
+	background-color: #010103 !important;
+	background-image: url(/static/common/img/background_trans.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+}
+.barra_superior {
+    background: black;
+    color: white;
+    border: 0px;
+	border-radius: 0px;
+}
+
+.barra_superior a{
+    color: white !important;
+}
+
+.barra_superior .navbar-nav a:hover{
+    background: #87878c !important;;
+}
+
+.barra_superior .active a{
+    color: black !important;
+}
+
+.barra_superior .logo{
+	font-weight: bold;
+	font-size: 1.8em;
+}
+.barra_superior .logo span{
+	color:#ffa900;
+}
+
+#exit{
+	float: right;
+}
+
+#exit a{
+	margin: 0px;
+}
+
+#administrator{
+	float: right;
+	margin-right: 15px;
+}
+
+#administrator a{
+	margin: 0px;
+}
+
+
+.cuerpo{
+	padding: 30px;
+	padding-top: 0px;
+
+}
+.col-md-12.barra_inferior {
+    background: #e5e5e5;
+    margin-top: 100px;
+    padding: 10px;
+    text-align: right;
+}
+#mis_subdominios{
+    border: 1px solid #dadada;
+}
+
+
+.col-md-12.barra_inferior a:hover,.col-md-12.barra_inferior a:hover a:focus, .col-md-12.barra_inferior a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}

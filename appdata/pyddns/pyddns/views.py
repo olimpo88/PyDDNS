@@ -9,6 +9,8 @@ from django.template  import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Max, Count
+from django.contrib.auth.models import User
+
 import json
 import base64
 import requests
@@ -91,6 +93,23 @@ def manage(request):
 		list_domains = paginator.page(paginator.num_pages)
 
 	return render_to_response("manage.html",{ 'list_domains': list_domains})
+
+@login_required
+def users(request):
+	users=User.objects.all()
+
+	paginator = Paginator(users, 10) # Show 25 contacts per page
+	page = request.GET.get('page')
+	try:
+		list_users = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+		list_users = paginator.page(1)
+	except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+		list_users = paginator.page(paginator.num_pages)
+
+	return render_to_response("users.html",{ 'list_users': list_users})
 
 
 
