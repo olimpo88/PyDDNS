@@ -12,6 +12,7 @@ import json
 from common.utils import getForwardedFor
 from common.models import Activity_log
 from datetime import datetime, timedelta
+from pyddns.views import main
 import base64
 import requests
 
@@ -52,8 +53,11 @@ def dologin(request):
 
 def login(request):
 	request.session.set_test_cookie()
-	#return render_to_response("login.html", { "fechahora": '10/10/2010', "empresa": 'Unifix & Co.'}, context_instance=RequestContext(request))
-	return render(request,"login.html")
+	if request.user.id == None:
+		return render(request,"login.html")
+	else:
+		#return render_to_response("login.html", { "fechahora": '10/10/2010', "empresa": 'Unifix & Co.'}, context_instance=RequestContext(request))
+		return main(request)
 
 @login_required
 def logout(request, next_page = '/common/login/'):
