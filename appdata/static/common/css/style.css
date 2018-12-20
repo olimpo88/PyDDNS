@@ -1,216 +1,224 @@
+@font-face {
+  font-family: "Oswald";
+  src: url("/static/common/fonts/Oswald/Oswald-Bold.ttf");
+  src: url("/static/common/fonts/Oswald/Oswald-Bold.ttf") format("ttf");
+}
 
 
-  
-  
-  html, body { 
-    height: 100%;
-  }
-    body {
-      width: 100%;
-      margin: 0px;
-      padding: 0px;
-      overflow:hidden
-      padding-top: 120px;
-      padding-bottom: 40px;
-      background-color: #fff;
-      margin-top: 52px;
-    }
-    .btn 
-    {
-     outline:0;
-     border:none;
-     border-top:none;
-     border-bottom:none;
-     border-left:none;
-     border-right:none;
-     box-shadow:inset 2px -3px rgba(0,0,0,0.15);
-    }
-    .btn:focus
-    {
-     outline:0;
-     -webkit-outline:0;
-     -moz-outline:0;
-    }
-    .fullscreen_bg {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-size: cover;
-      background-position: 50% 50%;
-      background-image: url('/static/common/img/background.jpg');
-      background-size: 100%;
-      background-repeat:repeat;
-    }
-    .form-signin {
-      max-width: 280px;
-      padding: 15px;
-      margin: 0 auto;
-      margin-top:20%;
-    }
-    .form-signin .form-signin-heading, .form-signin {
-      margin-bottom: 10px;
-    }
-    .form-signin .form-control {
-      position: relative;
-      font-size: 16px;
-      height: auto;
-      padding: 10px;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    .form-signin .form-control:focus {
-      z-index: 2;
-    }
-    /*
-    .form-signin input[type="text"] {
-      
-      margin-bottom: -1px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-top-style: solid;
-      border-right-style: solid;
-      border-bottom-style: none;
-      border-left-style: solid;
-      border-color: #000;
-    }
-    .form-signin input[type="password"] {
-      margin-bottom: 10px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-top-style: none;
-      border-right-style: solid;
-      border-bottom-style: solid;
-      border-left-style: solid;
-      border-color: rgb(0,0,0);
-      border-top:1px solid rgba(0,0,0,0.08);
-    }*/
-    .form-signin-heading {
-      color: #fff;
-      text-align: center;
-      text-shadow: 0 2px 2px rgba(0,0,0,0.5);
-    }    
-
-  .navbar-brand{
-    font-family: 'Oswald';
-  }
-
-  .navbar-brand span{
-    color: rgb(0, 235, 255);
-  }
-
-  .navbar-inverse .navbar-brand{
-    color:#fff;
-  }
-
-
-  .container{
+html, body { 
+  height: 100%;
+}
+  body {
     width: 100%;
-    padding: 0px;
     margin: 0px;
-  }
-
-  #menu_superior{
-    margin: 0px;
-    margin-top: 15px;
     padding: 0px;
-    height: 52px;
+    overflow:hidden
+    padding-top: 120px;
+    padding-bottom: 40px;
+    background-color: #fff;
+    margin-top: 52px;
+    font-family: 'Muli', sans-serif;
   }
-
-  #items_menu_superior li a{
-    color:#FFFFFF;
+  .btn 
+  {
+   outline:0;
+   border:none;
+   border-top:none;
+   border-bottom:none;
+   border-left:none;
+   border-right:none;
+   box-shadow:inset 2px -3px rgba(0,0,0,0.15);
   }
-
-  #items_menu_superior li:hover {
-    background: rgb(70, 96, 141);
+  .btn:focus
+  {
+   outline:0;
+   -webkit-outline:0;
+   -moz-outline:0;
   }
-
-
-  #items_menu_superior .dropdown-menu {
-    background: rgb(70, 96, 141);
-  }
-  #items_menu_superior .open  {
-    background: rgb(70, 96, 141);
-  }
-  #items_menu_superior .open a {
-    background: rgb(70, 96, 141);
-  }
-
-  #items_menu_superior .open .dropdown-menu li a:hover {
-    background: black;
-  }
-
-  #menu_lateral{
-    margin-right: 0px;
-    padding-right: 0px;
-    background: #ECECEC;
-    max-width: 200px;
-  }
-
-  #espacio_menu{
-    height:52px;
-    color:white;
-    background: #222;
-  }
-
-  .badge {
-    background: red;
-    position: absolute;
+  .fullscreen_bg {
+    position: fixed;
     top: 0;
     right: 0;
-    margin-top: 5px;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-image: url('/static/common/img/background.jpg');
+    background-size: 100%;
+    background-repeat:repeat;
   }
+  .form-signin {
+    max-width: 280px;
+    padding: 15px;
+    margin: 0 auto;
+    margin-top:20%;
+  }
+  .form-signin .form-signin-heading, .form-signin {
+    margin-bottom: 10px;
+  }
+  .form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .form-signin .form-control:focus {
+    z-index: 2;
+  }
+  /*
+  .form-signin input[type="text"] {
+    
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: none;
+    border-left-style: solid;
+    border-color: #000;
+  }
+  .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-style: none;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-color: rgb(0,0,0);
+    border-top:1px solid rgba(0,0,0,0.08);
+  }*/
+  .form-signin-heading {
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+  }    
 
-  .menu_profile{
-    margin:0px;
-    padding:0px;
-    margin-left: 15px;
-  }
-  .menu_profile img{
-    width: 32px;
-    padding: 0px;
-    margin: 5px;
-    margin-right: 20px;
-  }
+.navbar-brand{
+  font-family: 'Oswald';
+}
 
-  #search{
-    margin: 5px;
-    border-bottom: 1px solid rgb(216, 216, 216);
-  }
+.navbar-brand span{
+  color: rgb(0, 235, 255);
+}
 
-  .bs-docs-sidenav li{
-    border-bottom: 1px solid rgb(214, 214, 214);
-  }
+.navbar-inverse .navbar-brand{
+  color:#fff;
+}
 
 
-  .sub_menu {
-    list-style-type: none;
-    background: rgb(250, 250, 250);
-    text-decoration: none;
-  }
+.container{
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
 
-  .sub_menu li {
-    margin:2px;
-    margin-bottom: 4px;
-  }
+#menu_superior{
+  margin: 0px;
+  margin-top: 15px;
+  padding: 0px;
+  height: 52px;
+}
 
-  .sub_menu li:before {    
-    content: '\f054';
-    margin:0 5px 0 -20px;
-    color: #337ab7;
-    font-size: 0.8em;
-  }
+#items_menu_superior li a{
+  color:#FFFFFF;
+}
 
-  .parent i.fa-sort-desc {    
-    float: right;
-    margin-top: -2px;
-  }
-  .row{
-    margin-right: 0px;
-  }
+#items_menu_superior li:hover {
+  background: rgb(70, 96, 141);
+}
 
-  .col-sm-6 {
-    margin-left: 10px;
-  }
+
+#items_menu_superior .dropdown-menu {
+  background: rgb(70, 96, 141);
+}
+#items_menu_superior .open  {
+  background: rgb(70, 96, 141);
+}
+#items_menu_superior .open a {
+  background: rgb(70, 96, 141);
+}
+
+#items_menu_superior .open .dropdown-menu li a:hover {
+  background: black;
+}
+
+#menu_lateral{
+  margin-right: 0px;
+  padding-right: 0px;
+  background: #ECECEC;
+  max-width: 200px;
+}
+
+#espacio_menu{
+  height:52px;
+  color:white;
+  background: #222;
+}
+
+.badge {
+  background: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 5px;
+}
+
+.menu_profile{
+  margin:0px;
+  padding:0px;
+  margin-left: 15px;
+}
+.menu_profile img{
+  width: 32px;
+  padding: 0px;
+  margin: 5px;
+  margin-right: 20px;
+}
+
+#search{
+  margin: 5px;
+  border-bottom: 1px solid rgb(216, 216, 216);
+}
+
+.bs-docs-sidenav li{
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
+
+
+.sub_menu {
+  list-style-type: none;
+  background: rgb(250, 250, 250);
+  text-decoration: none;
+}
+
+.sub_menu li {
+  margin:2px;
+  margin-bottom: 4px;
+}
+
+.sub_menu li:before {    
+  content: '\f054';
+  margin:0 5px 0 -20px;
+  color: #337ab7;
+  font-size: 0.8em;
+}
+
+.parent i.fa-sort-desc {    
+  float: right;
+  margin-top: -2px;
+}
+.row{
+  margin-right: 0px;
+}
+
+.col-sm-6 {
+  margin-left: 10px;
+}
+
+h1.form-signin-heading {
+    font-family: 'Oswald', sans-serif;
+}

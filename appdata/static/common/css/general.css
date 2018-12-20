@@ -1,15 +1,19 @@
+
 body{
+    font-family: 'Muli', sans-serif !important;
 	background-color: #010103 !important;
 	background-image: url(/static/common/img/background_trans.png);
     background-repeat: no-repeat;
     background-size: 100%;
     
 }
+
 .barra_superior {
-    background: black;
+    background: #1b3050;
     color: white;
     border: 0px;
-	border-radius: 0px;
+    border-radius: 0px;
+    font-weight: bold;
 }
 
 .barra_superior a{
@@ -26,7 +30,8 @@ body{
 
 .barra_superior .logo{
 	font-weight: bold;
-	font-size: 1.8em;
+	font-size: 2em;
+    font-family: 'Oswald', sans-serif;
 }
 .barra_superior .logo span{
 	color:#ffa900;

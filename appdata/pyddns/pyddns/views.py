@@ -21,7 +21,8 @@ from common.models import Activity_log
 from datetime import datetime, timedelta
 from django.conf import settings
 from pyddns.models import SubDomain
-
+from django.db.models import Q
+from common.utils import getForwardedFor
 
 @user_passes_test(lambda u: u.is_superuser)
 
@@ -95,10 +96,15 @@ def manage(request):
 	return render_to_response("manage.html",{ 'list_domains': list_domains})
 
 @login_required
-def users(request):
+def users(request, buscar=None):
+	print buscar
 	users=User.objects.all()
 
-	paginator = Paginator(users, 10) # Show 25 contacts per page
+	if buscar:
+		users=users.filter( Q(first_name__icontains=buscar) | Q(last_name__icontains=buscar) | Q(username__icontains=buscar) )
+	else:
+		buscar=""
+	paginator = Paginator(users, 6) # Show 25 contacts per page
 	page = request.GET.get('page')
 	try:
 		list_users = paginator.page(page)
@@ -108,11 +114,48 @@ def users(request):
 	except EmptyPage:
 		# If page is out of range (e.g. 9999), deliver last page of results.
 		list_users = paginator.page(paginator.num_pages)
-
-	return render_to_response("users.html",{ 'list_users': list_users})
-
+	return render_to_response("users.html",{ 'list_users': list_users, "buscar":buscar})
 
 
+@login_required
+def add_user(request):
+	return render_to_response("add_user.html")
+
+
+@login_required
+def set_user(request):
+	myjson = {
+		'error': "",
+		'success': False,
+	}
+	print request.POST
+	if "username" in request.POST.keys():
+		username=request.POST['username']
+		name=request.POST['name']
+		last_name=request.POST['last_name']
+		email=request.POST['email']
+		password=request.POST['password']
+		is_admin=request.POST['is_admin']
+
+		if is_admin=="1":
+			is_admin=True
+		else:
+			is_admin=False
+
+		user = User.objects.create_user(username=username,
+                                 		email=email,
+                                 		password=password)
+		user.first_name=name
+		user.last_name=last_name
+		user.is_superuser=is_admin
+		user.save()
+
+		myjson['success']= True
+		Activity_log(action='SET USER', xforward=getForwardedFor(request), user_affected=request.user, result="Add User --> name: %s"%user).save()
+	else:
+		myjson['error']= "No se pasaron los datos por post"
+
+	return HttpResponse(json.dumps(myjson))
 
 
 def set_ip_web(request,domain,ip,):

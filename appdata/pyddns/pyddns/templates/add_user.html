@@ -1,0 +1,123 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+		
+	<div class="col-md-12">
+		<h3> {% trans "Add user" %}</h3>
+		<table id="formulario" style=" border-collapse: separate;;">
+			<tr>
+				<td style="width: 84px;">{% trans "Username" %}</td>
+				<td><input id="username" name="username" type="text" size="40" class="form-control input-md" value="{{ user.username }}"> </td>
+			</tr>
+			<tr>
+				<td style="width: 84px;">{% trans "Name" %}</td>
+				<td><input id="name" name="name" type="text" size="40" class="form-control input-md" value="{{ user.name }}"> </td>
+			</tr>
+			<tr>
+				<td style="width: 84px;">{% trans "Last name" %}</td>
+				<td><input id="last_name" name="last_name" type="text" size="40" class="form-control input-md" value="{{ user.last_name }}"> </td>
+			</tr>
+			<tr>
+				<td style="width: 84px;">{% trans "Email" %}</td>
+				<td><input id="email" name="email" type="text" size="40" class="form-control input-md" value="{{ user.email }}"> </td>
+			</tr>
+			<tr>
+				<td style="width: 84px;">{% trans "Password" %}</td>
+				<td><input id="password" name="password" type="text" size="40" class="form-control input-md" value="{{ user.email }}"> </td>
+			</tr>
+			<tr>
+				<td>{% trans "Is admin?" %}</td>
+				<td>
+					<input type="checkbox" name="is_admin" id="is_admin" value="1" style="height: 18px;width: 18px;">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button id="button2id" name="button2id" class="btn btn-success" style="float:right;margin-top:15px"  onclick="guardar()"><i class="fa fa-save"></i> Guardar</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script type="text/javascript">
+
+		function guardar(){
+
+			if ($( "#username" ).val().length < 2){
+				alert('{% trans "you must enter a username" %}');
+			}
+			else if ($( "#name" ).val().length < 2){
+				alert('{% trans "you must enter a name" %}');
+			}
+			else if ($( "#last_name" ).val().length < 2){
+				alert('{% trans "you must enter a last name" %}');
+			}
+			else if ($( "#email" ).val().length < 2){
+				alert('{% trans "you must enter a email" %}');
+			}			
+			else if ($( "#password" ).val().length < 8){
+				alert('{% trans "Please enter a password of at least 8 characters" %}');
+			}
+
+			//Si esta todo bien mando a guardar
+			else{
+
+				if($("#is_admin").is(':checked'))
+				    is_admin=1
+				else
+				    is_admin=0
+
+
+	            var m_data = new FormData();
+	            m_data.append( 'username', $("#username").val());
+	            m_data.append( 'name', $("#name").val());
+	            m_data.append( 'last_name', $("#last_name").val());
+	            m_data.append( 'email', $("#email").val());
+	            m_data.append( 'password', $("#password").val());
+	            m_data.append( 'is_admin', is_admin);
+	            m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
+
+				$.ajax({
+					url: '/set_user',
+					data: m_data,
+					processData: false,
+					contentType: false,
+					type: 'POST',
+					dataType:'json',
+					success:function(result){
+						console.log(result);
+						//var result = JSON.parse(result);
+						if(result['success']){
+							location.reload(true);
+						}
+						else{
+							alert(result['error']);
+						}
+					}	
+				});
+			}
+		}
+
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+			    var cookie = jQuery.trim(cookies[i]);
+			    // Does this cookie string begin with the name we want?
+			    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			    }
+			}
+		    }
+		    return cookieValue;
+		}
+		
+	</script>
+</body>
+</html>
