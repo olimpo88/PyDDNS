@@ -1,0 +1,32 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Permission Denied</title>
+	  <link href="/static/common/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	  <link href="/static/common/css/style.css?v=0.1" rel="stylesheet" id="bootstrap-css">
+	  <link href="https://fonts.googleapis.com/css?family=Muli|Oswald" rel="stylesheet">
+	  <link href="/static/common/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<style>
+		span{
+			color: #cc6666;
+    		font-size: 2.5em;
+		}
+		body{
+			background: #f5f5f5;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12" style="text-align: center; margin-top: 10vh;">
+				<h1><span class="glyphicon glyphicon-ban-circle"></span></h1>
+				<h1>{% trans "ACCESS DENIED" %}</h1>
+				<h4>{% trans "You do not have permission to see this page" %}</h4>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

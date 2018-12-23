@@ -53,11 +53,10 @@ def dologin(request):
 
 def login(request):
 	request.session.set_test_cookie()
-	if request.user.id == None:
-		return render(request,"login.html")
-	else:
-		#return render_to_response("login.html", { "fechahora": '10/10/2010', "empresa": 'Unifix & Co.'}, context_instance=RequestContext(request))
-		return main(request)
+	return render(request,"login.html")
+
+def permission_denied(request):
+	return render(request,"permission_denied.html")
 
 @login_required
 def logout(request, next_page = '/common/login/'):

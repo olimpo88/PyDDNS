@@ -23,20 +23,32 @@ from django.conf import settings
 from pyddns.models import SubDomain
 from django.db.models import Q
 from common.utils import getForwardedFor
+from django.contrib.auth.decorators import user_passes_test
 
-@user_passes_test(lambda u: u.is_superuser)
+
+
 
 @login_required
-def main(request):
+def main(request,id_user=None):
 
 	admin=False
+	see_user=False
+
 	if request.user.is_superuser:
 		admin=True
-	name = request.user.first_name
-	username = request.user.username
+
+	if id_user:
+		user=User.objects.get(id=id_user)
+		see_user=True
+	else:
+		user=request.user
+		id_user=request.user.id
+
+	name = user.first_name
+	username = user.username
 	actividad=Activity_log.objects.filter(user_affected=username,action="SYNC")
 
-	my_subdomains=SubDomain.objects.filter(user=request.user)
+	my_subdomains=SubDomain.objects.filter(user=user)
 
 	last_activity = Activity_log.objects.filter(action="SYNC",code="good")
 	last_activity = last_activity.values('domain','ip').annotate(date=Max('date')).order_by('domain')
@@ -76,7 +88,7 @@ def main(request):
 		# If page is out of range (e.g. 9999), deliver last page of results.
 		list_activity = paginator.page(paginator.num_pages)
 		
-	return render_to_response("dash.html",{'name':name, 'username':username, 'list_activity':list_activity, 'last_activity':last_activity, 'my_subdomains':my_subdomains, 'info_domains':info_domains ,'ip_x_forwarded':ip_x_forwarded, 'admin':admin })
+	return render_to_response("dash.html",{'name':name, 'username':username, 'list_activity':list_activity, 'last_activity':last_activity, 'my_subdomains':my_subdomains, 'info_domains':info_domains ,'ip_x_forwarded':ip_x_forwarded, 'admin':admin, 'see_user':see_user, 'domain':domain, 'id_user': id_user })
 
 @login_required
 def manage(request):
@@ -95,10 +107,11 @@ def manage(request):
 
 	return render_to_response("manage.html",{ 'list_domains': list_domains})
 
-@login_required
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
 def users(request, buscar=None):
 	print buscar
-	users=User.objects.all()
+	users=User.objects.all().order_by('username')
 
 	if buscar:
 		users=users.filter( Q(first_name__icontains=buscar) | Q(last_name__icontains=buscar) | Q(username__icontains=buscar) )
@@ -117,12 +130,51 @@ def users(request, buscar=None):
 	return render_to_response("users.html",{ 'list_users': list_users, "buscar":buscar})
 
 
-@login_required
-def add_user(request):
-	return render_to_response("add_user.html")
+@user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
+def add_user(request,id_user=None):
+	user=None
+	if id_user:
+		try:
+			user=User.objects.get(id=id_user)
+			print user
+		except OstUserEmail.DoesNotExist:
+			print "DoesNotExist"
+	return render_to_response("add_user.html",{'user':user})
+
+def add_subdomain(request):
+	myjson = {
+		'error': "",
+		'success': False,
+	}
 
 
-@login_required
+	if "subdomain" in request.POST.keys():
+		subdomain=request.POST['subdomain']
+		id_user=request.POST['id_user']
+
+		user=User.objects.get(id=id_user)
+		try:
+			subdomain=SubDomain.objects.get(name=subdomain)
+			myjson['error']= "exist"
+		except SubDomain.DoesNotExist:
+			admin=False
+			if request.user.is_superuser:
+				admin=True
+			user_login=request.user
+
+			if admin or user_login==user:
+				subdomain=SubDomain(
+										user=user,
+										name=subdomain
+									)
+				subdomain.save()
+				myjson['success']= True
+			else:
+				myjson['error']= "Not permission"
+	return HttpResponse(json.dumps(myjson))
+
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
 def set_user(request):
 	myjson = {
 		'error': "",
@@ -142,14 +194,46 @@ def set_user(request):
 		else:
 			is_admin=False
 
-		user = User.objects.create_user(username=username,
-                                 		email=email,
-                                 		password=password)
+
+		try:
+			user_exist= User.objects.get(username=username)
+			myjson['error']= "username exist"
+			return HttpResponse(json.dumps(myjson))
+		except User.DoesNotExist:
+			user = User.objects.create_user(username=username,
+	                                 		email=email,
+	                                 		password=password)
+			if password:
+				#user.password=password
+				user.set_password(password)
+			user.first_name=name
+			user.last_name=last_name
+			user.is_superuser=is_admin
+			user.save()
+			myjson['success']= True
+		Activity_log(action='EDIT USER', xforward=getForwardedFor(request), user_affected=request.user, result="Edit User --> name: %s"%user).save()
+
+
+	elif "id_user" in request.POST.keys():
+		name=request.POST['name']
+		last_name=request.POST['last_name']
+		email=request.POST['email']
+		password=request.POST['password']
+		is_admin=request.POST['is_admin']		
+		user= User.objects.get(id=request.POST['id_user'])
+		if is_admin=="1":
+			is_admin=True
+		else:
+			is_admin=False
 		user.first_name=name
 		user.last_name=last_name
 		user.is_superuser=is_admin
+		user.email=email
+		if password:
+			#user.password=password
+			print password
+			user.set_password(password)
 		user.save()
-
 		myjson['success']= True
 		Activity_log(action='SET USER', xforward=getForwardedFor(request), user_affected=request.user, result="Add User --> name: %s"%user).save()
 	else:
@@ -158,32 +242,68 @@ def set_user(request):
 	return HttpResponse(json.dumps(myjson))
 
 
-def set_ip_web(request,domain,ip,):
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
+def delet_user(request):
+	myjson = {
+		'error': "",
+		'success': False,
+	}
+
+	if "id_user" in request.POST.keys():
+		id_user=request.POST['id_user']
+
+		user= User.objects.get(id=request.POST['id_user'])
+		user.delete()
+
+		myjson['success']= True
+		Activity_log(action='DELETE USER', xforward=getForwardedFor(request), user_affected=request.user, result="ADelete User --> name: %s"%user).save()
+	else:
+		myjson['error']= "No se pasaron los datos por post"
+
+	return HttpResponse(json.dumps(myjson))
+
+
+
+
+def set_ip_web(request,domain,ip):
 	myjson = {
 		'message': '',
 		'success': False,
 	}
 
-	agent=""
-	ip_x_forwarded=""
-	username = request.user.username
- 	if 'HTTP_X_FORWARDED_FOR' in request.META:
- 		ip_x_forwarded=request.META['HTTP_X_FORWARDED_FOR']
+	admin=False
+	user=request.user
+	if user.is_superuser:
+		admin=True
 
+	print "Dominio"
+	print domain
+	subdomain=domain.split(".")[0]
+	subdomain_obj=SubDomain.objects.get(name=subdomain)
+	try:
+		check_valid_subdomain=SubDomain.objects.get(user=user,name=subdomain)
+	except SubDomain.DoesNotExist:	
+		check_valid_subdomain=False
 
-	if 'HTTP_USER_AGENT' in request.META:
-		agent=request.META['HTTP_USER_AGENT']
+	if check_valid_subdomain or admin:
 
-	return_code, message = set_ip(request,domain,ip)
-	print "llego"
-	print return_code
-	print message
-	if return_code== "good":
-		myjson['success'] = True
-	else:
-		myjson['message'] = message
+		agent=""
+		ip_x_forwarded=""
+		username = user.username
+	 	if 'HTTP_X_FORWARDED_FOR' in request.META:
+	 		ip_x_forwarded=request.META['HTTP_X_FORWARDED_FOR']
 
-	Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
+		if 'HTTP_USER_AGENT' in request.META:
+			agent=request.META['HTTP_USER_AGENT']
+
+		return_code, message = set_ip(request,domain,ip)
+		if return_code== "good":
+			myjson['success'] = True
+		else:
+			myjson['message'] = message
+
+		Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=subdomain_obj.user.username, domain=domain, result="%s"%(message)).save()
 
 	return HttpResponse(json.dumps(myjson))
 

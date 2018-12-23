@@ -41,15 +41,33 @@
 			</div><!--/.container-fluid -->
 		</nav>
 			<div class="col-md-12 cuerpo">
+				{% if not see_user %}
+					<h3>{% trans "Welcome" %} {{ name }}  </h3>
+				{% else %}
+					<h3>{% trans "Dashboard of the user " %} {{ username }}  </h3>
+				{% endif %}
 
-				<h3>{% trans "Welcome" %} {{ name }}  </h3>
-				<span>{% trans "Your current IP is" %} <span class="my_ip"></span></span><br/><br/>
+
+
+				<div style="float:right;margin-bottom: 10px;width: 40%;">
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="{% trans "Subdomain name " %}" aria-describedby="basic-addon2" style="height: 33px;" id="subdomain">
+					  <span class="input-group-addon" id="basic-addon2"  style="height: 33px;">.{{domain}}</span>
+					  <span class="input-group-btn"  style="height: 33px;">
+				        <button class="btn btn-success" type="button" style="height: 33px;" onclick="add_subdomain()"><span class="glyphicon glyphicon-plus" aria-hidden="true" ></span></button>
+				      </span>
+					</div>
+				</div>
+
+
+
+				<span>{% trans "Your current IP is" %} <span class="my_ip"></span></span><br/><br/><br/>
 
 				<table class="table table-striped" id="mis_subdominios">
 					<tr>
 						<th>{% trans "My domains" %}</th>
 						<th>IP</th>
-						<th>{% trans "Date" %}</th>
+						<th>{% trans "Last update" %}</th>
 						<th>{% trans "Action" %}</th>
 					</tr>
 					{% for info in info_domains %}
@@ -63,7 +81,7 @@
 						</tr>
 					{% endfor %}
 				</table>
-				<br><br>
+				<br>
 				<h3>{% trans "My last records" %}</h3>
 				<table class="table table-striped">
 					<thead class="thead-dark" style="background:#dfdfdf;">
@@ -166,14 +184,68 @@
 
 	}
 
-	  $(function() {
-	    $.getJSON("https://api.ipify.org?format=jsonp&callback=?",
-	      function(json) {
-	      	$('.my_ip').html(json.ip);
-	      	ip=json.ip;
-	      }
-	    );
-	  });
+	function add_subdomain(){
+		var m_data = new FormData();
+		m_data.append( 'subdomain', $('#subdomain').val());
+		m_data.append( 'id_user', '{{ id_user }}');
+		m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
+		$.ajax({url:"/add_subdomain",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'json',
+			success:function(result){
+		  		if(result['success']){
+	            	//alert("Contrato agregado correctamente");
+	            	location.reload(true);
+	            }
+	            else{
+	            	if (result['error']=="exist"){
+	            		alert('{% trans "The subdomain already exists" %}');
+	            	}
+	            	else{
+	            		alert(result['error']);
+	            	}
+	                
+	            }
+		  	}	
+		});
+	}
+
+
+	$(function() {
+		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
+			function(json) {
+				$('.my_ip').html(json.ip);
+				ip=json.ip;
+			}
+		);
+	});
+
+
+	$("#subdomain").keypress(function(e) {
+	    if(e.which == 13) {
+	        add_subdomain();
+	    }
+	});
+
+
+	function getCookie(name) {
+	    var cookieValue = null;
+	    if (document.cookie && document.cookie != '') {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+		    var cookie = jQuery.trim(cookies[i]);
+		    // Does this cookie string begin with the name we want?
+		    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+			cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+			break;
+		    }
+		}
+	    }
+	    return cookieValue;
+	}
 	</script>
 </body>
 </html>

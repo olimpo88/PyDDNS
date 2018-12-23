@@ -8,15 +8,20 @@
 <body>
 		
 	<div class="col-md-12">
-		<h3> {% trans "Add user" %}</h3>
+		{% if user %}
+			<h3> {% trans "Edit user" %}: {{ user.username }}</h3>
+		{% else %}
+			<h3> {% trans "Add user" %}</h3>
+		{% endif %}
+		
 		<table id="formulario" style=" border-collapse: separate;;">
 			<tr>
 				<td style="width: 84px;">{% trans "Username" %}</td>
-				<td><input id="username" name="username" type="text" size="40" class="form-control input-md" value="{{ user.username }}"> </td>
+				<td><input id="username" name="username" type="text" size="40" class="form-control input-md" value="{{ user.username }}" {% if user  %} readonly{% endif %}> </td>
 			</tr>
 			<tr>
 				<td style="width: 84px;">{% trans "Name" %}</td>
-				<td><input id="name" name="name" type="text" size="40" class="form-control input-md" value="{{ user.name }}"> </td>
+				<td><input id="name" name="name" type="text" size="40" class="form-control input-md" value="{{ user.first_name }}"> </td>
 			</tr>
 			<tr>
 				<td style="width: 84px;">{% trans "Last name" %}</td>
@@ -28,12 +33,12 @@
 			</tr>
 			<tr>
 				<td style="width: 84px;">{% trans "Password" %}</td>
-				<td><input id="password" name="password" type="text" size="40" class="form-control input-md" value="{{ user.email }}"> </td>
+				<td><input id="password" name="password" type="text" size="40" class="form-control input-md" placeholder="Empty to not change"> </td>
 			</tr>
 			<tr>
-				<td>{% trans "Is admin?" %}</td>
+				<td>{% trans "Is admin?" %}{{ user.id_admin}}</td>
 				<td>
-					<input type="checkbox" name="is_admin" id="is_admin" value="1" style="height: 18px;width: 18px;">
+					<input type="checkbox" name="is_admin" id="is_admin" value="1" style="height: 18px;width: 18px;" {% if user.is_superuser %} checked="checked" {% endif %}>
 				</td>
 			</tr>
 			<tr>
@@ -58,10 +63,13 @@
 			}
 			else if ($( "#email" ).val().length < 2){
 				alert('{% trans "you must enter a email" %}');
-			}			
-			else if ($( "#password" ).val().length < 8){
-				alert('{% trans "Please enter a password of at least 8 characters" %}');
 			}
+			{% if not user %}
+				else if ( ($( "#password" ).val().length < 8) {% if user %} & ($( "#password" ).val().length != 0) {% endif %}){
+					alert('{% trans "Please enter a password of at least 8 characters" %}');
+				}		
+			{% endif %}	
+
 
 			//Si esta todo bien mando a guardar
 			else{
@@ -73,7 +81,11 @@
 
 
 	            var m_data = new FormData();
-	            m_data.append( 'username', $("#username").val());
+	            {% if user %}
+	            	m_data.append( 'id_user', {{ user.id }});
+	            {% else %}
+	            	m_data.append( 'username', $("#username").val());
+	            {% endif %}
 	            m_data.append( 'name', $("#name").val());
 	            m_data.append( 'last_name', $("#last_name").val());
 	            m_data.append( 'email', $("#email").val());
@@ -95,7 +107,13 @@
 							location.reload(true);
 						}
 						else{
-							alert(result['error']);
+							if (result['error']=="username exist"){
+								alert('{% trans "The username " %}'+$("#username").val()+'{% trans " already exists" %}');
+							}
+							else{
+								alert(result['error']);
+							}
+							
 						}
 					}	
 				});
