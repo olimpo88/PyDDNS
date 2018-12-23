@@ -34,6 +34,7 @@ services:
       DJANGO_SU_NAME: admin
       DJANGO_SU_EMAIL: admin@my.company
       DJANGO_SU_PASSWORD: 1234
+      OWN_ADMIN: 1
     depends_on:
       - "postgres"
     networks:

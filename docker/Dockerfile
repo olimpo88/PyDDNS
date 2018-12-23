@@ -1,7 +1,7 @@
 FROM python:2.7-stretch
 
 
-RUN apt-get update && apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev python-ldap libkf5ldap-dev xfonts-base xfonts-75dpi -y --force-yes
+RUN apt-get update && apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev python-ldap libkf5ldap-dev xfonts-base xfonts-75dpi gettext -y --force-yes
 
 WORKDIR /usr/src/app
 

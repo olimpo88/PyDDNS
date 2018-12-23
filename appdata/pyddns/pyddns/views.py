@@ -25,7 +25,8 @@ from django.db.models import Q
 from common.utils import getForwardedFor
 from django.contrib.auth.decorators import user_passes_test
 
-
+import socket
+import dns.resolver
 
 
 @login_required
@@ -33,6 +34,10 @@ def main(request,id_user=None):
 
 	admin=False
 	see_user=False
+
+	own_admin=False
+	if settings.OWN_ADMIN=="1" and not id_user:
+		own_admin=True
 
 	if request.user.is_superuser:
 		admin=True
@@ -48,35 +53,14 @@ def main(request,id_user=None):
 	username = user.username
 	actividad=Activity_log.objects.filter(user_affected=username,action="SYNC")
 
-	my_subdomains=SubDomain.objects.filter(user=user)
-
-	last_activity = Activity_log.objects.filter(action="SYNC",code="good")
-	last_activity = last_activity.values('domain','ip').annotate(date=Max('date')).order_by('domain')
-
+	my_subdomains=SubDomain.objects.filter(user=user).order_by('name')
 	domain=settings.DNS_DOMAIN
-	info_domains=[]
-	for sub in my_subdomains:
-		ip = ""
-		date = ""
-		for activity in last_activity:
-			print sub.name
-			print activity['domain']
-			if sub.name == activity['domain'].split(".")[0]:
-				ip = activity['ip']
-				print activity
-				date = activity['date']
-		obj ={
-			'domain': "%s.%s"%(sub.name, domain),
-			'ip': ip,
-			'date': date
-		}
-		print obj
-		info_domains.append(obj)
-
 	
 	ip_x_forwarded=None
  	if 'HTTP_X_FORWARDED_FOR' in request.META:
  		ip_x_forwarded=request.META['HTTP_X_FORWARDED_FOR']
+
+
 	paginator = Paginator(actividad, 10) # Show 25 contacts per page
 	page = request.GET.get('page')
 	try:
@@ -88,7 +72,16 @@ def main(request,id_user=None):
 		# If page is out of range (e.g. 9999), deliver last page of results.
 		list_activity = paginator.page(paginator.num_pages)
 		
-	return render_to_response("dash.html",{'name':name, 'username':username, 'list_activity':list_activity, 'last_activity':last_activity, 'my_subdomains':my_subdomains, 'info_domains':info_domains ,'ip_x_forwarded':ip_x_forwarded, 'admin':admin, 'see_user':see_user, 'domain':domain, 'id_user': id_user })
+	return render_to_response("dash.html",{	'name':name, 
+											'username':username, 
+											'list_activity':list_activity, 
+											'my_subdomains':my_subdomains, 
+											'ip_x_forwarded':ip_x_forwarded, 
+											'admin':admin, 
+											'see_user':see_user, 
+											'domain':domain, 
+											'id_user': id_user,
+											'own_admin':own_admin })
 
 @login_required
 def manage(request):
@@ -128,6 +121,31 @@ def users(request, buscar=None):
 		# If page is out of range (e.g. 9999), deliver last page of results.
 		list_users = paginator.page(paginator.num_pages)
 	return render_to_response("users.html",{ 'list_users': list_users, "buscar":buscar})
+
+
+@user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
+def domains(request, buscar=None):
+	subdomains=SubDomain.objects.all().order_by('name')
+
+	print buscar
+	if buscar:
+		subdomains=subdomains.filter( name__icontains=buscar )
+	else:
+		buscar=""
+
+	domain=settings.DNS_DOMAIN
+
+	paginator = Paginator(subdomains, 6) # Show 25 contacts per page
+	page = request.GET.get('page')
+	try:
+		list_subdomains = paginator.page(page)
+	except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+		list_subdomains = paginator.page(1)
+	except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+		list_subdomains = paginator.page(paginator.num_pages)
+	return render_to_response("subdomains.html",{ 'list_subdomains': list_subdomains, "buscar":buscar, 'domain':domain })
 
 
 @user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
@@ -249,20 +267,38 @@ def delet_user(request):
 		'error': "",
 		'success': False,
 	}
-
 	if "id_user" in request.POST.keys():
 		id_user=request.POST['id_user']
-
 		user= User.objects.get(id=request.POST['id_user'])
 		user.delete()
-
 		myjson['success']= True
-		Activity_log(action='DELETE USER', xforward=getForwardedFor(request), user_affected=request.user, result="ADelete User --> name: %s"%user).save()
+		Activity_log(action='DELET USER', xforward=getForwardedFor(request), user_affected=request.user, result="Delet User --> name: %s"%user).save()
 	else:
 		myjson['error']= "No se pasaron los datos por post"
-
 	return HttpResponse(json.dumps(myjson))
 
+@login_required
+def delet_domain(request):
+	myjson = {
+		'error': "",
+		'success': False,
+	}
+
+	if "id_domain" in request.POST.keys():
+		id_domain=request.POST['id_domain']
+		domain= SubDomain.objects.get(id=id_domain)
+		domain_name=domain.name
+		domain_user=domain.user
+
+		if request.user.is_superuser or request.user==domain_user:
+			domain.delete()
+			myjson['success']= True
+			Activity_log(action='DELET DOMAIN', xforward=getForwardedFor(request), user_affected=domain_user, result="Delet domain --> name: %s"%domain_name).save()
+		else:
+			myjson['error']= "permission"
+	else:
+		myjson['error']= "No se pasaron los datos por post"
+	return HttpResponse(json.dumps(myjson))
 
 
 
@@ -315,6 +351,14 @@ def set_ip_web(request,domain,ip):
 def set_ip(request,domain,ip):
 
 
+	#FOR TEST - DIG
+	# ----------------------
+	#resolver = dns.resolver.Resolver()
+	#resolver.nameservers=[socket.gethostbyname('ddns')]
+	#ip_dig = resolver.query(domain,"A")[0]
+	
+
+
 	message=""
 	subdomain=domain.split(".")[0]
 	print 'http://%s:%s/update?secret=%s&domain=%s&addr=%s'%(settings.DNS_HOST,settings.DNS_API_PORT,settings.DNS_SHARED_SECRET,subdomain,ip)
@@ -334,7 +378,6 @@ def set_ip(request,domain,ip):
 
 
 def updateip(request):
-
  	return_code="unknown"
  	username=""
  	domain=""
@@ -409,5 +452,5 @@ def updateip(request):
 
 
 	print return_code
-	Activity_log(action='SYNC', agente=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
+	Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
 	return HttpResponse(return_code)

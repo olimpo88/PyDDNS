@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load app_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +34,10 @@
 			  </div>
 			  <div id="navbar" class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav navbar-right">
-			      <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
-			      <li><a href="/domains"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			    	{% if admin  %}
+				      <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
+				      <li><a href="/domains"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			    	{% endif %}
 			      <li><a href="/common/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
 			    </ul>
 			  </div><!--/.nav-collapse -->
@@ -48,16 +51,17 @@
 				{% endif %}
 
 
-
-				<div style="float:right;margin-bottom: 10px;width: 40%;">
-					<div class="input-group">
-					  <input type="text" class="form-control" placeholder="{% trans "Subdomain name " %}" aria-describedby="basic-addon2" style="height: 33px;" id="subdomain">
-					  <span class="input-group-addon" id="basic-addon2"  style="height: 33px;">.{{domain}}</span>
-					  <span class="input-group-btn"  style="height: 33px;">
-				        <button class="btn btn-success" type="button" style="height: 33px;" onclick="add_subdomain()"><span class="glyphicon glyphicon-plus" aria-hidden="true" ></span></button>
-				      </span>
+				{% if admin or own_admin %}
+					<div style="float:right;margin-bottom: 10px;width: 40%;">
+						<div class="input-group">
+						  <input type="text" class="form-control" placeholder="{% trans "Subdomain name " %}" aria-describedby="basic-addon2" style="height: 33px;" id="subdomain">
+						  <span class="input-group-addon" id="basic-addon2"  style="height: 33px;">.{{domain}}</span>
+						  <span class="input-group-btn"  style="height: 33px;">
+					        <button class="btn btn-success" type="button" style="height: 33px;" onclick="add_subdomain()"><span class="glyphicon glyphicon-plus" aria-hidden="true" ></span></button>
+					      </span>
+						</div>
 					</div>
-				</div>
+				{% endif %}
 
 
 
@@ -70,13 +74,17 @@
 						<th>{% trans "Last update" %}</th>
 						<th>{% trans "Action" %}</th>
 					</tr>
-					{% for info in info_domains %}
+					{% for d in my_subdomains %}
 						<tr>
-							<td>{{ info.domain }}</td>
-							<td>{{ info.ip }}</td>
-							<td>{{ info.date }}</td>
+							<td>{{ d.name }}.{{domain}}</td>
+							<td>{{ d.name|last_ip }}</td>
+							<td>{{ d.name|last_update }}</td>
 							<td>
-								<button type="button" class="btn btn-success btn-xs attr_ip" id="date_{{info.domain}}" onclick="actualizarIp('{{info.domain}}')">{% trans "Update to" %} <span class="my_ip"></span></button>
+								<button type="button" class="btn btn-success btn-xs attr_ip" id="date_{{d.name}}" onclick="actualizarIp('{{d.name}}.{{domain}}')">{% trans "Update to" %} <span class="my_ip"></span></button>
+								{% if admin or own_admin %}
+									<button type="button" class="btn btn-danger btn-xs" onclick="delet_domain('{{ d.id }}','{{ d.name }}')" style="float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+								{% endif %}
+								
 							</td>
 						</tr>
 					{% endfor %}
@@ -184,35 +192,6 @@
 
 	}
 
-	function add_subdomain(){
-		var m_data = new FormData();
-		m_data.append( 'subdomain', $('#subdomain').val());
-		m_data.append( 'id_user', '{{ id_user }}');
-		m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
-		$.ajax({url:"/add_subdomain",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'json',
-			success:function(result){
-		  		if(result['success']){
-	            	//alert("Contrato agregado correctamente");
-	            	location.reload(true);
-	            }
-	            else{
-	            	if (result['error']=="exist"){
-	            		alert('{% trans "The subdomain already exists" %}');
-	            	}
-	            	else{
-	            		alert(result['error']);
-	            	}
-	                
-	            }
-		  	}	
-		});
-	}
-
 
 	$(function() {
 		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
@@ -230,22 +209,84 @@
 	    }
 	});
 
-
-	function getCookie(name) {
-	    var cookieValue = null;
-	    if (document.cookie && document.cookie != '') {
-		var cookies = document.cookie.split(';');
-		for (var i = 0; i < cookies.length; i++) {
-		    var cookie = jQuery.trim(cookies[i]);
-		    // Does this cookie string begin with the name we want?
-		    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-			cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-			break;
-		    }
+	{% if admin or own_admin %}
+		function add_subdomain(){
+			var m_data = new FormData();
+			m_data.append( 'subdomain', $('#subdomain').val());
+			m_data.append( 'id_user', '{{ id_user }}');
+			m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
+			$.ajax({url:"/add_subdomain",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'json',
+				success:function(result){
+			  		if(result['success']){
+		            	//alert("Contrato agregado correctamente");
+		            	location.reload(true);
+		            }
+		            else{
+		            	if (result['error']=="exist"){
+		            		alert('{% trans "The subdomain already exists" %}');
+		            	}
+		            	else{
+		            		alert(result['error']);
+		            	}
+		                
+		            }
+			  	}	
+			});
 		}
-	    }
-	    return cookieValue;
-	}
+
+		function delet_domain(id_domain,domain){
+			var m_data = new FormData();    
+			m_data.append( 'id_domain', id_domain);
+	        m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
+	        var r = confirm("Seguro que desea borrar el dominio "+domain);
+			if (r == true) {
+				$.ajax({url:"/delet_domain",
+					type: "POST",
+					data: m_data,
+					processData: false,
+					contentType: false,
+					dataType:'json',
+					success:function(result){
+				  		if(result['success']){
+			            	//alert("producto borrada correctamente");
+			            	location.reload(true);
+			            }
+			            else{
+			            	if (result['error']=="permission"){
+			            		alert('{% trans "You do not have permission to delete the subdomain" %}');
+			            	}
+			            	else{
+			            		alert(result['error']);
+			            	}
+			                
+			            }
+				  	}	
+				});
+			}				
+		}
+
+		function getCookie(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+			var cookies = document.cookie.split(';');
+			for (var i = 0; i < cookies.length; i++) {
+			    var cookie = jQuery.trim(cookies[i]);
+			    // Does this cookie string begin with the name we want?
+			    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+				cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+				break;
+			    }
+			}
+		    }
+		    return cookieValue;
+		}	
+	{% endif %}
+
 	</script>
 </body>
 </html>

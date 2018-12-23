@@ -156,7 +156,7 @@ DNS_API_PORT= os.environ.get('DNS_API_PORT')
 DNS_SHARED_SECRET= os.environ.get('DNS_SHARED_SECRET')
 DNS_ALLOW_AGENT= os.environ.get('DNS_ALLOW_AGENT')
 DNS_DOMAIN= os.environ.get('DNS_DOMAIN')
-
+OWN_ADMIN= os.environ.get('OWN_ADMIN')
 
 
 #Configuration for translation
