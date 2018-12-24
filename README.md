@@ -11,8 +11,6 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 ### Screenshots
 ![screenshots](https://i.imgur.com/dwkECRr.png)
 
-### Architecture
-![screenshots](https://i.imgur.com/sQn6Ur3.png)
 
 ### Run :whale:
 - Install docker and docker-compose
@@ -36,6 +34,9 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
     DJANGO_SU_PASSWORD: 1234  <-- Password to default administrator
     OWN_ADMIN: 1  <-- 1 = all users can create subdomains, 0 = only the administrator can create subdomains
 ```
+
+### Architecture
+![screenshots](https://i.imgur.com/sQn6Ur3.png)
 
 ### Translation :us::es:
 The system automatically detects the language of your browser.
