@@ -17,6 +17,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 - Copy the file docker-compose: `cp docker-compose-demo.yml docker-compose.yml`
 - Start with command: `docker-compose up`
 
+
 ### Configuration of environment variables
 ```
     DNS_HOST: ddns  <-- DNS docker name
@@ -37,6 +38,25 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 
 ### Architecture
 ![screenshots](https://i.imgur.com/sQn6Ur3.png)
+
+### DDNS clients
+You can use any client compatible with the DynDNS2 protocol.
+
+###### For Windows
+I recommend using `DynDNS Simply Client`, you can download it here: https://sourceforge.net/projects/dyndnssimplycl/
+
+
+###### For Linux and Mac OS X
+I recommend using `ddclient`, basic configuration:
+```
+protocol=dyndns2
+use=web, web=checkip.dyndns.com, web-skip='IP Address'
+server=localhost.com
+login=userdemo
+password='userpassword'
+yourdomain.ddns.demo.com
+```
+
 
 ### Translation :us::es:
 The system automatically detects the language of your browser.
