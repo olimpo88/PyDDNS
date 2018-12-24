@@ -12,12 +12,12 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 ![screenshots](https://i.imgur.com/dwkECRr.png)
 
 
-### Run :whale:
+### Run
 - Install docker and docker-compose
 - Copy the file docker-compose: `cp docker-compose-demo.yml docker-compose.yml`
 - Start with command: `docker-compose up`
 
-### Configuration of environment variables :snake:
+### Configuration of environment variables
 ```
     DNS_HOST: ddns  <-- DNS docker name
     DNS_API_PORT: 8080  <-- Port to connect with the API-REST of dprandzioch
