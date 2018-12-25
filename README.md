@@ -37,7 +37,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 ```
 
 ### Architecture
-![screenshots](https://i.imgur.com/sQn6Ur3.png)
+![screenshots](https://i.imgur.com/KWZzxOs.png)
 
 ### DDNS clients
 You can use any client compatible with the DynDNS2 protocol.
