@@ -67,4 +67,5 @@ If you want to add your translations you must follow the following steps:
 3. Edit the file: `appdata/pyddns/locale/XXXX/LC_MESSAGES/django.po`
 4. Once the translations are finished, it must be compiled: `python manage.py compilemessages`
 
+### Contact :email:
 https://www.linkedin.com/in/peraltaleandro/
