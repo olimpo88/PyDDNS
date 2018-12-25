@@ -66,3 +66,5 @@ If you want to add your translations you must follow the following steps:
 2. You must execute the following command, replacing the last attribute: `python manage.py makemessages --locale es`
 3. Edit the file: `appdata/pyddns/locale/XXXX/LC_MESSAGES/django.po`
 4. Once the translations are finished, it must be compiled: `python manage.py compilemessages`
+
+https://www.linkedin.com/in/peraltaleandro/
