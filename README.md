@@ -1,4 +1,4 @@
-# PyDDNS
+# ![PyDDNS](https://i.imgur.com/kOrgTBW.png)
 Complete system to create your own dynamic DNS server.
 
 Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-ddns
