@@ -12,7 +12,7 @@ Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec)
 
 
 ### Screenshots
-![screenshots](https://i.imgur.com/dwkECRr.png)
+![screenshots](https://i.imgur.com/6HTwrfn.png)
 
 
 ### Run
