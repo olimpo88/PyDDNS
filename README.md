@@ -1,15 +1,18 @@
-# PyDDNS
+# ![PyDDNS](https://i.imgur.com/kOrgTBW.png)
 Complete system to create your own dynamic DNS server.
 
 Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-ddns
 
 
 ### Description
-PyDDNs is a complete solution, allows you to set up and manage their own dns, compatyble with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
+PyDDNs is a complete solution, allows you to set up and manage their own dns, compatible with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
+
+### Video
+Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec)
 
 
 ### Screenshots
-![screenshots](https://i.imgur.com/dwkECRr.png)
+![screenshots](https://i.imgur.com/6HTwrfn.png)
 
 
 ### Run
@@ -37,7 +40,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 ```
 
 ### Architecture
-![screenshots](https://i.imgur.com/sQn6Ur3.png)
+![screenshots](https://i.imgur.com/KWZzxOs.png)
 
 ### DDNS clients
 You can use any client compatible with the DynDNS2 protocol.
@@ -66,3 +69,6 @@ If you want to add your translations you must follow the following steps:
 2. You must execute the following command, replacing the last attribute: `python manage.py makemessages --locale es`
 3. Edit the file: `appdata/pyddns/locale/XXXX/LC_MESSAGES/django.po`
 4. Once the translations are finished, it must be compiled: `python manage.py compilemessages`
+
+### Contact :email:
+https://www.linkedin.com/in/peraltaleandro/
