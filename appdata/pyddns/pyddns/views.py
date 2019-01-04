@@ -373,7 +373,7 @@ def set_ip(request,domain,ip):
 			return_code = "good"
 			message = "The updatewas successful and the hostname is now updated"
 		else:
-			return_code = "unknown"
+			return_code = "dnserr"
 			message = "The APP not sinc bind"
 		#print return_code
 		return return_code, message
@@ -404,12 +404,13 @@ def updateip(request):
  	if 'HTTP_USER_AGENT' in request.META:
  		agent=request.META['HTTP_USER_AGENT']
 
- 	list_agent_allow=settings.DNS_ALLOW_AGENT.split(",")
- 	verified_agent=False
- 	if list_agent_allow:
- 		for a in list_agent_allow:
- 			if a in request.META['HTTP_USER_AGENT']:
- 				verified_agent=True
+	verified_agent=False
+ 	if settings.DNS_ALLOW_AGENT:
+ 		list_agent_allow=settings.DNS_ALLOW_AGENT.split(",")
+	 	if list_agent_allow:
+	 		for a in list_agent_allow:
+	 			if a in request.META['HTTP_USER_AGENT']:
+	 				verified_agent=True
  	else:
  		verified_agent=True
 
