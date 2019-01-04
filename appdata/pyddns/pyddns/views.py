@@ -339,7 +339,9 @@ def set_ip_web(request,domain,ip):
 		else:
 			myjson['message'] = message
 
-		Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=subdomain_obj.user.username, domain=domain, result="%s"%(message)).save()
+		print return_code
+		if return_code != "nochg":
+			Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=subdomain_obj.user.username, domain=domain, result="%s"%(message)).save()
 
 	return HttpResponse(json.dumps(myjson))
 
@@ -353,27 +355,30 @@ def set_ip(request,domain,ip):
 
 	#FOR TEST - DIG
 	# ----------------------
-	#resolver = dns.resolver.Resolver()
-	#resolver.nameservers=[socket.gethostbyname('ddns')]
-	#ip_dig = resolver.query(domain,"A")[0]
-	
+	resolver = dns.resolver.Resolver()
+	resolver.nameservers=[socket.gethostbyname('ddns')]
+	try:
+		ip_dig = resolver.query(domain,"A")[0]
+	except:
+		ip_dig=None
 
-
-	message=""
-	subdomain=domain.split(".")[0]
-	print 'http://%s:%s/update?secret=%s&domain=%s&addr=%s'%(settings.DNS_HOST,settings.DNS_API_PORT,settings.DNS_SHARED_SECRET,subdomain,ip)
-	r = requests.get('http://%s:%s/update?secret=%s&domain=%s&addr=%s'%(settings.DNS_HOST,settings.DNS_API_PORT,settings.DNS_SHARED_SECRET,subdomain,ip))
-	#print r.json()
-	#print r.json()['Success']
-	if r.json()['Success']:
-		return_code = "good"
-		message = "The updatewas successful and the hostname is now updated"
+	if str(ip_dig) != str(ip):
+		message=""
+		subdomain=domain.split(".")[0]
+		print 'http://%s:%s/update?secret=%s&domain=%s&addr=%s'%(settings.DNS_HOST,settings.DNS_API_PORT,settings.DNS_SHARED_SECRET,subdomain,ip)
+		r = requests.get('http://%s:%s/update?secret=%s&domain=%s&addr=%s'%(settings.DNS_HOST,settings.DNS_API_PORT,settings.DNS_SHARED_SECRET,subdomain,ip))
+		#print r.json()
+		#print r.json()['Success']
+		if r.json()['Success']:
+			return_code = "good"
+			message = "The updatewas successful and the hostname is now updated"
+		else:
+			return_code = "unknown"
+			message = "The APP not sinc bind"
+		#print return_code
+		return return_code, message
 	else:
-		return_code = "unknown"
-		message = "The APP not sinc bind"
-	#print return_code
-	return return_code, message
-
+		return "nochg", "It already exists"
 
 
 
@@ -450,7 +455,7 @@ def updateip(request):
 		return_code="abuse"
 		message="You have exceeded the maximum number of attempts"	
 
+	if return_code != "nochg":
+		Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
 
-	print return_code
-	Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
 	return HttpResponse(return_code)
