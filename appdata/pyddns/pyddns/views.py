@@ -339,8 +339,18 @@ def set_ip_web(request,domain,ip):
 		else:
 			myjson['message'] = message
 
-		print return_code
-		if return_code != "nochg":
+		#print return_code
+		#if return_code != "nochg":
+
+		register=False
+		last_activity=Activity_log.objects.filter(user_affected=username).last()
+		if last_activity:
+			if last_activity.code != return_code or return_code == "good":
+				register=True
+		else:
+			register=True
+
+		if register:
 			Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=subdomain_obj.user.username, domain=domain, result="%s"%(message)).save()
 
 	return HttpResponse(json.dumps(myjson))
@@ -456,7 +466,16 @@ def updateip(request):
 		return_code="abuse"
 		message="You have exceeded the maximum number of attempts"	
 
-	if return_code != "nochg":
+	#if return_code != "nochg":
+	register=False
+	last_activity=Activity_log.objects.filter(user_affected=username).last()
+	if last_activity:
+		if last_activity.code != return_code or return_code == "good":
+			register=True
+	else:
+		register=True
+
+	if register:
 		Activity_log(action='SYNC', agent=agent , ip=ip, code=return_code, xforward=ip_x_forwarded, user_affected=username, domain=domain, result="%s"%(message)).save()
 
 	return HttpResponse(return_code)
