@@ -47,6 +47,7 @@ You can use any client compatible with the DynDNS2 protocol.
 
 ###### For Windows
 I recommend using `DynDNS Simply Client`, you can download it here: https://sourceforge.net/projects/dyndnssimplycl/
+![screenshots](https://i.imgur.com/cTwjRFS.png)
 
 
 ###### For Linux and Mac OS X
