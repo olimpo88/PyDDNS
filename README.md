@@ -55,6 +55,7 @@ I recommend using `ddclient`, basic configuration:
 protocol=dyndns2
 use=web, web=checkip.dyndns.com, web-skip='IP Address'
 server=localhost.com
+ssl=no
 login=userdemo
 password='userpassword'
 yourdomain.ddns.demo.com
