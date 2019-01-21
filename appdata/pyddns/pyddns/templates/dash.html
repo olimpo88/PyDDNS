@@ -12,6 +12,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Muli|Oswald" rel="stylesheet">
 	<script src="/static/common/js/jquery-1.10.2.min.js"></script>
     <script src="/static/common/js/bootstrap.min.js"></script>
+    <script src="/static/common/js/clipboard.min.js"></script>
 </head>
 <body>
 
@@ -76,7 +77,7 @@
 					</tr>
 					{% for d in my_subdomains %}
 						<tr>
-							<td>{{ d.name }}.{{domain}}</td>
+							<td><span id="domain_{{ d.name }}">{{ d.name }}.{{domain}} </span><button class="btn" data-clipboard-target="#domain_{{ d.name }}" title="{% trans "Copy" %}"> <img class="clippy" src="/static/admin/img/clippy.svg" width="13" alt="Copy to clipboard"> </button></td>
 							<td>{{ d.name|last_ip }}</td>
 							<td>{{ d.name|last_update }}</td>
 							<td>
@@ -286,6 +287,23 @@
 		    return cookieValue;
 		}	
 	{% endif %}
+
+
+	var clipboard = new ClipboardJS('.btn');
+
+	clipboard.on('success', function(e) {
+	    console.info('Action:', e.action);
+	    console.info('Text:', e.text);
+	    console.info('Trigger:', e.trigger);
+
+	    e.clearSelection();
+	});
+
+	clipboard.on('error', function(e) {
+	    console.error('Action:', e.action);
+	    console.error('Trigger:', e.trigger);
+	});
+
 
 	</script>
 </body>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-23 22:46+0000\n"
+"POT-Creation-Date: 2019-01-21 11:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,156 +109,157 @@ msgstr "El nombre de usuario "
 msgid " already exists"
 msgstr " ya existe"
 
-#: pyddns/templates/dash.html:38 pyddns/templates/users.html.py:48
-msgid "Admin users"
-msgstr "Administrar usuarios"
+#: pyddns/templates/dash.html:39 pyddns/templates/subdomains.html.py:39
+#: pyddns/templates/users.html:39
+msgid "Users"
+msgstr "Usuarios"
 
-#: pyddns/templates/dash.html:39 pyddns/templates/subdomains.html.py:48
-msgid "Admin subdomains"
-msgstr "Administrar subdominios"
+#: pyddns/templates/dash.html:40 pyddns/templates/subdomains.html.py:40
+#: pyddns/templates/users.html:40 pyddns/templates/users.html.py:68
+msgid "Domains"
+msgstr "Dominios"
 
-#: pyddns/templates/dash.html:41 pyddns/templates/subdomains.html.py:41
+#: pyddns/templates/dash.html:42 pyddns/templates/subdomains.html.py:41
 #: pyddns/templates/users.html:41
 msgid "Logout"
 msgstr "Salir"
 
-#: pyddns/templates/dash.html:48
+#: pyddns/templates/dash.html:49
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: pyddns/templates/dash.html:50
+#: pyddns/templates/dash.html:51
 msgid "Dashboard of the user "
 msgstr "Dashboard del usuario "
 
-#: pyddns/templates/dash.html:57
+#: pyddns/templates/dash.html:58
 msgid "Subdomain name "
 msgstr "Nombre del subdominio "
 
-#: pyddns/templates/dash.html:68
+#: pyddns/templates/dash.html:69
 msgid "Your current IP is"
 msgstr "Su IP actual es"
 
-#: pyddns/templates/dash.html:72
+#: pyddns/templates/dash.html:73
 msgid "My domains"
 msgstr "Mis dominios"
 
-#: pyddns/templates/dash.html:74
+#: pyddns/templates/dash.html:75
 msgid "Last update"
 msgstr "Última actualización"
 
-#: pyddns/templates/dash.html:75 pyddns/templates/subdomains.html.py:64
+#: pyddns/templates/dash.html:76 pyddns/templates/subdomains.html.py:64
 msgid "Action"
 msgstr "Acción"
 
-#: pyddns/templates/dash.html:83
+#: pyddns/templates/dash.html:80
+msgid "Copy"
+msgstr "Copiar"
+
+#: pyddns/templates/dash.html:84
 msgid "Update to"
 msgstr "Actualizar a"
 
-#: pyddns/templates/dash.html:93
+#: pyddns/templates/dash.html:94
 msgid "My last records"
 msgstr "Mis últimos registros"
 
-#: pyddns/templates/dash.html:101
+#: pyddns/templates/dash.html:102
 msgid "Date"
 msgstr "Fecha"
 
-#: pyddns/templates/dash.html:104
+#: pyddns/templates/dash.html:105
 msgid "Code"
 msgstr "Código"
 
-#: pyddns/templates/dash.html:107
+#: pyddns/templates/dash.html:108
 msgid "Message"
 msgstr "Mensaje"
 
-#: pyddns/templates/dash.html:110 pyddns/templates/subdomains.html.py:61
+#: pyddns/templates/dash.html:111 pyddns/templates/subdomains.html.py:61
 msgid "Domain"
 msgstr "Dominio"
 
-#: pyddns/templates/dash.html:116
+#: pyddns/templates/dash.html:117
 msgid "Agent"
 msgstr "Agente"
 
-#: pyddns/templates/dash.html:137 pyddns/templates/subdomains.html.py:78
+#: pyddns/templates/dash.html:138 pyddns/templates/subdomains.html.py:78
 #: pyddns/templates/users.html:97
 msgid "Previous"
 msgstr "Anterior"
 
-#: pyddns/templates/dash.html:141 pyddns/templates/subdomains.html.py:82
+#: pyddns/templates/dash.html:142 pyddns/templates/subdomains.html.py:82
 #: pyddns/templates/users.html:101
 msgid "Page"
 msgstr "Página"
 
-#: pyddns/templates/dash.html:141 pyddns/templates/subdomains.html.py:82
+#: pyddns/templates/dash.html:142 pyddns/templates/subdomains.html.py:82
 #: pyddns/templates/users.html:101
 msgid "of"
 msgstr "de"
 
-#: pyddns/templates/dash.html:145 pyddns/templates/subdomains.html.py:86
+#: pyddns/templates/dash.html:146 pyddns/templates/subdomains.html.py:86
 #: pyddns/templates/users.html:105
 msgid "Next"
 msgstr "Siguiente"
 
-#: pyddns/templates/dash.html:157 pyddns/templates/subdomains.html.py:98
+#: pyddns/templates/dash.html:158 pyddns/templates/subdomains.html.py:98
 #: pyddns/templates/users.html:117
 msgid "The updatewas successful and the hostname is now updated"
 msgstr ""
 "La actualización fue exitosa y el nombre de host ahora está actualizado"
 
-#: pyddns/templates/dash.html:158 pyddns/templates/subdomains.html.py:99
+#: pyddns/templates/dash.html:159 pyddns/templates/subdomains.html.py:99
 #: pyddns/templates/users.html:118
 msgid "The APP not sinc bind"
 msgstr ""
 "La aplicación no pudo sincronizar el servicio BIND (contacte con su "
 "administrador)"
 
-#: pyddns/templates/dash.html:159 pyddns/templates/subdomains.html.py:100
+#: pyddns/templates/dash.html:160 pyddns/templates/subdomains.html.py:100
 #: pyddns/templates/users.html:119
 msgid "The hostname specified does not exist in this user account"
 msgstr "El nombre de host especificado no existe en esta cuenta de usuario"
 
-#: pyddns/templates/dash.html:160 pyddns/templates/subdomains.html.py:101
+#: pyddns/templates/dash.html:161 pyddns/templates/subdomains.html.py:101
 #: pyddns/templates/users.html:120
 msgid "The username and password pair do not match a real user"
 msgstr ""
 "El par de nombre de usuario y contraseña no coinciden con un usuario real"
 
-#: pyddns/templates/dash.html:161 pyddns/templates/dash.html.py:162
+#: pyddns/templates/dash.html:162 pyddns/templates/dash.html.py:163
 #: pyddns/templates/subdomains.html:102 pyddns/templates/subdomains.html:103
 #: pyddns/templates/users.html.py:121 pyddns/templates/users.html:122
 msgid "Incorrect authentication format"
 msgstr "Formato de autenticación incorrecto"
 
-#: pyddns/templates/dash.html:163 pyddns/templates/subdomains.html.py:104
+#: pyddns/templates/dash.html:164 pyddns/templates/subdomains.html.py:104
 #: pyddns/templates/users.html:123
 msgid "Missing header HTTP_AUTHORIZATION"
 msgstr "Falta el encabezado HTTP_AUTHORIZATION"
 
-#: pyddns/templates/dash.html:164 pyddns/templates/subdomains.html.py:105
+#: pyddns/templates/dash.html:165 pyddns/templates/subdomains.html.py:105
 #: pyddns/templates/users.html:124
 msgid "Missing header HTTP_USER_AGENT"
 msgstr "Falta el encabezado HTTP_USER_AGENT"
 
-#: pyddns/templates/dash.html:165 pyddns/templates/subdomains.html.py:106
+#: pyddns/templates/dash.html:166 pyddns/templates/subdomains.html.py:106
 #: pyddns/templates/users.html:125
 msgid "You have exceeded the maximum number of attempts"
 msgstr "Has superado el número máximo de intentos."
 
-#: pyddns/templates/dash.html:231
+#: pyddns/templates/dash.html:232
 msgid "The subdomain already exists"
 msgstr "EL subdominio ya existe"
 
-#: pyddns/templates/dash.html:261
+#: pyddns/templates/dash.html:262
 msgid "You do not have permission to delete the subdomain"
 msgstr "Usted no tiene permisos para eliminar el subdominio"
 
-#: pyddns/templates/subdomains.html:39 pyddns/templates/users.html.py:39
-msgid "Users"
-msgstr "Usuarios"
-
-#: pyddns/templates/subdomains.html:40 pyddns/templates/users.html.py:40
-#: pyddns/templates/users.html:68
-msgid "Domains"
-msgstr "Dominios"
+#: pyddns/templates/subdomains.html:48
+msgid "Admin subdomains"
+msgstr "Administrar subdominios"
 
 #: pyddns/templates/subdomains.html:51
 msgid "Search subdomain"
@@ -271,6 +272,10 @@ msgstr "Email de contacto"
 #: pyddns/templates/subdomains.html:71
 msgid "Admin"
 msgstr "Administrar"
+
+#: pyddns/templates/users.html:48
+msgid "Admin users"
+msgstr "Administrar usuarios"
 
 #: pyddns/templates/users.html:53
 msgid "Search user"
