@@ -13,6 +13,13 @@
 	<script src="/static/common/js/jquery-1.10.2.min.js"></script>
     <script src="/static/common/js/bootstrap.min.js"></script>
     <script src="/static/common/js/clipboard.min.js"></script>
+<style>
+	.nostyle{
+		background: transparent;
+	    border: 0px;
+	}
+
+</style>
 </head>
 <body>
 
@@ -77,7 +84,7 @@
 					</tr>
 					{% for d in my_subdomains %}
 						<tr>
-							<td><span id="domain_{{ d.name }}">{{ d.name }}.{{domain}} </span><button class="btn btn-xs" data-clipboard-target="#domain_{{ d.name }}" title="{% trans "Copy" %}"> <img class="clippy" src="/static/admin/img/clippy.svg" width="13" alt="Copy to clipboard"> </button></td>
+							<td><input id="domain_{{ d.name }}" value="{{ d.name }}.{{domain}}" class="nostyle" readonly /><button class="btn btn-xs" data-clipboard-target="#domain_{{ d.name }}" title="{% trans "Copy" %}"> <img class="clippy" src="/static/admin/img/clippy.svg" width="13" alt="Copy to clipboard"> </button></td>
 							<td>{{ d.name|last_ip }}</td>
 							<td>{{ d.name|last_update }}</td>
 							<td>

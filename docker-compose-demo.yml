@@ -15,7 +15,7 @@ services:
     networks:
       red:
   python:
-    image: olimpo88/pyddns:0.1
+    image: olimpo88/pyddns:latest
     restart: always
     volumes:
       - ./appdata/pyddns:/usr/src/app
