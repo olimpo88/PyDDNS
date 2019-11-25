@@ -8,7 +8,7 @@ Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-d
 PyDDNs is a complete solution, allows you to set up and manage their own dns, compatible with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
 
 ### Video
-Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec)
+Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec) :point_left: I made the video on a Linux desktop system, and port 53 was busy, **you should not change it**. 
 
 
 ### Screenshots
