@@ -39,6 +39,15 @@ Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec) :poin
     OWN_ADMIN: 1  <-- 1 = all users can create subdomains, 0 = only the administrator can create subdomains
 ```
 
+### Configuration of DNS
+you need a subdomain for example: ddns.demo.com
+
+Then you must create an NS record as follows:
+ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
+
+
+
+
 ### Architecture
 ![screenshots](https://i.imgur.com/KWZzxOs.png)
 
