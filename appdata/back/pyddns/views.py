@@ -25,10 +25,23 @@ from django.db.models import Q
 from common.utils import getForwardedFor
 from django.contrib.auth.decorators import user_passes_test
 
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from pyddns.api.serializers import SubDomainSerializer
+
 import socket
 import dns.resolver
 import logging
 logger = logging.getLogger('django')
+
+class SubdomainListView(ListAPIView):
+    queryset = SubDomain.objects.all()
+    serializer_class = SubDomainSerializer
+
+class SubdomainDetailView(RetrieveAPIView):
+    queryset = SubDomain.objects.all()
+    serializer_class = SubDomainSerializer
+
+
 
 @login_required
 def main(request,id_user=None):

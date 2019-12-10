@@ -35,8 +35,11 @@ urlpatterns = [
     url(r'^delet_user', delet_user),
     url(r'^delet_domain', delet_domain),
     url(r'^common/', include('common.urls')),
+    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^nic/update', updateip),
     url(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),
+    url(r'^api/SubdomainList$', SubdomainListView.as_view()),
+    url(r'^api/SubdomainList/<pk>$', SubdomainDetailView.as_view()),
     url(r'^$', main),
 ]
 
