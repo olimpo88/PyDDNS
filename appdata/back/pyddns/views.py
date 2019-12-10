@@ -32,7 +32,7 @@ logger = logging.getLogger('django')
 
 @login_required
 def main(request,id_user=None):
-    logger.info("LOGIN")
+    #logger.info("LOGIN")
     admin=False
     see_user=False
 
@@ -432,9 +432,9 @@ def updateip(request):
             if 'HTTP_AUTHORIZATION' in request.META:
                 auth = request.META['HTTP_AUTHORIZATION'].split()
                 if len(auth) == 2:
-                    logger.info(auth)
-                    logger.info(auth[0].lower())
-                    logger.info(auth[1])
+                    #logger.info(auth)
+                    #logger.info(auth[0].lower())
+                    #logger.info(auth[1])
 
                     if auth[0].lower() == "basic":
                         username, passwd = base64.b64decode(auth[1]).decode("utf-8", "ignore").split(':')

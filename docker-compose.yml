@@ -19,7 +19,7 @@ services:
     image: pyddns:2.0
     restart: always
     volumes:
-      - ./appdata/pyddns:/usr/src/app
+      - ./appdata/back:/usr/src/app
       - ./appdata/static/node_modules:/usr/src/app/static/node_modules
     environment:
       DNS_HOST: ddns
