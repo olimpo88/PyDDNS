@@ -1,4 +1,4 @@
-django==1.11.20
+django>=2.2,<3
 django-datatables-view
 psycopg2-binary
 python-dateutil

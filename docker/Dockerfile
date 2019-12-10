@@ -1,15 +1,25 @@
-FROM python:2.7-stretch
+FROM python:3.7
 
 
-RUN apt-get update && apt-get install libsasl2-dev python-dev libldap2-dev libssl-dev python-ldap libkf5ldap-dev xfonts-base xfonts-75dpi gettext -y --force-yes
+RUN apt-get update && apt-get install \
+    libsasl2-dev \
+    python3-dev \
+    libldap2-dev \
+    libssl-dev \
+    libkf5ldap-dev \
+    xfonts-base \
+    xfonts-75dpi \
+    -y --force-yes
+
 
 WORKDIR /usr/src/app
+
+RUN pip3 install --upgrade pip && pip3 install --upgrade setuptools
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE 8000
-
 
 RUN mkdir /script 
 COPY runserver.sh /script

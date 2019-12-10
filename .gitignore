@@ -7,4 +7,4 @@ appdata/pyddns/db.sqlite3
 appdata/pyddns/common/migrations/[0-9]*.py
 appdata/pyddns/pyddns/migrations/[0-9]*.py
 data/*
-docker-compose.yml
+.env
