@@ -4,7 +4,7 @@ Complete system to create your own dynamic DNS server.
 Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-ddns
 
 
-### Description
+## Description
 PyDDNs is a complete solution, allows you to set up and manage their own dns, compatible with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
 
 
@@ -12,7 +12,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 ![screenshots](https://i.imgur.com/6HTwrfn.png)
 
 
-### Configuration and run
+## Quick Start
 - Clone de proyect
 - ```cd PyDDNS```
 - copy the configuration file ```cp .env-demo .env```
@@ -37,8 +37,8 @@ DJANGO_PYTHONUNBUFFERED=1
 OWN_ADMIN: 1  <-- 1 = all users can create subdomains, 0 = only the administrator can create subdomains
 DNS_ALLOW_AGENT: ddclient3,ddclient <-- If you want to control by client, put their names separated by comma
 
-WEB_PORT=8088
-DNS_PORT=54
+WEB_PORT=80
+DNS_PORT=53
 ```
 
 - Install docker and docker-compose
@@ -51,10 +51,10 @@ Then you must create an NS record as follows:
 ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
 
 
-### Architecture
+## Architecture
 ![screenshots](https://i.imgur.com/KWZzxOs.png)
 
-### DDNS clients
+## DDNS clients
 You can use any client compatible with the DynDNS2 protocol.
 
 ###### For Windows
