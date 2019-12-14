@@ -17,6 +17,7 @@ services:
   python:
     #image: olimpo88/pyddns:latest
     image: pyddns:2.0
+    build: ./docker
     restart: always
     volumes:
       - ./appdata/pyddns:/usr/src/app
