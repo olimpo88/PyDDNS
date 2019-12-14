@@ -27,7 +27,7 @@ services:
       DNS_API_PORT: 8080
       DNS_DOMAIN: '${DOMAIN}'
       DNS_SHARED_SECRET: '${SHARED_SECRET}'
-      DNS_ALLOW_AGENT: ddclient3,ddclient
+      DNS_ALLOW_AGENT: '${DNS_ALLOW_AGENT}'
       DB_HOST: postgres
       DB_NAME: '${DATABASE_NAME}'
       DB_USER: '${DATABASE_USER}'
@@ -36,7 +36,7 @@ services:
       DJANGO_SU_NAME: '${DJANGO_SU_NAME}'
       DJANGO_SU_EMAIL: '${DJANGO_SU_EMAIL}'
       DJANGO_SU_PASSWORD: '${DJANGO_SU_PASSWORD}'
-      OWN_ADMIN: 1
+      OWN_ADMIN: '${OWN_ADMIN}'
     depends_on:
       - "postgres"
     networks:
