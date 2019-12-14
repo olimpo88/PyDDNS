@@ -14,7 +14,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 
 ### Configuration and run
 - Clone de proyect
-- ```cp PyDDNS```
+- ```cd PyDDNS```
 - copy the configuration file ```cp .env-demo .env```
 - Edit the configuration file ```nano .env```
 
