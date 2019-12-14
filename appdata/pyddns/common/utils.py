@@ -13,195 +13,195 @@ from django.db.models import Q
 #from models import Adm_clave_tabla
 
 def next_pk(pkname):
-	"""
-	Metodo que sirve para buscar el proximo PK en caso de necesitar insertar un nuevo registro.
-	El metodo buscara en la tabla Adm_clave_tabla por un nuevo registro.
-	"""
+    """
+    Metodo que sirve para buscar el proximo PK en caso de necesitar insertar un nuevo registro.
+    El metodo buscara en la tabla Adm_clave_tabla por un nuevo registro.
+    """
 
-	cursor = connection.cursor()
+    cursor = connection.cursor()
 
-	rows = cursor.execute("UPDATE ADM_CLAVE_TABLA SET MAX_CLAVE = MAX_CLAVE + 1 WHERE ID_CLAVE = %s", [pkname.upper()])
+    rows = cursor.execute("UPDATE ADM_CLAVE_TABLA SET MAX_CLAVE = MAX_CLAVE + 1 WHERE ID_CLAVE = %s", [pkname.upper()])
 
-	cursor.execute("SELECT MAX_CLAVE FROM ADM_CLAVE_TABLA WHERE ID_CLAVE = %s", [pkname.upper()])
-	row = cursor.fetchone()
-	transaction.commit_unless_managed()
+    cursor.execute("SELECT MAX_CLAVE FROM ADM_CLAVE_TABLA WHERE ID_CLAVE = %s", [pkname.upper()])
+    row = cursor.fetchone()
+    transaction.commit_unless_managed()
 
-	return row[0]
+    return row[0]
 
 def get_extcombo(record):
-	json={
-		'totalCount':len(record),
-		'records': list(record)
-	}
+    json={
+        'totalCount':len(record),
+        'records': list(record)
+    }
 
-	return json
+    return json
 
 class AbmFunction():
 
-	def __init__(self, form):
-		self.pk=form._meta.model._meta.fields[form._meta.model._meta.pk_index()].name
-		self.modelo=form._meta.model
-		self.tabla=form._meta.model._meta.db_table
-		self.form=form
-		self.lasterror=''
+    def __init__(self, form):
+        self.pk=form._meta.model._meta.fields[form._meta.model._meta.pk_index()].name
+        self.modelo=form._meta.model
+        self.tabla=form._meta.model._meta.db_table
+        self.form=form
+        self.lasterror=''
 
-	def make_action(self, request, action):
-		json = {
-			'errors': {},
-			'data': {},
-			'message': '',
-			'success': False,
-		}
-		actions={'next':self.next,
-				'prev':self.prev,
-				'first':self.first,
-				'last':self.last,
-				'save':self.save,
-				'delete':self.delete}
+    def make_action(self, request, action):
+        json = {
+            'errors': {},
+            'data': {},
+            'message': '',
+            'success': False,
+        }
+        actions={'next':self.next,
+                'prev':self.prev,
+                'first':self.first,
+                'last':self.last,
+                'save':self.save,
+                'delete':self.delete}
 
-		obj=actions[action](request)
-		if obj:
-			json['success'] = True
-			json['data'] = obj.get_values()
-		else:
-			json['errors']['reason']=self.lasterror
-			#json['errors']['reason']="Error"
-		return json
+        obj=actions[action](request)
+        if obj:
+            json['success'] = True
+            json['data'] = obj.get_values()
+        else:
+            json['errors']['reason']=self.lasterror
+            #json['errors']['reason']="Error"
+        return json
 
-	def next(self, request):
-		obj=False
-		q=self.form(request.POST).get_adicional_filter(request)
-		if (q):
-			q.add((Q(pk__gt=request.POST[self.pk])), q.connector)
-		else:
-			q=Q(pk__gt=request.POST[self.pk])
+    def next(self, request):
+        obj=False
+        q=self.form(request.POST).get_adicional_filter(request)
+        if (q):
+            q.add((Q(pk__gt=request.POST[self.pk])), q.connector)
+        else:
+            q=Q(pk__gt=request.POST[self.pk])
 
-		rs=self.modelo.objects.filter(*[q]).order_by(self.pk)[:1]
+        rs=self.modelo.objects.filter(*[q]).order_by(self.pk)[:1]
 
-		if rs:
-			obj=rs[0]
-		else:
-			self.lasterror=('Se ha llegado al final de los datos',)
- 		return obj
+        if rs:
+            obj=rs[0]
+        else:
+            self.lasterror=('Se ha llegado al final de los datos',)
+        return obj
 
-	def prev(self, request):
-		obj=False
-		q=self.form(request.POST).get_adicional_filter(request)
-		if (q):
-			q.add((Q(pk__lt=request.POST[self.pk])), q.connector)
-		else:
-			q=Q(pk__lt=request.POST[self.pk])
+    def prev(self, request):
+        obj=False
+        q=self.form(request.POST).get_adicional_filter(request)
+        if (q):
+            q.add((Q(pk__lt=request.POST[self.pk])), q.connector)
+        else:
+            q=Q(pk__lt=request.POST[self.pk])
 
-		rs=self.modelo.objects.filter(*[q]).order_by('-'+self.pk)[:1]
+        rs=self.modelo.objects.filter(*[q]).order_by('-'+self.pk)[:1]
 
-		if rs:
-			obj=rs[0]
-		else:
-			self.lasterror=('Se ha llegado al final de los datos',)
- 		return obj
+        if rs:
+            obj=rs[0]
+        else:
+            self.lasterror=('Se ha llegado al final de los datos',)
+        return obj
 
-	def first(self, request):
-		q=self.form(request.POST).get_adicional_filter(request)
-		if (q):
-			rs=self.modelo.objects.filter(*[q]).order_by(self.pk)[:1]
-		else:
-			rs=self.modelo.objects.order_by(self.pk)[:1]
-		obj=rs[0]
- 		return obj
+    def first(self, request):
+        q=self.form(request.POST).get_adicional_filter(request)
+        if (q):
+            rs=self.modelo.objects.filter(*[q]).order_by(self.pk)[:1]
+        else:
+            rs=self.modelo.objects.order_by(self.pk)[:1]
+        obj=rs[0]
+        return obj
 
-	def last(self, request):
-		q=self.form(request.POST).get_adicional_filter(request)
-		if (q):
-			rs=self.modelo.objects.filter(*[q]).order_by('-'+self.pk)[:1]
-		else:
-			rs=self.modelo.objects.order_by('-'+self.pk)[:1]
-		obj=rs[0]
- 		return obj
+    def last(self, request):
+        q=self.form(request.POST).get_adicional_filter(request)
+        if (q):
+            rs=self.modelo.objects.filter(*[q]).order_by('-'+self.pk)[:1]
+        else:
+            rs=self.modelo.objects.order_by('-'+self.pk)[:1]
+        obj=rs[0]
+        return obj
 
-	def save(self, request):
-		obj=False
-		rs=False
+    def save(self, request):
+        obj=False
+        rs=False
 
-		if request.POST[self.pk].isdigit():
-			rs=self.modelo.objects.filter(pk=request.POST[self.pk])
+        if request.POST[self.pk].isdigit():
+            rs=self.modelo.objects.filter(pk=request.POST[self.pk])
 
-		if rs:
-			if (not request.user.has_perm(self.modelo._meta.app_label+'.change_'+self.tabla)):
-				self.lasterror=('No posee permisos para Modificar datos.')
-				return obj
-			frm=self.form(request.POST, instance=rs[0])
-		else:
-			if (not request.user.has_perm(self.modelo._meta.app_label+'.add_'+self.tabla)):
-				self.lasterror=('No posee permisos para Agregar datos.')
-				return obj
-			frm=self.form(request.POST.copy())
+        if rs:
+            if (not request.user.has_perm(self.modelo._meta.app_label+'.change_'+self.tabla)):
+                self.lasterror=('No posee permisos para Modificar datos.')
+                return obj
+            frm=self.form(request.POST, instance=rs[0])
+        else:
+            if (not request.user.has_perm(self.modelo._meta.app_label+'.add_'+self.tabla)):
+                self.lasterror=('No posee permisos para Agregar datos.')
+                return obj
+            frm=self.form(request.POST.copy())
 
-		if not request.POST[self.pk].isdigit():
-			frm.data[self.pk] = next_pk(self.pk)
+        if not request.POST[self.pk].isdigit():
+            frm.data[self.pk] = next_pk(self.pk)
 
-		if frm.is_valid(): 			
-			obj=frm.save()
-		else:
-			for err in frm.errors:
-				self.lasterror='%s: %s' % (err, frm.errors[err])
+        if frm.is_valid():             
+            obj=frm.save()
+        else:
+            for err in frm.errors:
+                self.lasterror='%s: %s' % (err, frm.errors[err])
 
- 		return obj
+        return obj
 
-	def delete(self, request):
+    def delete(self, request):
 
-		if (not request.user.has_perm(self.modelo._meta.app_label+'.delete_'+self.tabla)):
-			self.lasterror=('No posee permisos para Eliminar datos.')
-			return False
+        if (not request.user.has_perm(self.modelo._meta.app_label+'.delete_'+self.tabla)):
+            self.lasterror=('No posee permisos para Eliminar datos.')
+            return False
 
-		obj=self.modelo.objects.get(pk=request.POST[self.pk])
-		if obj:
-			obj.delete()
-			obj = self.prev(request)
- 		return obj
+        obj=self.modelo.objects.get(pk=request.POST[self.pk])
+        if obj:
+            obj.delete()
+            obj = self.prev(request)
+        return obj
 
 
 class FrmExtAbm(forms.ModelForm):    
-	"""
-	Clase que extiende al ModelForm nativo de DJango para dotarlo de un metodo donde 
-	devuelva el conjunto de campos compatible con la sitaxis de EXTJS
-	"""
-	_ext_config={
-		'width':400,
-		'height':200,
-		'title':'Titulo del Form'
-	}
+    """
+    Clase que extiende al ModelForm nativo de DJango para dotarlo de un metodo donde 
+    devuelva el conjunto de campos compatible con la sitaxis de EXTJS
+    """
+    _ext_config={
+        'width':400,
+        'height':200,
+        'title':'Titulo del Form'
+    }
 
-	def ext_config(self, request):
-		"""
-		Reimplementar esta funcion en cada modelo cambiando por los valores correctos para c/form.
-		"""
-		self._ext_config['url']=request.META['PATH_INFO']
-		return self._ext_config
+    def ext_config(self, request):
+        """
+        Reimplementar esta funcion en cada modelo cambiando por los valores correctos para c/form.
+        """
+        self._ext_config['url']=request.META['PATH_INFO']
+        return self._ext_config
 
-	def as_ext(self):
-		return mark_safe(simplejson.dumps(self,cls=ExtJSONEncoder, indent=4))
+    def as_ext(self):
+        return mark_safe(simplejson.dumps(self,cls=ExtJSONEncoder, indent=4))
 
-	def get_adicional_filter(self, request):
-		"""
-		Reimplementar esta funcion en aquellos forms que requieran filtros adicionales.
-		Se debera devolver 
-		"""
-		return False
+    def get_adicional_filter(self, request):
+        """
+        Reimplementar esta funcion en aquellos forms que requieran filtros adicionales.
+        Se debera devolver 
+        """
+        return False
 
 class ExtModel():
-	"""
-	Clase para extender los modelos nativos y agregarles funcionalidad extra.
-	"""
-	def get_values(self):
-		"""
-		Clase que devuelve un diccionario con los campos y datos del Objeto QuerySet.
-		Sirve para formar un JSon con los valores de los datos y devolverlos al navegador.
-		"""
-		val={}
-		for field in self._meta.fields:
-			val[field.name]=field.value_to_string(self)
-		return val
-		
+    """
+    Clase para extender los modelos nativos y agregarles funcionalidad extra.
+    """
+    def get_values(self):
+        """
+        Clase que devuelve un diccionario con los campos y datos del Objeto QuerySet.
+        Sirve para formar un JSon con los valores de los datos y devolverlos al navegador.
+        """
+        val={}
+        for field in self._meta.fields:
+            val[field.name]=field.value_to_string(self)
+        return val
+        
 
 class ExtJSONEncoder(DjangoJSONEncoder):
     """

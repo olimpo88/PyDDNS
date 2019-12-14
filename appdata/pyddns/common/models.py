@@ -25,10 +25,10 @@ class Activity_log(models.Model):
         return '%s - %s - %s - %s' % (self.date, self.action, self.user_affected, self.result)
 
     class Meta:
-	   db_table=u'activity_log'
-	   ordering = ['-id_log']
+        db_table=u'activity_log'
+        ordering = ['-id_log']
 
     class Admin:
-	pass
+        pass
 
 admin.site.register(Activity_log)
