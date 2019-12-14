@@ -7,45 +7,48 @@ Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-d
 ### Description
 PyDDNs is a complete solution, allows you to set up and manage their own dns, compatible with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
 
-### Video
-Watch the video --> [Youtube](https://www.youtube.com/watch?v=L9ORq4zVjec) :point_left: I made the video on a Linux desktop system, and port 53 was busy, **you should not change it**. 
-
 
 ### Screenshots
 ![screenshots](https://i.imgur.com/6HTwrfn.png)
 
 
-### Run
+### Configuration and run
+- Clone de proyect
+- ```cp PyDDNS```
+- copy the configuration file ```cp .env-demo .env```
+- Edit the configuration file ```nano .env```
+
+```
+DOMAIN=ddns.demo.com  <-- our domain
+SHARED_SECRET=el@sadsadyS58 <-- password for API-REST of dprandzioch
+
+DATABASE_NAME=pyddns
+DATABASE_USER=pyddns
+DATABASE_PASS=PyDyn@m1cDNSP0s
+DATABASE_HOST=postgres
+DATABASE_PORT=5432
+
+DJANGO_SU_NAME=admin
+DJANGO_SU_EMAIL=admin@company.com
+DJANGO_SU_PASSWORD=1234 <-- Password to default administrator
+DJANGO_DEBUG=1
+DJANGO_LOG_LEVEL=INFO
+DJANGO_PYTHONUNBUFFERED=1
+OWN_ADMIN: 1  <-- 1 = all users can create subdomains, 0 = only the administrator can create subdomains
+DNS_ALLOW_AGENT: ddclient3,ddclient <-- If you want to control by client, put their names separated by comma
+
+WEB_PORT=8088
+DNS_PORT=54
+```
+
 - Install docker and docker-compose
-- Copy the file docker-compose: `cp docker-compose-demo.yml docker-compose.yml`
 - Start with command: `docker-compose up`
 
-
-### Configuration of environment variables
-```
-    DNS_HOST: ddns  <-- DNS docker name
-    DNS_API_PORT: 8080  <-- Port to connect with the API-REST of dprandzioch
-    DNS_DOMAIN: ddns.demo.com  <-- our domain
-    DNS_SHARED_SECRET: el@sadsadyS58 <-- same password that was set in API-REST of dprandzioch
-    DNS_ALLOW_AGENT: ddclient3,ddclient <-- If you want to control by client, put their names separated by comma
-    DB_HOST: postgres  <-- postgres docker name
-    DB_NAME: pyddns  <-- DB postgres
-    DB_USER: pyddns  <-- User postgres
-    DB_PASSWORD: PyDyn@m1cDNSP0s <-- Password of user postgres
-    DJANGO_ADMIN_URL: administrator  <-- URL to enter the django administration
-    DJANGO_SU_NAME: admin  <--- Default administrator user
-    DJANGO_SU_EMAIL: admin@my.company  <-- Email to default administrator
-    DJANGO_SU_PASSWORD: 1234  <-- Password to default administrator
-    OWN_ADMIN: 1  <-- 1 = all users can create subdomains, 0 = only the administrator can create subdomains
-```
-
 ### Configuration of DNS
-you need a subdomain for example: ddns.demo.com
+You need a subdomain for example: ddns.demo.com
 
 Then you must create an NS record as follows:
 ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
-
-
 
 
 ### Architecture
