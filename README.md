@@ -13,6 +13,10 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 
 
 ## Quick Start
+
+**IMPORTANT**: If you are using PyDDNS v1 before updating, make a backup of the file docker-compose.yml
+
+
 - Clone de proyect
 - ```cd PyDDNS```
 - copy the configuration file ```cp .env-demo .env```
@@ -20,7 +24,7 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 
 ```
 DOMAIN=ddns.demo.com  <-- our domain
-SHARED_SECRET=el@sadsadyS58 <-- password for API-REST of dprandzioch
+SHARED_SECRET=el@sadsadyS58 <-- password for internal API-REST
 
 DATABASE_NAME=pyddns
 DATABASE_USER=pyddns
@@ -47,7 +51,7 @@ DNS_PORT=53
 ### Configuration of DNS
 You need a subdomain for example: ddns.demo.com
 
-Then you must create an NS record as follows:
+Then you must create an **NS record** as follows:
 ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
 
 
