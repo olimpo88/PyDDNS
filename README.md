@@ -6,16 +6,18 @@ Based on the <b>dprandzioch</b> project: https://github.com/dprandzioch/docker-d
 
 ## Description
 PyDDNs is a complete solution, allows you to set up and manage their own dns, compatible with the dyndns2 protocol, the user can update his ip by web interface or using a compatible client for example ddclient.
-
+<br><br><br>
 
 ### Screenshots
 ![screenshots](https://i.imgur.com/6HTwrfn.png)
 
+<br><br><br>
+**VIDEO**: https://www.youtube.com/watch?v=ALN9901EoyA&feature=youtu.be
+<br><br><br>
 
 ## Quick Start
 
 **IMPORTANT**: If you are using PyDDNS v1 before updating, make a backup of the file docker-compose.yml
-
 
 - Clone de proyect
 - ```cd PyDDNS```
@@ -47,17 +49,17 @@ DNS_PORT=53
 
 - Install docker and docker-compose
 - Start with command: `docker-compose up`
-
+<br><br><br>
 ### Configuration of DNS
 You need a subdomain for example: ddns.demo.com
 
 Then you must create an **NS record** as follows:
 ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
 
-
+<br><br><br>
 ## Architecture
 ![screenshots](https://i.imgur.com/KWZzxOs.png)
-
+<br><br><br>
 ## DDNS clients
 You can use any client compatible with the DynDNS2 protocol.
 
@@ -78,7 +80,7 @@ password='userpassword'
 yourdomain.ddns.demo.com
 ```
 
-
+<br><br><br>
 ### Translation :us::es:
 The system automatically detects the language of your browser.
 If you want to add your translations you must follow the following steps:
