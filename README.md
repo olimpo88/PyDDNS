@@ -15,6 +15,14 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 **VIDEO**: https://www.youtube.com/watch?v=ALN9901EoyA&feature=youtu.be
 <br><br><br>
 
+
+### Prerequisites
+Install git
+Install docker - Dockerhttps://docs.docker.com/install/
+Install docker-composer - https://docs.docker.com/compose/install/
+
+**important**: if you use ubuntu 18 you should see the note at the end of this text
+<br><br><br>
 ## Quick Start
 
 **IMPORTANT**: If you are using PyDDNS v1 before updating, make a backup of the file docker-compose.yml
@@ -89,6 +97,24 @@ If you want to add your translations you must follow the following steps:
 2. You must execute the following command, replacing the last attribute: `python manage.py makemessages --locale es`
 3. Edit the file: `appdata/pyddns/locale/XXXX/LC_MESSAGES/django.po`
 4. Once the translations are finished, it must be compiled: `python manage.py compilemessages`
+
+<br><br><br>
+### NOTE
+On ubuntu 18 port 53 is busy with the systemd-resolve service.
+To solve this you must disable.
+
+I'm going to also mask it so it doesn't auto start on reboot.
+
+```
+sudo systemctl disable systemd-resolved
+sudo systemctl mask systemd-resolved
+reboot
+```
+To undo what you did:
+```
+sudo systemctl unmask systemd-resolved
+sudo systemctl enable systemd-resolved
+```
 
 ### Contact :email:
 https://www.linkedin.com/in/peraltaleandro/
