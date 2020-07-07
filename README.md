@@ -64,6 +64,16 @@ You need a subdomain for example: ddns.demo.com
 Then you must create an **NS record** as follows:
 ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
 
+
+Example in bind9:
+
+```
+ns3.ddns.demo.com.	IN	A	X.X.X.X
+$ORIGIN ddns.ddns.demo.com.
+@                       IN NS   ns3.ddns.demo.com.
+```
+
+
 <br><br><br>
 ## Architecture
 ![screenshots](https://i.imgur.com/KWZzxOs.png)
