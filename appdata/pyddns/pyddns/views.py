@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 #from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, HttpResponseRedirect
 #from django.utils import simplejson
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.template  import RequestContext
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import user_passes_test
@@ -73,7 +73,7 @@ def main(request,id_user=None):
         # If page is out of range (e.g. 9999), deliver last page of results.
         list_activity = paginator.page(paginator.num_pages)
         
-    return render_to_response("dash.html",{    'name':name, 
+    return render(request,"dash.html",{    'name':name, 
                                             'username':username, 
                                             'list_activity':list_activity, 
                                             'my_subdomains':my_subdomains, 
@@ -99,7 +99,7 @@ def manage(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         list_domains = paginator.page(paginator.num_pages)
 
-    return render_to_response("manage.html",{ 'list_domains': list_domains})
+    return render(request,"manage.html",{ 'list_domains': list_domains})
 
 
 @user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
@@ -121,7 +121,7 @@ def users(request, buscar=None):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         list_users = paginator.page(paginator.num_pages)
-    return render_to_response("users.html",{ 'list_users': list_users, "buscar":buscar})
+    return render(request,"users.html",{ 'list_users': list_users, "buscar":buscar})
 
 
 @user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
@@ -146,7 +146,7 @@ def domains(request, buscar=None):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         list_subdomains = paginator.page(paginator.num_pages)
-    return render_to_response("subdomains.html",{ 'list_subdomains': list_subdomains, "buscar":buscar, 'domain':domain })
+    return render(request,"subdomains.html",{ 'list_subdomains': list_subdomains, "buscar":buscar, 'domain':domain })
 
 
 @user_passes_test(lambda u: u.is_superuser,login_url='/common/permission_denied')
@@ -159,7 +159,7 @@ def add_user(request,id_user=None):
         except OstUserEmail.DoesNotExist:
             pass
             #print "DoesNotExist"
-    return render_to_response("add_user.html",{'user':user})
+    return render(request,"add_user.html",{'user':user})
 
 def add_subdomain(request):
     myjson = {
