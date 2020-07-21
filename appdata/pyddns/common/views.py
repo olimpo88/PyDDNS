@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 #from django.core.serializers.json import DjangoJSONEncoder
 from django.http import HttpResponse, HttpResponseRedirect
 #from django.utils import simplejson
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.template  import RequestContext
 import json
 
@@ -64,4 +64,4 @@ def logout(request, next_page = '/common/login/'):
 	return HttpResponseRedirect(next_page)
 
 def sin_permiso(request):
-	return render_to_response("sin_permiso.html")
+	return render(request,"sin_permiso.html")
