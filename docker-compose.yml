@@ -15,8 +15,7 @@ services:
     networks:
       red:
   python:
-    #image: olimpo88/pyddns:latest
-    image: pyddns:2.0
+    image: pyddns:3.0
     build: ./docker
     restart: always
     volumes:
