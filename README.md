@@ -114,7 +114,7 @@ If you want to add your translations you must follow the following steps:
 - change the variable in line 149/185 to --> LANGUAGE_CODE = 'en-En'
 
 <br><br><br>
-### TOOD
+### TODO
 Config default language in .env file
 
 
