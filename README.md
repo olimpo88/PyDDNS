@@ -109,6 +109,12 @@ If you want to add your translations you must follow the following steps:
 4. Once the translations are finished, it must be compiled: `python manage.py compilemessages`
 
 <br><br><br>
+### Change default language
+- open file --> nano ~/PyDDNS/appdata/pyddns/pyddns/settings.py
+- change the variable in line 149/185 to --> LANGUAGE_CODE = 'en-En'
+
+
+<br><br><br>
 ### NOTE
 On ubuntu 18 port 53 is busy with the systemd-resolve service.
 To solve this you must disable.
