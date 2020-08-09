@@ -2,7 +2,8 @@ from copy import copy, deepcopy
 from django import forms
 from django.core.serializers.json import DjangoJSONEncoder
 from django.forms import fields
-from django.forms.forms import BoundField
+#from django.forms.forms import BoundField
+from django.forms.boundfield import BoundField
 from django.forms.models import  ModelChoiceField, ModelMultipleChoiceField
 #from django.utils import simplejson
 import json as simplejson
