@@ -18,7 +18,9 @@ PyDDNs is a complete solution, allows you to set up and manage their own dns, co
 
 ### Prerequisites
 Install git
+
 Install docker - Dockerhttps://docs.docker.com/install/
+
 Install docker-composer - https://docs.docker.com/compose/install/
 
 **important**: if you use ubuntu 18 you should see the note at the end of this text
