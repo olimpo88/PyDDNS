@@ -31,11 +31,12 @@ services:
       DB_NAME: '${DATABASE_NAME}'
       DB_USER: '${DATABASE_USER}'
       DB_PASSWORD: '${DATABASE_PASS}'
-      DJANGO_ADMIN_URL: administrator
+      DJANGO_ADMIN_URL: '${DJANGO_ADMIN_URL}'
       DJANGO_SU_NAME: '${DJANGO_SU_NAME}'
       DJANGO_SU_EMAIL: '${DJANGO_SU_EMAIL}'
       DJANGO_SU_PASSWORD: '${DJANGO_SU_PASSWORD}'
       OWN_ADMIN: '${OWN_ADMIN}'
+      MAX_DOMAINS_USER: '${MAX_DOMAINS_USER}'
     depends_on:
       - "postgres"
     networks:
