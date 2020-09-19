@@ -56,11 +56,13 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "${WEB_PORT}:8000"
+      - "${HTTP_PORT}:8000"
+      - "${HTTPS_PORT}:8443"
     volumes:
       - ./config/nginx_src:/src
       - ./config/nginx:/etc/nginx/conf.d
       - ./appdata/static:/static
+      - ./data/certs:/etc/nginx/certs
     depends_on:
       - "python"
     networks:

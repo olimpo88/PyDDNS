@@ -70,10 +70,55 @@ ddns.demo.com IN NS X.X.X.X <-- SERVER PUBLIC IP (CHECK)
 Example in bind9:
 
 ```
-ns3.ddns.demo.com.	IN	A	X.X.X.X
-$ORIGIN ddns.ddns.demo.com.
-@                       IN NS   ns3.ddns.demo.com.
+ddns.demo.com.	IN	A	X.X.X.X
+$ORIGIN ddns.demo.com.
+@                       IN NS   ddns.demo.com.
 ```
+
+<br><br><br>
+### Create SSL certificate
+As web today is almost required to have SSL the package is setup for that by default.
+
+1. To generate a certificate do `openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr`
+2. Then send to your certificate authority and get the server.crt file back
+3. Install the key and crt files into certificate store in `/data/certs`
+
+<br><br><br>
+### Running without SSL
+It is not recomended to run without SSL but if you wish to
+
+Edit `/config/nginx/mydjango.conf` and a few sections:
+```
+server {
+    server_name localhost;
+    listen 8000;
+    return 301 https://$host$request_uri;
+}
+```
+```
+ssl_certificate /etc/nginx/certs/https.crt;
+ssl_certificate_key /etc/nginx/certs/https.key;
+```
+and then change 
+```
+listen 8443 ssl;
+```
+into:
+```
+listen 8000;
+```
+    
+
+<br><br><br>
+### Edit static records or glue records
+This is usefull for creating the @ A X.X.X.X that is needed from above.
+Sometimes you wish to have some static records or change the zone file outside of what you can do via gui.
+
+1. Enter the container console: `docker-compose exec ddns bash`
+2. You must execute the following command, replacing the last attribute: `rndc freeze ddns.demo.com`
+3. Edit the zone file: `data/bind-data/ddns.demo.com.zone`
+4. Thaw the zone: `rndc thaw ddns.demo.com`
+
 
 
 <br><br><br>
@@ -119,24 +164,42 @@ If you want to add your translations you must follow the following steps:
 ### TODO
 Config default language in .env file
 
+<br><br><br>
+### Notes for Ubuntu 18 and later
+On Ubuntu , port 53 is most likeley already busy with the systemd-resolve service.
+
+To check this run this command.
+```
+sudo lsof -i :53
+```
+
+If the command shows that systemd-resolve then we need to change so that it does not bind the port. First, edit /etc/systemd/resolved.conf, and for DNS enter your dns server ip (1.1.1.1 for cloudflare or 8.8.8.8 for google).
+```
+[Resolve]
+DNS=1.1.1.1
+#FallbackDNS=
+#Domains=
+#LLMNR=no
+#MulticastDNS=no
+#DNSSEC=no
+#DNSOverTLS=no
+#Cache=no
+DNSStubListener=no
+#ReadEtcHosts=yes
+```
+
+Then link the file to etc
+
+```
+sudo ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+```
+
+And lastly reboot:
+
+```
+sudo reboot
+```
 
 <br><br><br>
-### NOTE
-On ubuntu 18 port 53 is busy with the systemd-resolve service.
-To solve this you must disable.
-
-I'm going to also mask it so it doesn't auto start on reboot.
-
-```
-sudo systemctl disable systemd-resolved
-sudo systemctl mask systemd-resolved
-reboot
-```
-To undo what you did:
-```
-sudo systemctl unmask systemd-resolved
-sudo systemctl enable systemd-resolved
-```
-
 ### Contact :email:
 https://www.linkedin.com/in/peraltaleandro/
