@@ -79,9 +79,10 @@ $ORIGIN ddns.demo.com.
 ### Create SSL certificate
 As web today is almost required to have SSL the package is setup for that by default.
 
-1. To generate a certificate do `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout data/certs/https.key -out data/certs/https.crt`
-2. Then send to your certificate authority and get the server.crt file back
-3. Install the key and crt files into certificate store in `/data/certs`
+1. Create folder `mkdir -p data/certs/`
+2. To generate a certificate do `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout data/certs/https.key -out data/certs/https.crt`
+3. Then send to your certificate authority and get the server.crt file back
+4. Install the key and crt files into certificate store in `/data/certs`
 
 <br><br><br>
 ### Running without SSL
