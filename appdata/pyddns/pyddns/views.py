@@ -56,7 +56,7 @@ def main(request,id_user=None):
 
     my_subdomains=SubDomain.objects.filter(user=user).order_by('name')
     domain=settings.DNS_DOMAIN
-    
+
     ip_x_forwarded=None
     if 'HTTP_X_FORWARDED_FOR' in request.META:
         ip_x_forwarded=request.META['HTTP_X_FORWARDED_FOR']
@@ -72,15 +72,15 @@ def main(request,id_user=None):
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         list_activity = paginator.page(paginator.num_pages)
-        
-    return render(request,"dash.html",{    'name':name, 
-                                            'username':username, 
-                                            'list_activity':list_activity, 
-                                            'my_subdomains':my_subdomains, 
-                                            'ip_x_forwarded':ip_x_forwarded, 
-                                            'admin':admin, 
-                                            'see_user':see_user, 
-                                            'domain':domain, 
+
+    return render(request,"dash.html",{    'name':name,
+                                            'username':username,
+                                            'list_activity':list_activity,
+                                            'my_subdomains':my_subdomains,
+                                            'ip_x_forwarded':ip_x_forwarded,
+                                            'admin':admin,
+                                            'see_user':see_user,
+                                            'domain':domain,
                                             'id_user': id_user,
                                             'own_admin':own_admin })
 
@@ -239,7 +239,7 @@ def set_user(request):
         last_name=request.POST['last_name']
         email=request.POST['email']
         password=request.POST['password']
-        is_admin=request.POST['is_admin']        
+        is_admin=request.POST['is_admin']
         user= User.objects.get(id=request.POST['id_user'])
         if is_admin=="1":
             is_admin=True
@@ -321,7 +321,7 @@ def set_ip_web(request,domain,ip):
     subdomain_obj=SubDomain.objects.get(name=subdomain)
     try:
         check_valid_subdomain=SubDomain.objects.get(user=user,name=subdomain)
-    except SubDomain.DoesNotExist:    
+    except SubDomain.DoesNotExist:
         check_valid_subdomain=False
 
     if check_valid_subdomain or admin:
@@ -405,7 +405,7 @@ def updateip(request):
     agent=""
 
     if request.method == 'GET':
-        if 'hostname' in request.GET: 
+        if 'hostname' in request.GET:
             domain=request.GET['hostname']
         if 'myip' in request.GET:
             ip=request.GET['myip']
@@ -447,7 +447,7 @@ def updateip(request):
                             for sub in user_subdomains:
                                 if domain == "%s.%s"%(sub.name,settings.DNS_DOMAIN):
                                     valid_domain=True
-                            
+
                             if valid_domain:
                                 return_code, message = set_ip(request,domain,ip)
                             else:
@@ -470,7 +470,7 @@ def updateip(request):
             message="Missing header HTTP_USER_AGENT"
     else:
         return_code="abuse"
-        message="You have exceeded the maximum number of attempts"    
+        message="You have exceeded the maximum number of attempts"
 
     #if return_code != "nochg":
     register=False

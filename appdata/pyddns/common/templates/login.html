@@ -28,7 +28,6 @@
       }
       return cookieValue;
     }
-  
 
     function enviar(){
       var passwd = document.getElementById("password").value;
@@ -54,7 +53,7 @@
       });
     }
   </script>
-    
+
   <style>
     body {
       margin: 0;
@@ -71,10 +70,10 @@
       margin: 5px;
       margin-bottom: 20px;
     }
-  
+
     .form-signin input[type="text"], .form-signin input[type="password"]{
         border:1px solid #444444;
-        margin-bottom: 5px;     
+        margin-bottom: 5px;
     }
 
     #error{
@@ -104,19 +103,19 @@
     	</form>
       <script>
     </script>
-    </div>	
+    </div>
   </div>
   <script>
-  $('#password').keypress(function(e) 
+  $('#password').keypress(function(e)
   {
-     if(e.which == 13) 
+     if(e.which == 13)
      {
         enviar()
      }
   });
-  $('#username').keypress(function(e) 
+  $('#username').keypress(function(e)
   {
-     if(e.which == 13) 
+     if(e.which == 13)
      {
         enviar()
      }

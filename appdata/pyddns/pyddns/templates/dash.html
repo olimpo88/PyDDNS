@@ -92,7 +92,6 @@
 								{% if admin or own_admin %}
 									<button type="button" class="btn btn-danger btn-xs" onclick="delet_domain('{{ d.id }}','{{ d.name }}')" style="float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								{% endif %}
-								
 							</td>
 						</tr>
 					{% endfor %}
@@ -113,10 +112,10 @@
 							</th>
 							<th>
 								{% trans "Message" %}
-							</th>	
+							</th>
 							<th>
 								{% trans "Domain" %}
-							</th>					
+							</th>
 							<th>
 								IP
 							</th>
@@ -241,17 +240,16 @@
 		            	else{
 		            		alert(result['error']);
 		            	}
-		                
 		            }
-			  	}	
+			  	}
 			});
 		}
 
 		function delet_domain(id_domain,domain){
-			var m_data = new FormData();    
+			var m_data = new FormData();
 			m_data.append( 'id_domain', id_domain);
 	        m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
-	        var r = confirm("Seguro que desea borrar el dominio "+domain);
+	        var r = confirm('{% trans "You certainly want to delete the domain" %}'+domain);
 			if (r == true) {
 				$.ajax({url:"/delet_domain",
 					type: "POST",
@@ -271,11 +269,10 @@
 			            	else{
 			            		alert(result['error']);
 			            	}
-			                
 			            }
-				  	}	
+				  	}
 				});
-			}				
+			}
 		}
 
 		function getCookie(name) {
@@ -292,7 +289,7 @@
 			}
 		    }
 		    return cookieValue;
-		}	
+		}
 	{% endif %}
 
 
