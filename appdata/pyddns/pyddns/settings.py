@@ -153,7 +153,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_L10N = True
- 
+
 USE_TZ = True
 
 
@@ -176,6 +176,7 @@ from django.utils.translation import ugettext_lazy as _
 LANGUAGES = (
     ('es', _('Spanish')),
     ('en', _('English')),
+    ('ja', _('Japanese')),
 )
 
 # Definimos la ruta de los archivos de idiomas

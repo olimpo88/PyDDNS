@@ -133,11 +133,11 @@
 			        dialog.container.css({position: 'absolute', top: '15%'});
 		      	}
 			    //d.container.css({position: 'absolute', top: '0px'});
-            });   
+            });
         }
 
 		function delet_user(id_user,username){
-			var m_data = new FormData();    
+			var m_data = new FormData();
 			m_data.append( 'id_user', id_user);
             m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
             var r = confirm("Seguro que desea borrar al usuario "+username);
@@ -156,9 +156,9 @@
 		            else{
 		                alert(result['error']);
 		            }
-			  	}	
+			  	}
 				});
-			}				
+			}
 		}
 
 

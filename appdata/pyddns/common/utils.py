@@ -140,7 +140,7 @@ class AbmFunction():
         if not request.POST[self.pk].isdigit():
             frm.data[self.pk] = next_pk(self.pk)
 
-        if frm.is_valid():             
+        if frm.is_valid():
             obj=frm.save()
         else:
             for err in frm.errors:
@@ -161,9 +161,9 @@ class AbmFunction():
         return obj
 
 
-class FrmExtAbm(forms.ModelForm):    
+class FrmExtAbm(forms.ModelForm):
     """
-    Clase que extiende al ModelForm nativo de DJango para dotarlo de un metodo donde 
+    Clase que extiende al ModelForm nativo de DJango para dotarlo de un metodo donde
     devuelva el conjunto de campos compatible con la sitaxis de EXTJS
     """
     _ext_config={
@@ -185,7 +185,7 @@ class FrmExtAbm(forms.ModelForm):
     def get_adicional_filter(self, request):
         """
         Reimplementar esta funcion en aquellos forms que requieran filtros adicionales.
-        Se debera devolver 
+        Se debera devolver
         """
         return False
 
@@ -202,7 +202,6 @@ class ExtModel():
         for field in self._meta.fields:
             val[field.name]=field.value_to_string(self)
         return val
-        
 
 class ExtJSONEncoder(DjangoJSONEncoder):
     """
@@ -423,19 +422,19 @@ class ExtJSONEncoder(DjangoJSONEncoder):
 
 
 UNIDADES = (
-    '',    
-    'UN ', 
+    '',
+    'UN ',
     'DOS ',
     'TRES ',
     'CUATRO ',
     'CINCO ',
-    'SEIS ', 
+    'SEIS ',
     'SIETE ',
-    'OCHO ', 
+    'OCHO ',
     'NUEVE ',
-    'DIEZ ', 
-    'ONCE ', 
-    'DOCE ', 
+    'DIEZ ',
+    'ONCE ',
+    'DOCE ',
     'TRECE ',
     'CATORCE ',
     'QUINCE ',
@@ -443,79 +442,79 @@ UNIDADES = (
     'DIECISIETE ',
     'DIECIOCHO ',
     'DIECINUEVE ',
-    'VEINTE '    
-)                
-DECENAS = (      
-    'VENTI',     
-    'TREINTA ',  
-    'CUARENTA ', 
+    'VEINTE '
+)
+DECENAS = (
+    'VENTI',
+    'TREINTA ',
+    'CUARENTA ',
     'CINCUENTA ',
-    'SESENTA ',  
-    'SETENTA ',  
-    'OCHENTA ',  
-    'NOVENTA ',  
-    'CIEN '      
-)                
-CENTENAS = (     
-    'CIENTO ',   
+    'SESENTA ',
+    'SETENTA ',
+    'OCHENTA ',
+    'NOVENTA ',
+    'CIEN '
+)
+CENTENAS = (
+    'CIENTO ',
     'DOSCIENTOS ',
     'TRESCIENTOS ',
     'CUATROCIENTOS ',
-    'QUINIENTOS ',  
-    'SEISCIENTOS ', 
-    'SETECIENTOS ', 
-    'OCHOCIENTOS ', 
-    'NOVECIENTOS '  
-)                   
-                    
+    'QUINIENTOS ',
+    'SEISCIENTOS ',
+    'SETECIENTOS ',
+    'OCHOCIENTOS ',
+    'NOVECIENTOS '
+)
+
 def NumeroALetra(number_in):
-                             
-    converted = ''                             
+
+    converted = ''
 
     if type(number_in) != 'str':
-      number = str(number_in)  
-    else:                      
-      number = number_in       
-                                                          
-    number_str=number                                     
-                                                          
-    try:                                                  
-      number_int, number_dec = number_str.split(".")      
-    except ValueError:                                    
-      number_int = number_str                             
-      number_dec = ""                                     
+      number = str(number_in)
+    else:
+      number = number_in
+
+    number_str=number
+
+    try:
+      number_int, number_dec = number_str.split(".")
+    except ValueError:
+      number_int = number_str
+      number_dec = ""
 
     number_str = number_int.zfill(9)
-    millones = number_str[:3]      
-    miles = number_str[3:6]        
-    cientos = number_str[6:]       
+    millones = number_str[:3]
+    miles = number_str[3:6]
+    cientos = number_str[6:]
 
     if(millones):
         if(millones == '001'):
             converted += 'UN MILLON '
-        elif(int(millones) > 0):    
+        elif(int(millones) > 0):
             converted += '%sMILLONES ' % __convertNumber(millones)
-                                                                 
-    if(miles):                                                   
-        if(miles == '001'):                                      
-            converted += 'MIL '                                  
-        elif(int(miles) > 0):                                    
-            converted += '%sMIL ' % __convertNumber(miles)       
-    if(cientos):                                                 
-        if(cientos == '001'):                                    
-            converted += 'UN '                                   
-        elif(int(cientos) > 0):                                  
-            converted += '%s ' % __convertNumber(cientos)        
+
+    if(miles):
+        if(miles == '001'):
+            converted += 'MIL '
+        elif(int(miles) > 0):
+            converted += '%sMIL ' % __convertNumber(miles)
+    if(cientos):
+        if(cientos == '001'):
+            converted += 'UN '
+        elif(int(cientos) > 0):
+            converted += '%s ' % __convertNumber(cientos)
 
     if number_dec == "":
       number_dec = "00"
     if (len(number_dec) < 2 ):
-      number_dec+='0'        
+      number_dec+='0'
 
     converted += 'PESOS CON '+ number_dec + "/100 CENTAVOS"
 
     return converted
-                   
+
 def __convertNumber(n):
     output = ''
 

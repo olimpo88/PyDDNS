@@ -6,14 +6,14 @@
 	<title>Document</title>
 </head>
 <body>
-		
+
 	<div class="col-md-12">
 		{% if user %}
 			<h3> {% trans "Edit user" %}: {{ user.username }}</h3>
 		{% else %}
 			<h3> {% trans "Add user" %}</h3>
 		{% endif %}
-		
+
 		<table id="formulario" style=" border-collapse: separate;;">
 			<tr>
 				<td style="width: 84px;">{% trans "Username" %}</td>
@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button id="button2id" name="button2id" class="btn btn-success" style="float:right;margin-top:15px"  onclick="guardar()"><i class="fa fa-save"></i> Guardar</button>
+					<button id="button2id" name="button2id" class="btn btn-success" style="float:right;margin-top:15px"  onclick="guardar()"><i class="fa fa-save"></i>{% trans "Save" %}</button>
 				</td>
 			</tr>
 		</table>
@@ -67,8 +67,8 @@
 			{% if not user %}
 				else if ( ($( "#password" ).val().length < 8) {% if user %} & ($( "#password" ).val().length != 0) {% endif %}){
 					alert('{% trans "Please enter a password of at least 8 characters" %}');
-				}		
-			{% endif %}	
+				}
+			{% endif %}
 
 
 			//Si esta todo bien mando a guardar
@@ -113,9 +113,8 @@
 							else{
 								alert(result['error']);
 							}
-							
 						}
-					}	
+					}
 				});
 			}
 		}
@@ -135,7 +134,6 @@
 		    }
 		    return cookieValue;
 		}
-		
 	</script>
 </body>
 </html>
