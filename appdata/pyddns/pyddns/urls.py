@@ -20,8 +20,9 @@ from common.views import *
 from pyddns.views import *
 import os
 
+from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = [
+urlpatterns = i18n_patterns(
     url(r'^main/(?P<id_user>.*)', main),
     url(r'^main/', main),
     url(r'^users/(?P<buscar>.*)', users),
@@ -38,7 +39,7 @@ urlpatterns = [
     url(r'^nic/update', updateip),
     url(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),
     url(r'^$', main),
-]
+)
 
 #Add admin url
 admin_url='admin'
