@@ -1,0 +1,304 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-22 07:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: common/templates/login.html:99 pyddns/templates/subdomains.html:62
+#: pyddns/templates/users.html:63
+msgid "User"
+msgstr "用户"
+
+#: common/templates/login.html:100 pyddns/templates/add_user.html:35
+msgid "Password"
+msgstr "密码"
+
+#: common/templates/login.html:102
+msgid "Login"
+msgstr "登录"
+
+#: common/templates/permission_denied.html:30
+msgid "ACCESS DENIED"
+msgstr "拒绝访问"
+
+#: common/templates/permission_denied.html:31
+msgid "You do not have permission to see this page"
+msgstr "您无权查看此页面"
+
+#: common/templates/permission_denied.html:32
+msgid "Go to back"
+msgstr "回到上一步"
+
+#: pyddns/settings.py:177
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: pyddns/settings.py:178
+msgid "English"
+msgstr "英语"
+
+#: pyddns/settings.py:179
+msgid "Japanese"
+msgstr "日语"
+
+#: pyddns/templates/add_user.html:12
+msgid "Edit user"
+msgstr "修改用户"
+
+#: pyddns/templates/add_user.html:14 pyddns/templates/users.html:50
+msgid "Add user"
+msgstr "添加用户"
+
+#: pyddns/templates/add_user.html:19
+msgid "Username"
+msgstr "用户名称"
+
+#: pyddns/templates/add_user.html:23 pyddns/templates/users.html:65
+msgid "Name"
+msgstr "名字"
+
+#: pyddns/templates/add_user.html:27
+msgid "Last name"
+msgstr "姓"
+
+#: pyddns/templates/add_user.html:31 pyddns/templates/users.html:64
+msgid "Email"
+msgstr "电子邮箱"
+
+#: pyddns/templates/add_user.html:39
+msgid "Is admin?"
+msgstr "是否为管理员？"
+
+#: pyddns/templates/add_user.html:46
+msgid "Save"
+msgstr "保存"
+
+#: pyddns/templates/add_user.html:56
+msgid "you must enter a username"
+msgstr "您必须输入用户名"
+
+#: pyddns/templates/add_user.html:59
+msgid "you must enter a name"
+msgstr "您必须输入名字"
+
+#: pyddns/templates/add_user.html:62
+msgid "you must enter a last name"
+msgstr "您必须输入姓"
+
+#: pyddns/templates/add_user.html:65
+msgid "you must enter a email"
+msgstr "您必须输入电子邮箱"
+
+#: pyddns/templates/add_user.html:69
+msgid "Please enter a password of at least 8 characters"
+msgstr "请输入至少8个字符的密码"
+
+#: pyddns/templates/add_user.html:111
+msgid "The username "
+msgstr "该用户名"
+
+#: pyddns/templates/add_user.html:111
+msgid " already exists"
+msgstr "已经存在"
+
+#: pyddns/templates/dash.html:46 pyddns/templates/subdomains.html:39
+#: pyddns/templates/users.html:39
+msgid "Users"
+msgstr "用户"
+
+#: pyddns/templates/dash.html:47 pyddns/templates/subdomains.html:40
+#: pyddns/templates/users.html:40 pyddns/templates/users.html:68
+msgid "Domains"
+msgstr "域"
+
+#: pyddns/templates/dash.html:49 pyddns/templates/subdomains.html:41
+#: pyddns/templates/users.html:41
+msgid "Logout"
+msgstr "登出"
+
+#: pyddns/templates/dash.html:56
+msgid "Welcome"
+msgstr "欢迎"
+
+#: pyddns/templates/dash.html:58
+msgid "Dashboard of the user "
+msgstr "用户表盘"
+
+#: pyddns/templates/dash.html:65
+msgid "Subdomain name "
+msgstr "子域名"
+
+#: pyddns/templates/dash.html:76
+msgid "Your current IP is"
+msgstr "您当前的IP是"
+
+#: pyddns/templates/dash.html:80
+msgid "My domains"
+msgstr "我的域"
+
+#: pyddns/templates/dash.html:82
+msgid "Last update"
+msgstr "最后更新"
+
+#: pyddns/templates/dash.html:83 pyddns/templates/subdomains.html:64
+msgid "Action"
+msgstr "操作"
+
+#: pyddns/templates/dash.html:87
+msgid "Copy"
+msgstr "复制"
+
+#: pyddns/templates/dash.html:91
+msgid "Update to"
+msgstr "更新到"
+
+#: pyddns/templates/dash.html:100
+msgid "My last records"
+msgstr "我的最后记录"
+
+#: pyddns/templates/dash.html:108
+msgid "Date"
+msgstr "日期"
+
+#: pyddns/templates/dash.html:111
+msgid "Code"
+msgstr "代码"
+
+#: pyddns/templates/dash.html:114
+msgid "Message"
+msgstr "信息"
+
+#: pyddns/templates/dash.html:117 pyddns/templates/subdomains.html:61
+msgid "Domain"
+msgstr "网域"
+
+#: pyddns/templates/dash.html:123
+msgid "Agent"
+msgstr "代理人"
+
+#: pyddns/templates/dash.html:144 pyddns/templates/subdomains.html:78
+#: pyddns/templates/users.html:97
+msgid "Previous"
+msgstr "之前的"
+
+#: pyddns/templates/dash.html:148 pyddns/templates/subdomains.html:82
+#: pyddns/templates/users.html:101
+msgid "Page"
+msgstr "网页"
+
+#: pyddns/templates/dash.html:148 pyddns/templates/subdomains.html:82
+#: pyddns/templates/users.html:101
+msgid "of"
+msgstr "的"
+
+#: pyddns/templates/dash.html:152 pyddns/templates/subdomains.html:86
+#: pyddns/templates/users.html:105
+msgid "Next"
+msgstr "下一步"
+
+#: pyddns/templates/dash.html:164 pyddns/templates/subdomains.html:98
+#: pyddns/templates/users.html:117
+msgid "The updatewas successful and the hostname is now updated"
+msgstr "更新成功，主机名现已更新"
+
+#: pyddns/templates/dash.html:165 pyddns/templates/subdomains.html:99
+#: pyddns/templates/users.html:118
+msgid "The APP not sinc bind"
+msgstr "APP同步绑定失败"
+
+#: pyddns/templates/dash.html:166 pyddns/templates/subdomains.html:100
+#: pyddns/templates/users.html:119
+msgid "The hostname specified does not exist in this user account"
+msgstr "指定的主机名在该用户帐户中不存在"
+
+#: pyddns/templates/dash.html:167 pyddns/templates/subdomains.html:101
+#: pyddns/templates/users.html:120
+msgid "The username and password pair do not match a real user"
+msgstr "用户名和密码对与真实用户不匹配"
+
+#: pyddns/templates/dash.html:168 pyddns/templates/dash.html:169
+#: pyddns/templates/subdomains.html:102 pyddns/templates/subdomains.html:103
+#: pyddns/templates/users.html:121 pyddns/templates/users.html:122
+msgid "Incorrect authentication format"
+msgstr "验证格式不正确"
+
+#: pyddns/templates/dash.html:170 pyddns/templates/subdomains.html:104
+#: pyddns/templates/users.html:123
+msgid "Missing header HTTP_AUTHORIZATION"
+msgstr "标题HTTP_权限遗失"
+
+#: pyddns/templates/dash.html:171 pyddns/templates/subdomains.html:105
+#: pyddns/templates/users.html:124
+msgid "Missing header HTTP_USER_AGENT"
+msgstr "标题HTTP_用户_代理遗失"
+
+#: pyddns/templates/dash.html:172 pyddns/templates/subdomains.html:106
+#: pyddns/templates/users.html:125
+msgid "You have exceeded the maximum number of attempts"
+msgstr "您已超出最大尝试次数"
+
+#: pyddns/templates/dash.html:238
+msgid "The subdomain already exists"
+msgstr "子域已存在"
+
+#: pyddns/templates/dash.html:252
+msgid "You certainly want to delete the domain"
+msgstr "确定删除该域"
+
+#: pyddns/templates/dash.html:267
+msgid "You do not have permission to delete the subdomain"
+msgstr "您没有删除子域的权限"
+
+#: pyddns/templates/subdomains.html:48
+msgid "Admin subdomains"
+msgstr "管理员子域"
+
+#: pyddns/templates/subdomains.html:51
+msgid "Search subdomain"
+msgstr "搜索子域"
+
+#: pyddns/templates/subdomains.html:63
+msgid "Contact email"
+msgstr "联系电子邮箱"
+
+#: pyddns/templates/subdomains.html:71
+msgid "Admin"
+msgstr "管理"
+
+#: pyddns/templates/users.html:48
+msgid "Admin users"
+msgstr "管理用户"
+
+#: pyddns/templates/users.html:53
+msgid "Search user"
+msgstr "搜索用户"
+
+#: pyddns/templates/users.html:66
+msgid "Last Name"
+msgstr "姓"
+
+#: pyddns/templates/users.html:67
+msgid "Superuser"
+msgstr "超级用户"
+
+#: pyddns/templates/users.html:69
+msgid "Actions"
+msgstr "操作"
+
+#: pyddns/templates/users.html:162
+msgid "You certainly want to delete the user"
+msgstr "确定删除该用户"
