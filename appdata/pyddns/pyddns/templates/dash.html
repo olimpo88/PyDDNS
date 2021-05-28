@@ -42,11 +42,11 @@
 			  </div>
 			  <div id="navbar" class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav navbar-right">
-			    	{% if admin  %}
-				      <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
-				      <li><a href="/domains"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			    	{% if request.user.is_superuser  %}
+				      <li><a href="{% url 'users' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
+				      <li><a href="{% url 'domains' %}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
 			    	{% endif %}
-			      <li><a href="/common/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
+			      <li><a href="{% url 'common:logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
 			    </ul>
 			  </div><!--/.nav-collapse -->
 			</div><!--/.container-fluid -->
@@ -59,7 +59,7 @@
 				{% endif %}
 
 
-				{% if admin or own_admin %}
+				{% if request.user.is_superuser or own_admin %}
 					<div style="float:right;margin-bottom: 10px;width: 40%;">
 						<div class="input-group">
 						  <input type="text" class="form-control" placeholder="{% trans "Subdomain name " %}" aria-describedby="basic-addon2" style="height: 33px;" id="subdomain">
@@ -89,7 +89,7 @@
 							<td>{{ d.name|last_update }}</td>
 							<td>
 								<button type="button" class="btn btn-success btn-xs attr_ip" id="date_{{d.name}}" onclick="actualizarIp('{{d.name}}.{{domain}}')">{% trans "Update to" %} <span class="my_ip"></span></button>
-								{% if admin or own_admin %}
+								{% if request.user.is_superuser or own_admin %}
 									<button type="button" class="btn btn-danger btn-xs" onclick="delet_domain('{{ d.id }}','{{ d.name }}')" style="float: right;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 								{% endif %}
 							</td>
@@ -177,10 +177,8 @@
 	var ip
 
 	function actualizarIp(domain){
-		console.log(domain);
-		console.log(ip);
 
-		$.ajax({url:"/ip/update/"+domain+"/"+ip,
+		$.ajax({url:"{% url 'ip_update' %}"+domain+"/"+ip,
 			type: "GET",
 			processData: false,
 			contentType: false,
@@ -203,6 +201,7 @@
 	$(function() {
 		$.getJSON("https://api.ipify.org?format=jsonp&callback=?",
 			function(json) {
+				console.log(json)
 				$('.my_ip').html(json.ip);
 				ip=json.ip;
 			}
@@ -216,13 +215,13 @@
 	    }
 	});
 
-	{% if admin or own_admin %}
+	{% if request.user.is_superuser or own_admin %}
 		function add_subdomain(){
 			var m_data = new FormData();
 			m_data.append( 'subdomain', $('#subdomain').val());
 			m_data.append( 'id_user', '{{ id_user }}');
 			m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
-			$.ajax({url:"/add_subdomain",
+			$.ajax({url:"{% url 'add_subdomain' %}",
 				data: m_data,
 				processData: false,
 				contentType: false,
@@ -249,9 +248,9 @@
 			var m_data = new FormData();
 			m_data.append( 'id_domain', id_domain);
 	        m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
-	        var r = confirm('{% trans "You certainly want to delete the domain" %}'+domain);
+	        var r = confirm('{% trans "You certainly want to delete the domain " %}'+domain);
 			if (r == true) {
-				$.ajax({url:"/delet_domain",
+				$.ajax({url:"{% url 'delete_domain' %}",
 					type: "POST",
 					data: m_data,
 					processData: false,

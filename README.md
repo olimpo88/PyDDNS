@@ -88,25 +88,9 @@ As web today is almost required to have SSL the package is setup for that by def
 ### Running without SSL
 It is not recomended to run without SSL but if you wish to
 
-Edit `/config/nginx/mydjango.conf` and a few sections:
+Edit `/config/nginx/mydjango.conf` and comment this line:
 ```
-server {
-    server_name localhost;
-    listen 8000;
-    return 301 https://$host$request_uri;
-}
-```
-```
-ssl_certificate /etc/nginx/certs/https.crt;
-ssl_certificate_key /etc/nginx/certs/https.key;
-```
-and then change 
-```
-listen 8443 ssl;
-```
-into:
-```
-listen 8000;
+return 302 https://$host$request_uri;
 ```
     
 

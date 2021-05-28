@@ -36,9 +36,11 @@
 			  </div>
 			  <div id="navbar" class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav navbar-right">
-			      <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
-			      <li><a href="/domains"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
-			      <li><a href="/common/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
+			    	{% if request.user.is_superuser %}
+				      <li><a href="{% url 'users' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
+				      <li><a href="{% url 'domains' %}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			    	{% endif %}
+			      <li><a href="{% url 'common:logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
 			    </ul>
 			  </div><!--/.nav-collapse -->
 			</div><!--/.container-fluid -->

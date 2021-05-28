@@ -36,9 +36,11 @@
 			  </div>
 			  <div id="navbar" class="navbar-collapse collapse">
 			    <ul class="nav navbar-nav navbar-right">
-			      <li><a href="/users"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
-			      <li><a href="/domains"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
-			      <li><a href="/common/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
+			    	{% if request.user.is_superuser %}
+				      <li><a href="{% url 'users' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {% trans "Users" %}</a></li>
+				      <li><a href="{% url 'domains' %}"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> {% trans "Domains" %}</a></li>
+			    	{% endif %}
+			      <li><a href="{% url 'common:logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> {% trans "Logout" %}</a></li>
 			    </ul>
 			  </div><!--/.nav-collapse -->
 			</div><!--/.container-fluid -->
@@ -47,7 +49,7 @@
 
 				<h3>{% trans "Admin users" %}</h3><br/>
 
-				<a class="btn btn-success" href="#" role="button" style="float:right;margin-bottom: 10px;" onclick="ventana('/add_user','450px','420px')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {% trans "Add user" %}</a>
+				<a class="btn btn-success" href="#" role="button" style="float:right;margin-bottom: 10px;" onclick="ventana('{% url 'add_user' %}','450px','420px')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> {% trans "Add user" %}</a>
 
 
 				<div class="col-xs-3" style="padding: 0px;"><input type="text" id="buscar" class="form-control" placeholder="{% trans "Search user" %}" style="margin-bottom: 10px;"
@@ -82,7 +84,7 @@
 								{% endif %}
 							</td>
 							<td  style="text-align: center;">
-								<a class="btn btn-success btn-xs" href="/main/{{ user.id }}">{{ user|count_domain }}</a>
+								<a class="btn btn-success btn-xs" href="{% url 'main' %}{{ user.id }}">{{ user|count_domain }}</a>
 							</td>
 							<td>
 								<button type="button" class="btn btn-default btn-xs" onclick="ventana('/add_user/{{user.id}}','450px','420px')" style="margin-right: 15px;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
@@ -161,7 +163,7 @@
             m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
             var r = confirm('{% trans "You certainly want to delete the user" %} '+username);
 			if (r == true) {
-				$.ajax({url:"/delet_user",
+				$.ajax({url:"{% url 'del_user' %}",
 				type: "POST",
 				data: m_data,
 				processData: false,

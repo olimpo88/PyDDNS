@@ -94,7 +94,7 @@
 	            m_data.append( 'csrfmiddlewaretoken', getCookie('csrftoken'));
 
 				$.ajax({
-					url: '/set_user',
+					url: "{% url 'set_user' %}",
 					data: m_data,
 					processData: false,
 					contentType: false,

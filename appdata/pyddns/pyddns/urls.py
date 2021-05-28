@@ -22,22 +22,27 @@ import os
 
 from django.conf.urls.i18n import i18n_patterns
 
-urlpatterns = i18n_patterns(
+urlpatterns = [
+    url(r'^nic/update', updateip),
+]
+
+urlpatterns += i18n_patterns(
     url(r'^main/(?P<id_user>.*)', main),
-    url(r'^main/', main),
+    url(r'^main/', main, name="main"),
     url(r'^users/(?P<buscar>.*)', users),
-    url(r'^users/', users),
+    url(r'^users/', users , name='users'),
     url(r'^domains/(?P<buscar>.*)', domains),
-    url(r'^domains/', domains),
+    url(r'^domains/', domains, name="domains"),
     url(r'^add_user/(?P<id_user>\d+)', add_user),
-    url(r'^add_user/', add_user),
-    url(r'^add_subdomain', add_subdomain),
-    url(r'^set_user', set_user),
-    url(r'^delet_user', delet_user),
-    url(r'^delet_domain', delet_domain),
-    url(r'^common/', include('common.urls')),
+    url(r'^add_user/', add_user, name="add_user"),
+    url(r'^add_subdomain', add_subdomain, name="add_subdomain"),
+    url(r'^set_user', set_user, name="set_user"),
+    url(r'^delet_user', delet_user, name="del_user"),
+    url(r'^delet_domain', delet_domain, name="delete_domain"),
+    url(r'^common/', include(('common.urls', 'common'), namespace='common')),
     url(r'^nic/update', updateip),
     url(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),
+    url(r'^ip/update/', set_ip_web, name="ip_update"),
     url(r'^$', main),
 )
 

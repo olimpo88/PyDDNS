@@ -36,7 +36,7 @@
         //data: { username: username, password: passwd, csrfmiddlewaretoken: getCookie('csrftoken')},
         //{% csrf_token %}
       var csr= $( "input[name$='csrfmiddlewaretoken']" ).val();
-      $.ajax({url:"/common/dologin/",
+      $.ajax({url:"{% url 'common:dologin' %}",
         type: "POST",
         data: { username: username, password: passwd, csrfmiddlewaretoken: csr },
         success:function(result){
