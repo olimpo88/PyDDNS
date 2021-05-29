@@ -104,6 +104,32 @@ Sometimes you wish to have some static records or change the zone file outside o
 3. Edit the zone file: `data/bind-data/ddns.demo.com.zone`
 4. Thaw the zone: `rndc thaw ddns.demo.com`
 
+Add the A record line (change to your PUBLIC IP).
+Your file will look something like this,
+
+```
+$ORIGIN .
+$TTL 86400      ; 1 day
+ddns.demo.com           IN SOA  localhost. root.localhost. (
+                                75         ; serial
+                                3600       ; refresh (1 hour)
+                                900        ; retry (15 minutes)
+                                604800     ; expire (1 week)
+                                86400      ; minimum (1 day)
+                                )
+                        NS      localhost.
+                        A       1.2.3.4
+$ORIGIN ddns.demo.com.
+$TTL 60 ; 1 minute
+
+```
+
+<br><br><br>
+### Friendly URL for the web interface
+sometimes we want to have a friendly url for the web interface, in this case, you don't need edit static records or glue records.
+For example, if you want to use myip.ddns.com for your web interface. Then you only need to create an A record in your DNS pointing to the public IP of PYDDNS.
+
+Now you will have myip.demo.com for the web interface and ddns.demo.com for the dynamic dns service.
 
 
 <br><br><br>
