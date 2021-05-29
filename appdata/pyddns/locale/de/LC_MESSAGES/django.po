@@ -1,0 +1,304 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-20 17:46+0000\n"
+"PO-Revision-Date: 2021-05-29 20:16+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: common/templates/login.html:99 pyddns/templates/subdomains.html:62
+#: pyddns/templates/users.html:63
+msgid "User"
+msgstr "Benutzer"
+
+#: common/templates/login.html:100 pyddns/templates/add_user.html:35
+msgid "Password"
+msgstr "Paßwort"
+
+#: common/templates/login.html:102
+msgid "Login"
+msgstr "Anmelden"
+
+#: common/templates/permission_denied.html:30
+msgid "ACCESS DENIED"
+msgstr "ZUGRIFF VERWEIGERT"
+
+#: common/templates/permission_denied.html:31
+msgid "You do not have permission to see this page"
+msgstr "Du hast keine Erlaubnis diese Seite zu sehen"
+
+#: common/templates/permission_denied.html:32
+msgid "Go to back"
+msgstr "Gehe zurück"
+
+#: pyddns/settings.py:177
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: pyddns/settings.py:178
+msgid "English"
+msgstr "Englisch"
+
+#: pyddns/settings.py:179
+msgid "Japanese"
+msgstr "Japanisch"
+
+#: pyddns/templates/add_user.html:12
+msgid "Edit user"
+msgstr "Benutzer bearbeiten"
+
+#: pyddns/templates/add_user.html:14 pyddns/templates/users.html:50
+msgid "Add user"
+msgstr "Benutzer hinzufügen"
+
+#: pyddns/templates/add_user.html:19
+msgid "Username"
+msgstr "Benutzername"
+
+#: pyddns/templates/add_user.html:23 pyddns/templates/users.html:65
+msgid "Name"
+msgstr "Name"
+
+#: pyddns/templates/add_user.html:27
+msgid "Last name"
+msgstr "Nachname"
+
+#: pyddns/templates/add_user.html:31 pyddns/templates/users.html:64
+msgid "Email"
+msgstr "eMail"
+
+#: pyddns/templates/add_user.html:39
+msgid "Is admin?"
+msgstr "Ist Admin?"
+
+#: pyddns/templates/add_user.html:46
+msgid "Save"
+msgstr "Speichern"
+
+#: pyddns/templates/add_user.html:56
+msgid "you must enter a username"
+msgstr "Du musst einen Benutzernamen eingeben"
+
+#: pyddns/templates/add_user.html:59
+msgid "you must enter a name"
+msgstr "Du musst einen Namen eingeben"
+
+#: pyddns/templates/add_user.html:62
+msgid "you must enter a last name"
+msgstr "Du musst einen Nachnamen eingeben"
+
+#: pyddns/templates/add_user.html:65
+msgid "you must enter a email"
+msgstr "Du musst eine e-Mail-Adresse eingeben"
+
+#: pyddns/templates/add_user.html:69
+msgid "Please enter a password of at least 8 characters"
+msgstr "Bitte gib ein Passwort mit mindestens 8 Zeichen ein"
+
+#: pyddns/templates/add_user.html:111
+msgid "The username "
+msgstr "Der Benutzername "
+
+#: pyddns/templates/add_user.html:111
+msgid " already exists"
+msgstr " existiert bereits"
+
+#: pyddns/templates/dash.html:46 pyddns/templates/subdomains.html:39
+#: pyddns/templates/users.html:39
+msgid "Users"
+msgstr "Benutzer"
+
+#: pyddns/templates/dash.html:47 pyddns/templates/subdomains.html:40
+#: pyddns/templates/users.html:40 pyddns/templates/users.html:68
+msgid "Domains"
+msgstr "Domains"
+
+#: pyddns/templates/dash.html:49 pyddns/templates/subdomains.html:41
+#: pyddns/templates/users.html:41
+msgid "Logout"
+msgstr "Abmelden"
+
+#: pyddns/templates/dash.html:56
+msgid "Welcome"
+msgstr "Willkommen"
+
+#: pyddns/templates/dash.html:58
+msgid "Dashboard of the user "
+msgstr "Übersichtsseite des Benutzers "
+
+#: pyddns/templates/dash.html:65
+msgid "Subdomain name "
+msgstr "Name der Subdomain "
+
+#: pyddns/templates/dash.html:76
+msgid "Your current IP is"
+msgstr "Deine aktuelle IP ist"
+
+#: pyddns/templates/dash.html:80
+msgid "My domains"
+msgstr "Meine Domains"
+
+#: pyddns/templates/dash.html:82
+msgid "Last update"
+msgstr "Letze Aktualisierung"
+
+#: pyddns/templates/dash.html:83 pyddns/templates/subdomains.html:64
+msgid "Action"
+msgstr "Aktion"
+
+#: pyddns/templates/dash.html:87
+msgid "Copy"
+msgstr "Kopieren"
+
+#: pyddns/templates/dash.html:91
+msgid "Update to"
+msgstr "Aktualisieren zu"
+
+#: pyddns/templates/dash.html:100
+msgid "My last records"
+msgstr "Meine letzten Aktionen"
+
+#: pyddns/templates/dash.html:108
+msgid "Date"
+msgstr "Datum"
+
+#: pyddns/templates/dash.html:111
+msgid "Code"
+msgstr "Code"
+
+#: pyddns/templates/dash.html:114
+msgid "Message"
+msgstr "Nachricht"
+
+#: pyddns/templates/dash.html:117 pyddns/templates/subdomains.html:61
+msgid "Domain"
+msgstr "Domain"
+
+#: pyddns/templates/dash.html:123
+msgid "Agent"
+msgstr "Agent"
+
+#: pyddns/templates/dash.html:144 pyddns/templates/subdomains.html:78
+#: pyddns/templates/users.html:97
+msgid "Previous"
+msgstr "Vorhergehende"
+
+#: pyddns/templates/dash.html:148 pyddns/templates/subdomains.html:82
+#: pyddns/templates/users.html:101
+msgid "Page"
+msgstr "Seite"
+
+#: pyddns/templates/dash.html:148 pyddns/templates/subdomains.html:82
+#: pyddns/templates/users.html:101
+msgid "of"
+msgstr "von"
+
+#: pyddns/templates/dash.html:152 pyddns/templates/subdomains.html:86
+#: pyddns/templates/users.html:105
+msgid "Next"
+msgstr "Nächste"
+
+#: pyddns/templates/dash.html:164 pyddns/templates/subdomains.html:98
+#: pyddns/templates/users.html:117
+msgid "The updatewas successful and the hostname is now updated"
+msgstr "Das Update war erfolgreich und der Hostname ist jetzt aktualisiert"
+
+#: pyddns/templates/dash.html:165 pyddns/templates/subdomains.html:99
+#: pyddns/templates/users.html:118
+msgid "The APP not sinc bind"
+msgstr "Update fehlgeschlagen"
+
+#: pyddns/templates/dash.html:166 pyddns/templates/subdomains.html:100
+#: pyddns/templates/users.html:119
+msgid "The hostname specified does not exist in this user account"
+msgstr "Der angegebene Hostname existiert nicht in diesem Benutzerkonto"
+
+#: pyddns/templates/dash.html:167 pyddns/templates/subdomains.html:101
+#: pyddns/templates/users.html:120
+msgid "The username and password pair do not match a real user"
+msgstr "Username und Paßwort entsprechen keinem Benutzeraccount"
+
+#: pyddns/templates/dash.html:168 pyddns/templates/dash.html:169
+#: pyddns/templates/subdomains.html:102 pyddns/templates/subdomains.html:103
+#: pyddns/templates/users.html:121 pyddns/templates/users.html:122
+msgid "Incorrect authentication format"
+msgstr "Falsches Authentifizierungsformat"
+
+#: pyddns/templates/dash.html:170 pyddns/templates/subdomains.html:104
+#: pyddns/templates/users.html:123
+msgid "Missing header HTTP_AUTHORIZATION"
+msgstr "Fehlender Header HTTP_AUTHORIZATION"
+
+#: pyddns/templates/dash.html:171 pyddns/templates/subdomains.html:105
+#: pyddns/templates/users.html:124
+msgid "Missing header HTTP_USER_AGENT"
+msgstr "Fehlender Header HTTP_USER_AGENT"
+
+#: pyddns/templates/dash.html:172 pyddns/templates/subdomains.html:106
+#: pyddns/templates/users.html:125
+msgid "You have exceeded the maximum number of attempts"
+msgstr "Die maximale Anzahl Anmeldeversuche wurde erreicht"
+
+#: pyddns/templates/dash.html:238
+msgid "The subdomain already exists"
+msgstr "Die Subdomain existiert bereits"
+
+#: pyddns/templates/dash.html:252
+msgid "You certainly want to delete the domain"
+msgstr "Bis Du sicher, dass diese Domain gelöscht werden soll"
+
+#: pyddns/templates/dash.html:267
+msgid "You do not have permission to delete the subdomain"
+msgstr "Du hast keine Berechtigung, diese Subdomain zu löschen"
+
+#: pyddns/templates/subdomains.html:48
+msgid "Admin subdomains"
+msgstr "Subdomains-Administration"
+
+#: pyddns/templates/subdomains.html:51
+msgid "Search subdomain"
+msgstr "Suche Subdomain"
+
+#: pyddns/templates/subdomains.html:63
+msgid "Contact email"
+msgstr "Kontakt-eMail"
+
+#: pyddns/templates/subdomains.html:71
+msgid "Admin"
+msgstr "Admin"
+
+#: pyddns/templates/users.html:48
+msgid "Admin users"
+msgstr "Admin-Benutzer"
+
+#: pyddns/templates/users.html:53
+msgid "Search user"
+msgstr "Suche Benutzer"
+
+#: pyddns/templates/users.html:66
+msgid "Last Name"
+msgstr "Nachname"
+
+#: pyddns/templates/users.html:67
+msgid "Superuser"
+msgstr "Superuser"
+
+#: pyddns/templates/users.html:69
+msgid "Actions"
+msgstr "Aktionen"
+
+#: pyddns/templates/users.html:162
+msgid "You certainly want to delete the user"
+msgstr "Möchtest Du diesen Benutzer wirklich löschen"
