@@ -36,7 +36,7 @@ services:
       DJANGO_SU_EMAIL: '${DJANGO_SU_EMAIL}'
       DJANGO_SU_PASSWORD: '${DJANGO_SU_PASSWORD}'
       OWN_ADMIN: '${OWN_ADMIN}'
-      MAX_DOMAINS_USER: '${MAX_DOMAINS_USER}'
+      #MAX_DOMAINS_USER: '${MAX_DOMAINS_USER}'
     depends_on:
       - "postgres"
     networks:
