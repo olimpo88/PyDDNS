@@ -184,3 +184,6 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+#Fix for Django 3.2 explicitly defined primary key type
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
