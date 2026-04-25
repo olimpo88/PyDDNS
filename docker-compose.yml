@@ -72,7 +72,7 @@ services:
       red:
 
   postgres:
-    image: postgres:15
+    image: postgres:18
     restart: always
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASS}

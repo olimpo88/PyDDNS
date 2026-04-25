@@ -31,7 +31,7 @@ services:
       '
 
   postgres-old:
-    image: postgres:9.6
+    image: postgres:18.3
     environment:
       POSTGRES_PASSWORD: '${DATABASE_PASS}'
       POSTGRES_USER: '${DATABASE_NAME}'
@@ -51,7 +51,7 @@ services:
       red:
 
   migrator:
-    image: postgres:15
+    image: postgres:18
     environment:
       PGPASSWORD: '${DATABASE_PASS}'
       PGUSER: '${DATABASE_NAME}'
