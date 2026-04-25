@@ -16,7 +16,7 @@
 
 services:
   prep-migration:
-    image: alpine:3.20
+    image: alpine:3.23
     volumes:
       - ./data:/data
     command: >
