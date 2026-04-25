@@ -1,6 +1,6 @@
 services:
   ddns:
-    image: davd/docker-ddns:1.2.1
+    image: davd/docker-ddns:1.5.0
     restart: always
     environment:
       RECORD_TTL: 60
