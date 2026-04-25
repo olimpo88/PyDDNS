@@ -7,4 +7,4 @@ pytest-cov==6.0.0
 pytest-env==1.1.5
 
 # Linting / formatting
-ruff==0.6.9
+ruff==0.15.12
