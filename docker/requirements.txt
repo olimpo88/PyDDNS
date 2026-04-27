@@ -1,5 +1,5 @@
 Django==5.2.13
-djangorestframework==3.16.0
+djangorestframework==3.17.1
 argon2-cffi==23.1.0
 psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0
