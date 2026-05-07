@@ -1,4 +1,4 @@
-Django==5.2.13
+Django==5.2.14
 djangorestframework==3.16.0
 argon2-cffi==23.1.0
 psycopg2-binary==2.9.10
