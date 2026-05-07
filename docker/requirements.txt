@@ -6,4 +6,4 @@ python-dateutil==2.9.0.post0
 Pillow==12.2.0
 requests==2.33.0
 dnspython==2.6.1
-gunicorn==23.0.0
+gunicorn==26.0.0
