@@ -4,6 +4,6 @@ argon2-cffi==23.1.0
 psycopg2-binary==2.9.10
 python-dateutil==2.9.0.post0
 Pillow==12.2.0
-requests==2.33.0
+requests==2.34.1
 dnspython==2.6.1
 gunicorn==23.0.0
