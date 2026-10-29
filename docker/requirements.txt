@@ -1,11 +1,11 @@
 Django==5.2.18
-djangorestframework==3.17.1
+djangorestframework==3.18.2
 argon2-cffi==23.1.0
 psycopg2-binary==2.9.13
 python-dateutil==2.9.0.post0
 Pillow==13.0.0
 requests==2.34.1
-dnspython==2.6.1
+dnspython==2.9.0
 gunicorn==26.0.0
 django-otp==1.7.4
 qrcode==8.2
