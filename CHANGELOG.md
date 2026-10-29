@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] — 2026-10-29
+
 ### Added
 
 - **Two-factor authentication (TOTP)** — optional for every user, enabled from
@@ -16,12 +18,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   plus a per-IP limit and a restart after five wrong codes.
 - **`ADMIN_FORCE_2FA`** — `0` by default (nothing changes, existing admins are
   not locked out). `1` sends staff/superusers to enrol right after their
-  password and keeps them on the enrolment page until they do; they cannot
-  disable it afterwards.
+  password and keeps them on the enrolment page until they do. Once enrolled
+  they see a confirmation with their backup codes and carry on; they have no
+  settings page and cannot disable it.
 - **`/admin` honours 2FA** — its own password form is replaced by the app
   sign-in (with `next`), and sessions that must use a second factor are
   verified before entering. Login also accepts a safe same-site `next`.
-- **`manage.py reset_2fa <username>`** — recovery for a lost authenticator.
+- **Reset another user's 2FA** — admins can blank a user's two-factor setup
+  from the Users list or the edit page (lost phone). The user keeps their
+  password and can enrol again; never offered for your own account.
+- **`manage.py reset_2fa <username>`** — recovery for a lost authenticator,
+  including your own.
 - Activity-log actions `2FA_ENABLE`, `2FA_DISABLE`, `2FA_RESET`,
   `2FA_BACKUP_CODES`, `LOGIN_2FA`; strings translated into the 8 locales.
 
@@ -29,7 +36,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Impersonation keeps the admin's verified state when returning
   (`Return to admin`), and 2FA settings cannot be edited while impersonating.
+- The footer and login page show the real version (`PYDDNS_VERSION` in
+  settings) instead of a hardcoded `v2.0`.
 - New dependencies: `django-otp` 1.7.4, `qrcode` 8.2.
+
+### Not covered
+
+- `Authorization: Token` API requests and `/nic/update` (ddclient) keep their
+  own credentials and do not go through the second factor.
 
 ## [2.1.0] — 2026-10-29
 
@@ -229,6 +243,7 @@ See `SECURITY.md` for the disclosure policy. This release closes 2 critical,
 
 ---
 
-[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/olimpo88/PyDDNS/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/olimpo88/PyDDNS/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/olimpo88/PyDDNS/releases/tag/v2.0.0
