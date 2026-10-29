@@ -497,6 +497,111 @@ msgstr "这将删除"
 msgid "and all their subdomains. This can't be undone."
 msgstr "及其所有子域名。此操作无法撤销。"
 
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "请输入验证器应用中的6位验证码，或一个备用码。"
+
+msgid "Authentication code"
+msgstr "验证码"
+
+msgid "Verifying..."
+msgstr "验证中..."
+
+msgid "Verify"
+msgstr "验证"
+
+msgid "Invalid code."
+msgstr "验证码无效。"
+
+msgid "The verification expired. Please sign in again."
+msgstr "验证已过期，请重新登录。"
+
+msgid "Account disabled."
+msgstr "账户已被停用。"
+
+msgid "Too many attempts. Try again later."
+msgstr "尝试次数过多，请稍后再试。"
+
+msgid "Wrong password."
+msgstr "密码错误。"
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "管理员必须使用双因素认证，无法停用。"
+
+msgid "Security"
+msgstr "安全"
+
+msgid "Two-factor authentication"
+msgstr "双因素认证"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "在登录时增加来自验证器应用的一次性验证码。"
+
+msgid "Authenticator app"
+msgstr "验证器应用"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "您的账户已启用双因素认证。"
+
+msgid "Two-factor authentication is off."
+msgstr "双因素认证未启用。"
+
+msgid "Enabled"
+msgstr "已启用"
+
+msgid "Disabled"
+msgstr "未启用"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "管理员账户必须使用双因素认证。"
+
+msgid "Set up two-factor authentication"
+msgstr "设置双因素认证"
+
+msgid "Generate new backup codes"
+msgstr "生成新的备用码"
+
+msgid "Disable two-factor authentication"
+msgstr "停用双因素认证"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "管理员账户必须使用双因素认证，请先完成设置再继续。"
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "用验证器应用扫描二维码，然后输入其显示的验证码。"
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "安装验证器应用（Google Authenticator、Aegis、1Password、Authy 等）。"
+
+msgid "Scan this QR code, or type the key below."
+msgstr "扫描此二维码，或输入下方的密钥。"
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "输入6位验证码以确认。"
+
+msgid "QR code"
+msgstr "二维码"
+
+msgid "Setup key"
+msgstr "设置密钥"
+
+msgid "Verify and enable"
+msgstr "验证并启用"
+
+msgid "Backup codes"
+msgstr "备用码"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "请妥善保存这些备用码。若无法使用验证器应用，每个备用码可使用一次。它们不会再次显示。"
+
+msgid "I have saved them"
+msgstr "我已保存"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "剩余 %(n)s 个备用码。"
+
 #~ msgid "User"
 #~ msgstr "用户"
 
@@ -601,3 +706,18 @@ msgstr "及其所有子域名。此操作无法撤销。"
 
 #~ msgid "You certainly want to delete the user"
 #~ msgstr "确定删除该用户"
+
+msgid "Reset 2FA"
+msgstr "重置两步验证"
+
+msgid "Reset two-factor authentication?"
+msgstr "重置两步验证？"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "这将移除以下用户的身份验证应用和备用代码："
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "在重新设置之前，仅使用密码登录。"
+
+msgid "Two-factor authentication reset"
+msgstr "两步验证已重置"

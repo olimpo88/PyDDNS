@@ -512,3 +512,124 @@ msgstr "Isso removerá"
 
 msgid "and all their subdomains. This can't be undone."
 msgstr "e todos os seus subdomínios. Esta ação não pode ser desfeita."
+
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "Digite o código de 6 dígitos do seu app autenticador ou um dos seus códigos de backup."
+
+msgid "Authentication code"
+msgstr "Código de autenticação"
+
+msgid "Verifying..."
+msgstr "Verificando..."
+
+msgid "Verify"
+msgstr "Verificar"
+
+msgid "Invalid code."
+msgstr "Código inválido."
+
+msgid "The verification expired. Please sign in again."
+msgstr "A verificação expirou. Entre novamente."
+
+msgid "Account disabled."
+msgstr "Conta desativada."
+
+msgid "Too many attempts. Try again later."
+msgstr "Muitas tentativas. Tente novamente mais tarde."
+
+msgid "Wrong password."
+msgstr "Senha incorreta."
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "A autenticação em duas etapas é obrigatória para administradores e não pode ser desativada."
+
+msgid "Security"
+msgstr "Segurança"
+
+msgid "Two-factor authentication"
+msgstr "Autenticação em duas etapas"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "Adicione ao seu login um código de uso único de um app autenticador."
+
+msgid "Authenticator app"
+msgstr "App autenticador"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "A autenticação em duas etapas está ativada na sua conta."
+
+msgid "Two-factor authentication is off."
+msgstr "A autenticação em duas etapas está desativada."
+
+msgid "Enabled"
+msgstr "Ativada"
+
+msgid "Disabled"
+msgstr "Desativada"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "Sua conta de administrador deve usar autenticação em duas etapas."
+
+msgid "Set up two-factor authentication"
+msgstr "Configurar a autenticação em duas etapas"
+
+msgid "Generate new backup codes"
+msgstr "Gerar novos códigos de backup"
+
+msgid "Disable two-factor authentication"
+msgstr "Desativar a autenticação em duas etapas"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "Sua conta de administrador deve usar autenticação em duas etapas. Configure-a para continuar."
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "Escaneie o QR code com um app autenticador e digite o código exibido."
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "Instale um app autenticador (Google Authenticator, Aegis, 1Password, Authy, ...)."
+
+msgid "Scan this QR code, or type the key below."
+msgstr "Escaneie este QR code ou digite a chave abaixo."
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "Digite o código de 6 dígitos para confirmar."
+
+msgid "QR code"
+msgstr "QR code"
+
+msgid "Setup key"
+msgstr "Chave de configuração"
+
+msgid "Verify and enable"
+msgstr "Verificar e ativar"
+
+msgid "Backup codes"
+msgstr "Códigos de backup"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "Guarde estes códigos em um lugar seguro. Cada um funciona uma vez se você perder o acesso ao app autenticador. Eles não serão exibidos novamente."
+
+msgid "I have saved them"
+msgstr "Já salvei"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "Resta %(n)s código de backup."
+msgstr[1] "Restam %(n)s códigos de backup."
+
+msgid "Reset 2FA"
+msgstr "Redefinir 2FA"
+
+msgid "Reset two-factor authentication?"
+msgstr "Redefinir a autenticação em duas etapas?"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "Isso remove o app autenticador e os códigos de backup de"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "A pessoa entrará apenas com a senha até configurar novamente."
+
+msgid "Two-factor authentication reset"
+msgstr "Autenticação em duas etapas redefinida"

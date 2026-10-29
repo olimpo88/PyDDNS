@@ -10,6 +10,7 @@
      x-data="{
        q: '{{ buscar|default:'' }}',
        confirm: null,
+       confirm2fa: null,
        getCookie(name) {
          const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
          return v ? v.pop() : '';
@@ -17,6 +18,26 @@
        search() {
          const term = this.q.trim();
          window.location.href = term ? '/users/' + encodeURIComponent(term) : '{% url 'users' %}';
+       },
+       async doReset2fa() {
+         if (!this.confirm2fa) return;
+         const fd = new FormData();
+         fd.append('id_user', this.confirm2fa.id);
+         fd.append('csrfmiddlewaretoken', this.getCookie('csrftoken'));
+         try {
+           const res = await fetch('{% url 'reset_user_2fa' %}', { method: 'POST', body: fd });
+           const data = await res.json();
+           if (data.success) {
+             window.toast && window.toast('{% trans 'Two-factor authentication reset' %}');
+             setTimeout(() => location.reload(), 600);
+           } else {
+             window.toast && window.toast(data.error || '{% trans 'Failed' %}');
+           }
+         } catch (e) {
+           window.toast && window.toast('{% trans 'Network error' %}');
+         } finally {
+           this.confirm2fa = null;
+         }
        },
        async doDelete() {
          if (!this.confirm) return;
@@ -98,6 +119,7 @@
                 {% else %}
                   <span class="badge">{% trans "user" %}</span>
                 {% endif %}
+                {% if u|has_2fa %}<span class="badge" title="{% trans 'Two-factor authentication' %}">2FA</span>{% endif %}
               </td>
               <td>
                 <a class="btn btn-sm btn-ghost" href="{% url 'main' %}{{ u.id }}" title="{% trans 'View domains' %}">{{ u|count_domain }}</a>
@@ -118,6 +140,15 @@
                         <circle cx="16" cy="9" r="3"/>
                       </svg>
                     </a>
+                  {% endif %}
+                  {% if u.id != request.user.id and u|has_2fa %}
+                    <button class="btn btn-sm btn-ghost" @click="confirm2fa = { id: '{{ u.id }}', name: '{{ u.username }}' }"
+                            title="{% trans 'Reset 2FA' %}" aria-label="{% trans 'Reset 2FA' %}">
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5l8-3z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                      </svg>
+                    </button>
                   {% endif %}
                   <a class="btn btn-sm btn-ghost" href="/add_user/{{ u.id }}" title="{% trans 'Edit' %}" aria-label="{% trans 'Edit' %}">
                     <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -163,6 +194,24 @@
       </div>
     {% endif %}
   </div>
+
+  {# Confirm 2FA reset modal #}
+  <template x-if="confirm2fa">
+    <div class="modal-bg" @click="confirm2fa = null">
+      <div class="modal" @click.stop role="dialog">
+        <h3>{% trans "Reset two-factor authentication?" %}</h3>
+        <p>
+          {% trans "This removes the authenticator app and backup codes of" %}
+          <span class="mono"><b x-text="confirm2fa.name"></b></span>.
+          {% trans "They will sign in with their password only until they set it up again." %}
+        </p>
+        <div class="modal-actions">
+          <button class="btn" @click="confirm2fa = null">{% trans "Cancel" %}</button>
+          <button class="btn btn-danger" @click="doReset2fa()">{% trans "Reset 2FA" %}</button>
+        </div>
+      </div>
+    </div>
+  </template>
 
   {# Confirm delete modal #}
   <template x-if="confirm">

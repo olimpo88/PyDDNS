@@ -16,9 +16,29 @@
        is_admin: {% if user.is_superuser %}true{% else %}false{% endif %},
        error: '',
        submitting: false,
+       confirm2fa: false,
        getCookie(name) {
          const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
          return v ? v.pop() : '';
+       },
+       async doReset2fa() {
+         this.confirm2fa = false;
+         this.error = '';
+         const fd = new FormData();
+         fd.append('id_user', '{{ user.id }}');
+         fd.append('csrfmiddlewaretoken', this.getCookie('csrftoken'));
+         try {
+           const res = await fetch('{% url 'reset_user_2fa' %}', { method: 'POST', body: fd });
+           const data = await res.json();
+           if (data.success) {
+             window.toast && window.toast('{% trans 'Two-factor authentication reset' %}');
+             setTimeout(() => location.reload(), 600);
+           } else {
+             this.error = data.error || '{% trans 'Failed' %}';
+           }
+         } catch (e) {
+           this.error = '{% trans 'Network error' %}';
+         }
        },
        async submit() {
          this.error = '';
@@ -113,6 +133,15 @@
         </div>
       </label>
 
+      {% if can_reset_2fa %}
+      <div style="grid-column: span 2; display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 12px 14px; background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: var(--r-ctl);">
+        <div>
+          <div style="font-weight: 600;">{% trans "Two-factor authentication" %} <span class="code-pill code-good" style="margin-left: 6px;">{% trans "Enabled" %}</span></div>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger" @click="confirm2fa = true">{% trans "Reset 2FA" %}</button>
+      </div>
+      {% endif %}
+
       <div x-show="error" x-cloak role="alert" style="grid-column: span 2; background: oklch(from var(--bad) l c h / 0.12); border: 1px solid oklch(from var(--bad) l c h / 0.3); color: var(--bad); padding: 10px 12px; border-radius: var(--r-ctl); font-size: 13px;" x-text="error"></div>
 
       <div style="grid-column: span 2; display: flex; gap: 8px; justify-content: flex-end;">
@@ -133,5 +162,24 @@
       </div>
     </form>
   </div>
+
+  {% if can_reset_2fa %}
+  <template x-if="confirm2fa">
+    <div class="modal-bg" @click="confirm2fa = false">
+      <div class="modal" @click.stop role="dialog">
+        <h3>{% trans "Reset two-factor authentication?" %}</h3>
+        <p>
+          {% trans "This removes the authenticator app and backup codes of" %}
+          <span class="mono"><b>{{ user.username }}</b></span>.
+          {% trans "They will sign in with their password only until they set it up again." %}
+        </p>
+        <div class="modal-actions">
+          <button class="btn" @click="confirm2fa = false">{% trans "Cancel" %}</button>
+          <button class="btn btn-danger" @click="doReset2fa()">{% trans "Reset 2FA" %}</button>
+        </div>
+      </div>
+    </div>
+  </template>
+  {% endif %}
 </div>
 {% endblock %}

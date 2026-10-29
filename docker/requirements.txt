@@ -7,3 +7,5 @@ Pillow==13.0.0
 requests==2.34.1
 dnspython==2.6.1
 gunicorn==26.0.0
+django-otp==1.7.4
+qrcode==8.2

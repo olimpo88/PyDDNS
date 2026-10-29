@@ -30,6 +30,7 @@ urlpatterns += i18n_patterns(
     re_path(r'^add_subdomain', add_subdomain, name="add_subdomain"),
     re_path(r'^set_user', set_user, name="set_user"),
     re_path(r'^delet_user', delet_user, name="del_user"),
+    re_path(r'^reset_user_2fa', reset_user_2fa, name="reset_user_2fa"),
     re_path(r'^delet_domain', delet_domain, name="delete_domain"),
     re_path(r'^common/', include(('common.urls', 'common'), namespace='common')),
     re_path(r'^ip/update/(?P<domain>.*)/(?P<ip>.*)', set_ip_web),

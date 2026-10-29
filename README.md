@@ -55,6 +55,7 @@ Point a delegated subdomain at your server, create user accounts, and let users 
 - 🔑 **Token-authenticated REST API** (optional, opt-in) — full CRUD over users, subdomains, activity log, with per-token revocation
 - 👥 **Multi-user, multi-domain** — admin panel, per-user subdomains, role-based permissions, soft-delete prevention for the current user
 - 🎭 **Admin impersonation** — superusers can sign in as any active account (with a sticky banner and full audit trail) for support and debugging without needing the user's password
+- 🔐 **Two-factor authentication (TOTP)** — optional for every user (authenticator app + one-time backup codes), mandatory for admins with a single env var (`ADMIN_FORCE_2FA=1`); also guards `/admin`
 - 📧 **Password reset by email** (toggleable) — built-in self-service flow with localized email templates. Operators that prefer admin-controlled credentials can disable it with a single env var
 - 🎨 **Modern dark UI** — responsive Django templates + Alpine.js, no SPA build pipeline. Amber accent palette, Inter for UI, JetBrains Mono for technical data
 - 🌍 **8 languages out of the box** — 🇺🇸 English · 🇪🇸 Spanish · 🇧🇷 Portuguese (Brazilian) · 🇫🇷 French · 🇩🇪 German · 🇷🇺 Russian · 🇯🇵 Japanese · 🇨🇳 Chinese (Simplified). Browser auto-detection, in-app picker, or operator-locked mode
@@ -62,7 +63,7 @@ Point a delegated subdomain at your server, create user accounts, and let users 
 - 📊 **Full audit trail** — every IP update, login attempt, and admin action persisted to Postgres with timestamps, agent strings, and return codes
 - 🛡 **Container hardening** — multi-stage build, non-root user, read-only root filesystem, dropped capabilities, no-new-privileges
 - 🩺 **Healthchecks everywhere** — Postgres `pg_isready`, Gunicorn TCP probe, `depends_on: service_healthy` gates startup order
-- 🧪 **Tested in CI** — pytest suite (88+ tests), GitHub Actions on every push with `pip-audit` for CVE scanning, `ruff` for lint
+- 🧪 **Tested in CI** — pytest suite (125+ tests), GitHub Actions on every push with `pip-audit` for CVE scanning, `ruff` for lint
 - 🔄 **Smooth upgrades** — scripted Postgres 9.6 → 15 migration runs both versions in parallel via a separate Compose overlay file
 - 🧰 **One-command deployment** — `docker compose up -d` and you're live
 
@@ -186,6 +187,7 @@ Environment variables live in `.env` (template: [`.env-demo`](.env-demo)).
 | `EMAIL_USE_TLS` / `EMAIL_USE_SSL` | Enable STARTTLS or SSL on the SMTP socket (defaults: TLS on) | ➖ |
 | `EMAIL_FROM` | `From:` header used by outgoing mail (default: `PyDDNS <noreply@<DNS_DOMAIN>>`) | ➖ |
 | `SITE_URL` | Absolute base URL used by email templates for clickable links | ➖ |
+| `ADMIN_FORCE_2FA` | `0` (default) = two-factor is optional, everyone signs in as before. `1` = staff/superusers are sent to enrol right after their password and cannot use the app until they do. See [Two-factor authentication](#-two-factor-authentication) | ➖ |
 | `ALLOW_PASSWORD_RESET` | `1` (default) = users can reset their own passwords via email. `0` = admin-only: reset URLs return 404 and the "Forgot your password?" link is hidden | ➖ |
 
 ### Development mode
@@ -345,6 +347,20 @@ ALLOW_PASSWORD_RESET=1
 ```
 
 > **Note**: changes to `.env` require `docker compose up -d --force-recreate python` to take effect — `restart` only reloads code.
+
+---
+
+## 🔐 Two-factor authentication
+
+Any user can protect their account with a TOTP app (Google Authenticator, Aegis, 1Password, Authy, ...): click the avatar in the top bar → **Set up two-factor authentication**, scan the QR code and confirm with a code. You get 10 one-time **backup codes**, shown once. From then on, signing in asks for the password and then the 6-digit code. Disabling it (or regenerating the backup codes) asks for the password again.
+
+- **Optional by default.** Nothing changes for anyone until they opt in.
+- **`ADMIN_FORCE_2FA=1`** makes it mandatory for staff and superusers. It never locks anyone out: an admin without a device signs in with just the password, is redirected straight to the enrolment page and can only use that page (and sign out) until they finish. Once enrolled they cannot disable it. Turn the variable on whenever you like; existing admin accounts keep working.
+- **Django admin (`/admin`)** no longer has its own password form: it sends you through the normal sign-in (including the code) and returns you. Users with 2FA — and staff while `ADMIN_FORCE_2FA=1` — only get in with a verified session.
+- **Lost phone?** The user can sign in with a backup code, or you can reset them from the server: `docker compose exec python python manage.py reset_2fa <username>` (an admin is asked to enrol again at the next sign-in when `ADMIN_FORCE_2FA=1`).
+- Wrong codes are throttled per device (exponential back-off by `django-otp`), after five wrong codes the sign-in restarts from the password, and failures count towards a per-IP limit. Enabling, disabling, resetting and failed attempts are written to the activity log (`2FA_ENABLE`, `2FA_DISABLE`, `2FA_RESET`, `2FA_BACKUP_CODES`, `LOGIN_2FA`).
+- **Not covered:** `Authorization: Token` requests to the REST API and the dyndns2 `/nic/update` endpoint authenticate with their own credentials and never involve a second factor. While an admin is impersonating a user, 2FA settings of the impersonated account cannot be changed.
+- Time-based codes need an accurate server clock (±30 s).
 
 ---
 

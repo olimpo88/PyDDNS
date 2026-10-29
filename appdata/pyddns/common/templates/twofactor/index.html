@@ -1,0 +1,74 @@
+{% extends "_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Security" %} — PyDDNS{% endblock %}
+
+{% block topbar %}{% include "_topbar.html" %}{% endblock %}
+
+{% block content %}
+<div class="main" style="max-width: 720px;">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">{% trans "Two-factor authentication" %}</h1>
+      <p class="page-sub">{% trans "Add a one-time code from an authenticator app to your sign-in." %}</p>
+    </div>
+  </div>
+
+  {% if error %}
+    <div role="alert" class="card card-pad" style="color: var(--bad); margin-bottom: 16px;">{{ error }}</div>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-head">
+      <div>
+        <h2 class="card-title">{% trans "Authenticator app" %}</h2>
+        <p class="card-sub">
+          {% if enabled %}{% trans "Two-factor authentication is on for your account." %}
+          {% else %}{% trans "Two-factor authentication is off." %}{% endif %}
+        </p>
+      </div>
+      {% if enabled %}
+        <span class="code-pill code-good">{% trans "Enabled" %}</span>
+      {% else %}
+        <span class="code-pill code-warn">{% trans "Disabled" %}</span>
+      {% endif %}
+    </div>
+
+    <div class="card-section">
+      {% if not enabled %}
+        {% if forced %}
+          <p>{% trans "Your administrator account must use two-factor authentication." %}</p>
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'common:twofactor_setup' %}">{% trans "Set up two-factor authentication" %}</a>
+      {% else %}
+        <p class="card-sub" style="margin-bottom: 16px;">
+          {% blocktrans count n=codes_left %}{{ n }} backup code left.{% plural %}{{ n }} backup codes left.{% endblocktrans %}
+        </p>
+
+        <form method="post" action="{% url 'common:twofactor_regenerate' %}" style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 20px;">
+          {% csrf_token %}
+          <div class="field">
+            <label for="regen-password">{% trans "Password" %}</label>
+            <input id="regen-password" class="input" type="password" name="password" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn">{% trans "Generate new backup codes" %}</button>
+        </form>
+
+        {% if forced %}
+          <p class="card-sub">{% trans "Two-factor authentication is required for administrators and cannot be disabled." %}</p>
+        {% else %}
+          <hr style="border: 0; border-top: 1px solid var(--line-soft); margin: 0 0 20px;">
+          <form method="post" action="{% url 'common:twofactor_disable' %}" style="display: flex; flex-direction: column; gap: 14px;">
+            {% csrf_token %}
+            <div class="field">
+              <label for="disable-password">{% trans "Password" %}</label>
+              <input id="disable-password" class="input" type="password" name="password" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="btn btn-danger">{% trans "Disable two-factor authentication" %}</button>
+          </form>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

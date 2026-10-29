@@ -46,7 +46,11 @@
   <div class="right">
     {% include "_lang_toggle.html" %}
 
-    <span class="avatar" title="{{ request.user.first_name }} {{ request.user.last_name }}">{{ request.user|get_initials }}</span>
+    {% if IS_IMPERSONATING or TWOFA_FORCED %}
+      <span class="avatar" title="{{ request.user.first_name }} {{ request.user.last_name }}">{{ request.user|get_initials }}</span>
+    {% else %}
+      <a class="avatar" href="{% url 'common:twofactor' %}" style="text-decoration: none; color: inherit;" title="{% trans 'Security' %} — {{ request.user.first_name }} {{ request.user.last_name }}">{{ request.user|get_initials }}</a>
+    {% endif %}
 
     <a class="btn btn-icon btn-ghost" href="{% url 'common:logout' %}" title="{% trans 'Sign out' %}" aria-label="{% trans 'Sign out' %}">
       <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">

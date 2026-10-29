@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.safestring import mark_safe
+from common import twofactor
 from pyddns.models import SubDomain
 from common.models import Activity_log
 from django.conf import settings
@@ -15,6 +16,11 @@ register = template.Library()
 def count_domain(user):
     count = SubDomain.objects.filter(user=user).count()
     return count
+
+
+@register.filter(name='has_2fa')
+def has_2fa(user):
+    return twofactor.has_2fa(user)
 
 
 @register.filter(name='last_ip')

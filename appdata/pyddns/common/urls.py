@@ -4,11 +4,18 @@ from django.urls import path, re_path
 from django.urls import reverse_lazy
 
 from common.views import *
+from common import views_2fa
 
 urlpatterns = [
     re_path(r'^logout/', logout, name="logout"),
     re_path(r'^login/', login, name="login"),
     re_path(r'^dologin/', dologin, name="dologin"),
+    re_path(r'^verify2fa/', verify2fa, name="verify2fa"),
+    path('2fa/', views_2fa.index, name='twofactor'),
+    path('2fa/setup/', views_2fa.setup, name='twofactor_setup'),
+    path('2fa/codes/', views_2fa.codes, name='twofactor_codes'),
+    path('2fa/disable/', views_2fa.disable, name='twofactor_disable'),
+    path('2fa/regenerate/', views_2fa.regenerate, name='twofactor_regenerate'),
     re_path(r'^permission_denied', permission_denied, name="permission_denied"),
     re_path(r'^sin_permiso', sin_permiso, name="sin_permiso"),
 ]

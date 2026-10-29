@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Backup codes" %} — PyDDNS{% endblock %}
+
+{% block topbar %}{% include "_topbar.html" %}{% endblock %}
+
+{% block content %}
+<div class="main" style="max-width: 720px;">
+  <div class="page-head">
+    <div>
+      <h1 class="page-title">{% if just_enrolled %}{% trans "Two-factor authentication" %} <span class="code-pill code-good" style="vertical-align: middle;">{% trans "Enabled" %}</span>{% else %}{% trans "Backup codes" %}{% endif %}</h1>
+      <p class="page-sub">{% trans "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again." %}</p>
+    </div>
+  </div>
+
+  <div class="card card-pad">
+    <ul class="mono" style="list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; font-size: 16px;">
+      {% for code in codes %}<li>{{ code }}</li>{% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{{ continue_url }}">{% trans "I have saved them" %}</a>
+  </div>
+</div>
+{% endblock %}

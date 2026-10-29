@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Two-factor authentication (TOTP)** — optional for every user, enabled from
+  the avatar menu (`/common/2fa/`): QR code + manual key, 10 one-time backup
+  codes, password required to disable or regenerate. Sign-in becomes two steps
+  for accounts that enable it. Built on `django-otp` (per-device throttling),
+  plus a per-IP limit and a restart after five wrong codes.
+- **`ADMIN_FORCE_2FA`** — `0` by default (nothing changes, existing admins are
+  not locked out). `1` sends staff/superusers to enrol right after their
+  password and keeps them on the enrolment page until they do; they cannot
+  disable it afterwards.
+- **`/admin` honours 2FA** — its own password form is replaced by the app
+  sign-in (with `next`), and sessions that must use a second factor are
+  verified before entering. Login also accepts a safe same-site `next`.
+- **`manage.py reset_2fa <username>`** — recovery for a lost authenticator.
+- Activity-log actions `2FA_ENABLE`, `2FA_DISABLE`, `2FA_RESET`,
+  `2FA_BACKUP_CODES`, `LOGIN_2FA`; strings translated into the 8 locales.
+
+### Changed
+
+- Impersonation keeps the admin's verified state when returning
+  (`Return to admin`), and 2FA settings cannot be edited while impersonating.
+- New dependencies: `django-otp` 1.7.4, `qrcode` 8.2.
+
 ## [2.1.0] — 2026-10-29
 
 ### Added

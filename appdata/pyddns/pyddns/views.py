@@ -21,8 +21,12 @@ from django.conf import settings
 from django.utils import timezone
 from pyddns.models import SubDomain
 from django.db.models import Q
+from common import twofactor
 from common.utils import get_client_ip
+from django_otp import devices_for_user, login as otp_login
 from django.contrib.auth.decorators import user_passes_test
+from django.views.decorators.http import require_POST
+from django.utils.translation import gettext as _
 
 import ipaddress
 import re
@@ -165,7 +169,9 @@ def add_user(request,id_user=None):
             user=User.objects.get(id=id_user)
         except User.DoesNotExist:
             pass
-    return render(request,"add_user.html",{'user':user})
+    # Resetting your own 2FA is not offered here (see reset_user_2fa).
+    can_reset_2fa = bool(user and user.id != request.user.id and twofactor.has_2fa(user))
+    return render(request,"add_user.html",{'user':user, 'can_reset_2fa': can_reset_2fa})
 
 SUBDOMAIN_RE = re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9-]{0,62}$')
 
@@ -292,6 +298,36 @@ def delet_user(request):
     return HttpResponse(json.dumps(myjson))
 
 @user_passes_test(lambda u: u.is_superuser, login_url='/common/permission_denied')
+@require_POST
+def reset_user_2fa(request):
+    """Admin-only: blank another user's two-factor setup (lost phone).
+
+    The user keeps their password; they sign in with it alone and can enrol
+    again (admins under ADMIN_FORCE_2FA are sent to enrol at that sign-in).
+    Resetting your own is refused: that would let a hijacked admin session
+    strip the admin's own second factor.
+    """
+    myjson = {'error': '', 'success': False}
+    try:
+        target = User.objects.get(id=request.POST.get('id_user', ''))
+    except (User.DoesNotExist, ValueError):
+        myjson['error'] = _('Failed')
+        return HttpResponse(json.dumps(myjson), status=404)
+    if target.id == request.user.id:
+        myjson['error'] = _('Failed')
+        return HttpResponse(json.dumps(myjson), status=403)
+    removed = twofactor.remove_2fa(target)
+    Activity_log(
+        action='2FA_RESET',
+        xforward=get_client_ip(request),
+        user_affected=target.get_username(),
+        result='Reset by admin %s (%d device(s) removed)' % (request.user.get_username(), removed),
+    ).save()
+    myjson['success'] = True
+    return HttpResponse(json.dumps(myjson))
+
+
+@user_passes_test(lambda u: u.is_superuser, login_url='/common/permission_denied')
 def impersonate(request, user_id):
     """Admin-only: switch the active session to another user.
 
@@ -308,8 +344,12 @@ def impersonate(request, user_id):
 
     admin_id = request.user.id
     admin_username = request.user.username
+    # Remember whether the admin had passed the second factor: djlogin()
+    # flushes the session, and stop_impersonating() must restore it.
+    admin_verified = request.user.is_verified()
     djlogin(request, target, backend='django.contrib.auth.backends.ModelBackend')
     request.session['_impersonator_id'] = admin_id
+    request.session['_impersonator_verified'] = admin_verified
     request.session.save()
     Activity_log(
         action='IMPERSONATE_START',
@@ -323,6 +363,7 @@ def impersonate(request, user_id):
 @login_required
 def stop_impersonating(request):
     impersonator_id = request.session.pop('_impersonator_id', None)
+    was_verified = request.session.pop('_impersonator_verified', False)
     if not impersonator_id:
         return HttpResponseRedirect('/main/')
     try:
@@ -331,6 +372,10 @@ def stop_impersonating(request):
         return HttpResponseRedirect('/main/')
     target_username = request.user.username
     djlogin(request, impersonator, backend='django.contrib.auth.backends.ModelBackend')
+    if was_verified:
+        device = next(iter(devices_for_user(impersonator)), None)
+        if device is not None:
+            otp_login(request, device)
     Activity_log(
         action='IMPERSONATE_STOP',
         xforward=get_client_ip(request),

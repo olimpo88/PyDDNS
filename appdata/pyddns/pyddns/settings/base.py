@@ -24,12 +24,16 @@ LOGIN_URL = '/common/login/'
 ENABLE_REST_API = os.environ.get('ENABLE_REST_API', '0').lower() in ('1', 'true', 'yes')
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # Subclass of AdminConfig that swaps in an admin site honouring 2FA.
+    'common.adminconfig.PyDDNSAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_static',
     'common',
     'pyddns',
 ]
@@ -60,6 +64,8 @@ MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_otp.middleware.OTPMiddleware',
+    'common.middleware.TwoFactorMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -147,6 +153,9 @@ DNS_HOST = os.environ.get('DNS_HOST')
 DNS_API_PORT = os.environ.get('DNS_API_PORT')
 DNS_SHARED_SECRET = os.environ.get('DNS_SHARED_SECRET')
 DNS_ALLOW_AGENT = os.environ.get('DNS_ALLOW_AGENT')
+# Shown in the footer and on the login page; bump together with the git tag.
+PYDDNS_VERSION = '2.1.0'
+
 DNS_DOMAIN = os.environ.get('DNS_DOMAIN')
 OWN_ADMIN = os.environ.get('OWN_ADMIN')
 
@@ -171,6 +180,15 @@ else:
 # When False, the self-service password-reset flow (URLs + login link)
 # is hidden and only admins can change passwords via the Users page.
 ALLOW_PASSWORD_RESET = os.environ.get('ALLOW_PASSWORD_RESET', '1').lower() in ('1', 'true', 'yes')
+
+# Two-factor authentication (TOTP). Opt-in for every user from /common/2fa/.
+# ADMIN_FORCE_2FA=1 makes it mandatory for staff/superusers: right after the
+# password step they are redirected to enrol and cannot use the rest of the
+# app until they do. Default 0, so enabling nothing locks out existing admins.
+ADMIN_FORCE_2FA = os.environ.get('ADMIN_FORCE_2FA', '0').lower() in ('1', 'true', 'yes')
+# Label shown by authenticator apps next to the account name.
+OTP_TOTP_ISSUER = f'PyDDNS ({DNS_DOMAIN})' if DNS_DOMAIN else 'PyDDNS'
+# django-otp throttles wrong codes per device (exponential back-off) by default.
 
 # Used by password-reset emails to build absolute links. Falls back to
 # DNS_DOMAIN; tweakable per-deployment if you serve the UI from a different

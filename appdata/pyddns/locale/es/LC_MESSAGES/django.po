@@ -511,6 +511,112 @@ msgstr "Esto va a eliminar"
 msgid "and all their subdomains. This can't be undone."
 msgstr "y todos sus subdominios. No se puede deshacer."
 
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "Ingresá el código de 6 dígitos de tu app de autenticación, o uno de tus códigos de respaldo."
+
+msgid "Authentication code"
+msgstr "Código de autenticación"
+
+msgid "Verifying..."
+msgstr "Verificando..."
+
+msgid "Verify"
+msgstr "Verificar"
+
+msgid "Invalid code."
+msgstr "Código inválido."
+
+msgid "The verification expired. Please sign in again."
+msgstr "La verificación expiró. Iniciá sesión nuevamente."
+
+msgid "Account disabled."
+msgstr "Cuenta deshabilitada."
+
+msgid "Too many attempts. Try again later."
+msgstr "Demasiados intentos. Probá de nuevo más tarde."
+
+msgid "Wrong password."
+msgstr "Contraseña incorrecta."
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "La autenticación en dos pasos es obligatoria para los administradores y no se puede desactivar."
+
+msgid "Security"
+msgstr "Seguridad"
+
+msgid "Two-factor authentication"
+msgstr "Autenticación en dos pasos"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "Sumá un código de un solo uso de una app de autenticación a tu inicio de sesión."
+
+msgid "Authenticator app"
+msgstr "App de autenticación"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "La autenticación en dos pasos está activada en tu cuenta."
+
+msgid "Two-factor authentication is off."
+msgstr "La autenticación en dos pasos está desactivada."
+
+msgid "Enabled"
+msgstr "Activada"
+
+msgid "Disabled"
+msgstr "Desactivada"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "Tu cuenta de administrador debe usar autenticación en dos pasos."
+
+msgid "Set up two-factor authentication"
+msgstr "Configurar la autenticación en dos pasos"
+
+msgid "Generate new backup codes"
+msgstr "Generar nuevos códigos de respaldo"
+
+msgid "Disable two-factor authentication"
+msgstr "Desactivar la autenticación en dos pasos"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "Tu cuenta de administrador debe usar autenticación en dos pasos. Configurala para continuar."
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "Escaneá el código QR con una app de autenticación e ingresá el código que muestra."
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "Instalá una app de autenticación (Google Authenticator, Aegis, 1Password, Authy, ...)."
+
+msgid "Scan this QR code, or type the key below."
+msgstr "Escaneá este código QR o escribí la clave de abajo."
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "Ingresá el código de 6 dígitos para confirmar."
+
+msgid "QR code"
+msgstr "Código QR"
+
+msgid "Setup key"
+msgstr "Clave de configuración"
+
+msgid "Verify and enable"
+msgstr "Verificar y activar"
+
+msgid "Backup codes"
+msgstr "Códigos de respaldo"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "Guardá estos códigos en un lugar seguro. Cada uno sirve una sola vez si perdés el acceso a tu app de autenticación. No se volverán a mostrar."
+
+msgid "I have saved them"
+msgstr "Ya los guardé"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "Queda %(n)s código de respaldo."
+msgstr[1] "Quedan %(n)s códigos de respaldo."
+
 #~ msgid "User"
 #~ msgstr "Usuario"
 
@@ -633,3 +739,18 @@ msgstr "y todos sus subdominios. No se puede deshacer."
 
 #~ msgid "Develop by"
 #~ msgstr "Desarrollado por"
+
+msgid "Reset 2FA"
+msgstr "Restablecer 2FA"
+
+msgid "Reset two-factor authentication?"
+msgstr "¿Restablecer la autenticación en dos pasos?"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "Esto elimina la app de autenticación y los códigos de respaldo de"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "Entrará solo con su contraseña hasta que lo vuelva a configurar."
+
+msgid "Two-factor authentication reset"
+msgstr "Autenticación en dos pasos restablecida"

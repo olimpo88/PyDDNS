@@ -522,3 +522,124 @@ msgstr "Ceci supprimera"
 
 msgid "and all their subdomains. This can't be undone."
 msgstr "et tous ses sous-domaines. Cette action est irréversible."
+
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "Saisissez le code à 6 chiffres de votre application d'authentification, ou l'un de vos codes de secours."
+
+msgid "Authentication code"
+msgstr "Code d'authentification"
+
+msgid "Verifying..."
+msgstr "Vérification..."
+
+msgid "Verify"
+msgstr "Vérifier"
+
+msgid "Invalid code."
+msgstr "Code invalide."
+
+msgid "The verification expired. Please sign in again."
+msgstr "La vérification a expiré. Veuillez vous reconnecter."
+
+msgid "Account disabled."
+msgstr "Compte désactivé."
+
+msgid "Too many attempts. Try again later."
+msgstr "Trop de tentatives. Réessayez plus tard."
+
+msgid "Wrong password."
+msgstr "Mot de passe incorrect."
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "L'authentification à deux facteurs est obligatoire pour les administrateurs et ne peut pas être désactivée."
+
+msgid "Security"
+msgstr "Sécurité"
+
+msgid "Two-factor authentication"
+msgstr "Authentification à deux facteurs"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "Ajoutez à votre connexion un code à usage unique issu d'une application d'authentification."
+
+msgid "Authenticator app"
+msgstr "Application d'authentification"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "L'authentification à deux facteurs est activée sur votre compte."
+
+msgid "Two-factor authentication is off."
+msgstr "L'authentification à deux facteurs est désactivée."
+
+msgid "Enabled"
+msgstr "Activée"
+
+msgid "Disabled"
+msgstr "Désactivée"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "Votre compte administrateur doit utiliser l'authentification à deux facteurs."
+
+msgid "Set up two-factor authentication"
+msgstr "Configurer l'authentification à deux facteurs"
+
+msgid "Generate new backup codes"
+msgstr "Générer de nouveaux codes de secours"
+
+msgid "Disable two-factor authentication"
+msgstr "Désactiver l'authentification à deux facteurs"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "Votre compte administrateur doit utiliser l'authentification à deux facteurs. Configurez-la pour continuer."
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "Scannez le code QR avec une application d'authentification, puis saisissez le code affiché."
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "Installez une application d'authentification (Google Authenticator, Aegis, 1Password, Authy, ...)."
+
+msgid "Scan this QR code, or type the key below."
+msgstr "Scannez ce code QR ou saisissez la clé ci-dessous."
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "Saisissez le code à 6 chiffres pour confirmer."
+
+msgid "QR code"
+msgstr "Code QR"
+
+msgid "Setup key"
+msgstr "Clé de configuration"
+
+msgid "Verify and enable"
+msgstr "Vérifier et activer"
+
+msgid "Backup codes"
+msgstr "Codes de secours"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "Conservez ces codes en lieu sûr. Chacun ne sert qu'une fois si vous perdez l'accès à votre application d'authentification. Ils ne seront plus affichés."
+
+msgid "I have saved them"
+msgstr "Je les ai enregistrés"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "%(n)s code de secours restant."
+msgstr[1] "%(n)s codes de secours restants."
+
+msgid "Reset 2FA"
+msgstr "Réinitialiser la 2FA"
+
+msgid "Reset two-factor authentication?"
+msgstr "Réinitialiser l’authentification à deux facteurs ?"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "Cela supprime l’application d’authentification et les codes de secours de"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "La connexion se fera avec le mot de passe seul jusqu’à une nouvelle configuration."
+
+msgid "Two-factor authentication reset"
+msgstr "Authentification à deux facteurs réinitialisée"

@@ -10,9 +10,38 @@
      x-data="{
        username: '',
        password: '',
+       token: '',
+       step: 'password',
        show: false,
        error: '',
        submitting: false,
+       backToPassword() {
+         this.step = 'password';
+         this.token = '';
+         this.error = '';
+       },
+       async submitCode() {
+         this.error = '';
+         this.submitting = true;
+         try {
+           const fd = new FormData();
+           fd.append('token', this.token);
+           fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+           const res = await fetch('{% url 'common:verify2fa' %}', { method: 'POST', body: fd });
+           const data = await res.json();
+           if (data.success) {
+             window.location.href = data.redirect || '/main/';
+           } else {
+             this.error = (data.errors && data.errors.reason) || '{% trans "Invalid code." %}';
+             this.token = '';
+             if (data.restart) { this.step = 'password'; this.password = ''; }
+           }
+         } catch (e) {
+           this.error = '{% trans "Network error" %}';
+         } finally {
+           this.submitting = false;
+         }
+       },
        async submit() {
          this.error = '';
          this.submitting = true;
@@ -20,11 +49,15 @@
            const fd = new FormData();
            fd.append('username', this.username);
            fd.append('password', this.password);
+           fd.append('next', '{{ next|escapejs }}');
            fd.append('csrfmiddlewaretoken', '{{ csrf_token }}');
            const res = await fetch('{% url 'common:dologin' %}', { method: 'POST', body: fd });
            const data = await res.json();
            if (data.success) {
              window.location.href = data.redirect || '/main/';
+           } else if (data.two_factor) {
+             this.step = 'code';
+             this.$nextTick(() => this.$refs.token && this.$refs.token.focus());
            } else {
              this.error = (data.errors && data.errors.reason) || 'Login failed';
            }
@@ -47,7 +80,7 @@
     <h1>{% trans "Sign in to PyDDNS" %}</h1>
     <p class="lead">{% trans "Welcome back. Sign in to manage your dynamic DNS records." %}</p>
 
-    <form class="row" @submit.prevent="submit()">
+    <form class="row" x-show="step === 'password'" @submit.prevent="submit()">
       <div class="field">
         <label for="username">{% trans "Username" %}</label>
         <input id="username" class="input" x-model="username" autocomplete="username" autofocus required>
@@ -95,8 +128,33 @@
       {% endif %}
     </form>
 
+
+    <form class="row" x-show="step === 'code'" x-cloak @submit.prevent="submitCode()">
+      <p class="lead" style="margin-top: 0;">{% trans "Enter the 6-digit code from your authenticator app, or one of your backup codes." %}</p>
+
+      <div class="field">
+        <label for="token">{% trans "Authentication code" %}</label>
+        <input id="token" class="input mono" x-ref="token" x-model="token"
+               autocomplete="one-time-code" inputmode="text" autocapitalize="off" spellcheck="false" required>
+      </div>
+
+      <div x-show="error" x-cloak
+           role="alert"
+           style="background: oklch(from var(--bad) l c h / 0.12); border: 1px solid oklch(from var(--bad) l c h / 0.3); color: var(--bad); padding: 10px 12px; border-radius: var(--r-ctl); font-size: 13px;"
+           x-text="error"></div>
+
+      <button type="submit" class="btn btn-primary" :disabled="submitting"
+              style="justify-content: center; padding: 11px 14px;">
+        <span x-text="submitting ? '{% trans "Verifying..." %}' : '{% trans "Verify" %}'"></span>
+      </button>
+
+      <button type="button" class="btn btn-ghost" @click="backToPassword()" style="justify-content: center;">
+        {% trans "Back" %}
+      </button>
+    </form>
+
     <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-soft); color: var(--text-dim); font-size: 12px; text-align: center;">
-      {{ DNS_DOMAIN|default:"ddns.demo.com" }} · powered by PyDDNS v2.0
+      {{ DNS_DOMAIN|default:"ddns.demo.com" }} · powered by PyDDNS v{{ PYDDNS_VERSION }}
     </div>
   </div>
 

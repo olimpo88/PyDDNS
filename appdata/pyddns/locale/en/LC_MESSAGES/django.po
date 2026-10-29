@@ -301,3 +301,127 @@ msgstr ""
 #: pyddns/templates/users.html:162
 msgid "You certainly want to delete the user"
 msgstr ""
+
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr ""
+
+msgid "Authentication code"
+msgstr ""
+
+msgid "Verifying..."
+msgstr ""
+
+msgid "Verify"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Invalid code."
+msgstr ""
+
+msgid "The verification expired. Please sign in again."
+msgstr ""
+
+msgid "Account disabled."
+msgstr ""
+
+msgid "Too many attempts. Try again later."
+msgstr ""
+
+msgid "Wrong password."
+msgstr ""
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr ""
+
+msgid "Security"
+msgstr ""
+
+msgid "Two-factor authentication"
+msgstr ""
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr ""
+
+msgid "Authenticator app"
+msgstr ""
+
+msgid "Two-factor authentication is on for your account."
+msgstr ""
+
+msgid "Two-factor authentication is off."
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr ""
+
+msgid "Set up two-factor authentication"
+msgstr ""
+
+msgid "Generate new backup codes"
+msgstr ""
+
+msgid "Disable two-factor authentication"
+msgstr ""
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr ""
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr ""
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr ""
+
+msgid "Scan this QR code, or type the key below."
+msgstr ""
+
+msgid "Enter the 6-digit code to confirm."
+msgstr ""
+
+msgid "QR code"
+msgstr ""
+
+msgid "Setup key"
+msgstr ""
+
+msgid "Verify and enable"
+msgstr ""
+
+msgid "Backup codes"
+msgstr ""
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr ""
+
+msgid "I have saved them"
+msgstr ""
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Reset 2FA"
+msgstr "Reset 2FA"
+
+msgid "Reset two-factor authentication?"
+msgstr "Reset two-factor authentication?"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "This removes the authenticator app and backup codes of"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "They will sign in with their password only until they set it up again."
+
+msgid "Two-factor authentication reset"
+msgstr "Two-factor authentication reset"

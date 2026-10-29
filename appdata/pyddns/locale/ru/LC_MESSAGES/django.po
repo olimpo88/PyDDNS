@@ -508,3 +508,126 @@ msgstr "Это удалит"
 
 msgid "and all their subdomains. This can't be undone."
 msgstr "и все его поддомены. Действие нельзя отменить."
+
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "Введите 6-значный код из приложения-аутентификатора или один из резервных кодов."
+
+msgid "Authentication code"
+msgstr "Код аутентификации"
+
+msgid "Verifying..."
+msgstr "Проверка..."
+
+msgid "Verify"
+msgstr "Подтвердить"
+
+msgid "Invalid code."
+msgstr "Неверный код."
+
+msgid "The verification expired. Please sign in again."
+msgstr "Время проверки истекло. Войдите снова."
+
+msgid "Account disabled."
+msgstr "Учётная запись отключена."
+
+msgid "Too many attempts. Try again later."
+msgstr "Слишком много попыток. Повторите позже."
+
+msgid "Wrong password."
+msgstr "Неверный пароль."
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "Двухфакторная аутентификация обязательна для администраторов и не может быть отключена."
+
+msgid "Security"
+msgstr "Безопасность"
+
+msgid "Two-factor authentication"
+msgstr "Двухфакторная аутентификация"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "Добавьте к входу одноразовый код из приложения-аутентификатора."
+
+msgid "Authenticator app"
+msgstr "Приложение-аутентификатор"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "Двухфакторная аутентификация включена для вашей учётной записи."
+
+msgid "Two-factor authentication is off."
+msgstr "Двухфакторная аутентификация выключена."
+
+msgid "Enabled"
+msgstr "Включена"
+
+msgid "Disabled"
+msgstr "Выключена"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "Для учётной записи администратора обязательна двухфакторная аутентификация."
+
+msgid "Set up two-factor authentication"
+msgstr "Настроить двухфакторную аутентификацию"
+
+msgid "Generate new backup codes"
+msgstr "Создать новые резервные коды"
+
+msgid "Disable two-factor authentication"
+msgstr "Отключить двухфакторную аутентификацию"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "Для учётной записи администратора обязательна двухфакторная аутентификация. Настройте её, чтобы продолжить."
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "Отсканируйте QR-код приложением-аутентификатором и введите показанный код."
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "Установите приложение-аутентификатор (Google Authenticator, Aegis, 1Password, Authy и т. д.)."
+
+msgid "Scan this QR code, or type the key below."
+msgstr "Отсканируйте этот QR-код или введите ключ ниже."
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "Введите 6-значный код для подтверждения."
+
+msgid "QR code"
+msgstr "QR-код"
+
+msgid "Setup key"
+msgstr "Ключ настройки"
+
+msgid "Verify and enable"
+msgstr "Проверить и включить"
+
+msgid "Backup codes"
+msgstr "Резервные коды"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "Сохраните эти коды в надёжном месте. Каждый работает один раз, если вы потеряете доступ к приложению-аутентификатору. Повторно они показаны не будут."
+
+msgid "I have saved them"
+msgstr "Я сохранил(а) их"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "Остался %(n)s резервный код."
+msgstr[1] "Осталось %(n)s резервных кода."
+msgstr[2] "Осталось %(n)s резервных кодов."
+msgstr[3] "Осталось %(n)s резервных кодов."
+
+msgid "Reset 2FA"
+msgstr "Сбросить 2FA"
+
+msgid "Reset two-factor authentication?"
+msgstr "Сбросить двухфакторную аутентификацию?"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "Будут удалены приложение-аутентификатор и резервные коды пользователя"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "Пока 2FA не будет настроена заново, вход будет только по паролю."
+
+msgid "Two-factor authentication reset"
+msgstr "Двухфакторная аутентификация сброшена"

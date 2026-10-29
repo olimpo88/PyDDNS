@@ -499,6 +499,111 @@ msgstr "次のユーザー:"
 msgid "and all their subdomains. This can't be undone."
 msgstr "とそのすべてのサブドメインが削除されます。この操作は取り消せません。"
 
+# --- Two-factor authentication ---
+
+msgid "Enter the 6-digit code from your authenticator app, or one of your backup codes."
+msgstr "認証アプリの6桁のコード、またはバックアップコードを入力してください。"
+
+msgid "Authentication code"
+msgstr "認証コード"
+
+msgid "Verifying..."
+msgstr "確認中..."
+
+msgid "Verify"
+msgstr "確認"
+
+msgid "Invalid code."
+msgstr "コードが正しくありません。"
+
+msgid "The verification expired. Please sign in again."
+msgstr "確認の有効期限が切れました。もう一度サインインしてください。"
+
+msgid "Account disabled."
+msgstr "アカウントは無効です。"
+
+msgid "Too many attempts. Try again later."
+msgstr "試行回数が多すぎます。しばらくしてからやり直してください。"
+
+msgid "Wrong password."
+msgstr "パスワードが正しくありません。"
+
+msgid "Two-factor authentication is required for administrators and cannot be disabled."
+msgstr "管理者には二要素認証が必須です。無効にすることはできません。"
+
+msgid "Security"
+msgstr "セキュリティ"
+
+msgid "Two-factor authentication"
+msgstr "二要素認証"
+
+msgid "Add a one-time code from an authenticator app to your sign-in."
+msgstr "サインインに、認証アプリのワンタイムコードを追加します。"
+
+msgid "Authenticator app"
+msgstr "認証アプリ"
+
+msgid "Two-factor authentication is on for your account."
+msgstr "アカウントの二要素認証は有効です。"
+
+msgid "Two-factor authentication is off."
+msgstr "二要素認証は無効です。"
+
+msgid "Enabled"
+msgstr "有効"
+
+msgid "Disabled"
+msgstr "無効"
+
+msgid "Your administrator account must use two-factor authentication."
+msgstr "管理者アカウントでは二要素認証の使用が必須です。"
+
+msgid "Set up two-factor authentication"
+msgstr "二要素認証を設定"
+
+msgid "Generate new backup codes"
+msgstr "新しいバックアップコードを生成"
+
+msgid "Disable two-factor authentication"
+msgstr "二要素認証を無効にする"
+
+msgid "Your administrator account must use two-factor authentication. Set it up to continue."
+msgstr "管理者アカウントでは二要素認証が必須です。続行するには設定してください。"
+
+msgid "Scan the QR code with an authenticator app, then enter the code it shows."
+msgstr "認証アプリでQRコードを読み取り、表示されたコードを入力してください。"
+
+msgid "Install an authenticator app (Google Authenticator, Aegis, 1Password, Authy, ...)."
+msgstr "認証アプリ（Google Authenticator、Aegis、1Password、Authy など）をインストールします。"
+
+msgid "Scan this QR code, or type the key below."
+msgstr "このQRコードを読み取るか、下のキーを入力してください。"
+
+msgid "Enter the 6-digit code to confirm."
+msgstr "確認のため6桁のコードを入力してください。"
+
+msgid "QR code"
+msgstr "QRコード"
+
+msgid "Setup key"
+msgstr "セットアップキー"
+
+msgid "Verify and enable"
+msgstr "確認して有効化"
+
+msgid "Backup codes"
+msgstr "バックアップコード"
+
+msgid "Save these codes somewhere safe. Each one works once if you lose access to your authenticator app. They will not be shown again."
+msgstr "これらのコードは安全な場所に保管してください。認証アプリにアクセスできなくなった場合、それぞれ1回だけ使用できます。再表示はされません。"
+
+msgid "I have saved them"
+msgstr "保存しました"
+
+msgid "%(n)s backup code left."
+msgid_plural "%(n)s backup codes left."
+msgstr[0] "バックアップコードは残り%(n)s個です。"
+
 #~ msgid "User"
 #~ msgstr "ユーザー"
 
@@ -602,3 +707,18 @@ msgstr "とそのすべてのサブドメインが削除されます。この操
 #, fuzzy
 #~ msgid "You certainly want to delete the user"
 #~ msgstr "このユーザーを削除しますか？"
+
+msgid "Reset 2FA"
+msgstr "2FAをリセット"
+
+msgid "Reset two-factor authentication?"
+msgstr "二段階認証をリセットしますか？"
+
+msgid "This removes the authenticator app and backup codes of"
+msgstr "次のユーザーの認証アプリとバックアップコードを削除します:"
+
+msgid "They will sign in with their password only until they set it up again."
+msgstr "再設定するまで、パスワードのみでサインインします。"
+
+msgid "Two-factor authentication reset"
+msgstr "二段階認証をリセットしました"
