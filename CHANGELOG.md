@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] — 2026-10-29
+
 ### Added
 
 - **Password reset by email** — self-service flow with localized emails
@@ -109,6 +111,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   reconnects. `GUNICORN_WORKERS` is also env-configurable so operators
   can size worker count to their device fanout.
 
+### Security
+
+- **Pillow 12.2.0 → 13.0.0** — fixes the reported security advisory.
+- **Django 5.2.13 → 5.2.18** — upstream security patch releases (5.2 LTS).
+- **gunicorn 23.0.0 → 26.0.0** — the removed `eventlet` worker was not used
+  by PyDDNS; stricter HTTP request-target and header validation upstream.
+- **requests 2.33.0 → 2.34.1**, **djangorestframework 3.16.0 → 3.17.1**,
+  **psycopg2-binary 2.9.10 → 2.9.13**.
+- **nginx 1.27 → 1.31** (`docker-compose.yml`); the bundled config validates
+  unchanged.
+- Dev/CI tooling: pytest 9.1.1, pytest-django 4.12.0, pytest-cov 7.1.0,
+  pytest-env 1.6.0.
+
 ## [2.0.0] — 2026-04-25
 
 Major modernization release. Stack upgraded end-to-end, security hardened,
@@ -190,5 +205,6 @@ See `SECURITY.md` for the disclosure policy. This release closes 2 critical,
 
 ---
 
-[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/olimpo88/PyDDNS/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/olimpo88/PyDDNS/releases/tag/v2.0.0
