@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] — 2026-10-29
+
+### Changed
+
+- Dependencies: `djangorestframework` 3.17.1 → 3.18.2 and `dnspython`
+  2.6.1 → 2.9.0 (Dependabot security group). Verified against the full test
+  suite; rebuild the `python` image to pick them up.
+
 ## [2.2.0] — 2026-10-29
 
 ### Added
@@ -243,7 +251,8 @@ See `SECURITY.md` for the disclosure policy. This release closes 2 critical,
 
 ---
 
-[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.2.0...HEAD
+[Unreleased]: https://github.com/olimpo88/PyDDNS/compare/v2.2.1...HEAD
+[2.2.1]: https://github.com/olimpo88/PyDDNS/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/olimpo88/PyDDNS/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/olimpo88/PyDDNS/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/olimpo88/PyDDNS/releases/tag/v2.0.0

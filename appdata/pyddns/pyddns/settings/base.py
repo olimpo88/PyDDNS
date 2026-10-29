@@ -154,7 +154,7 @@ DNS_API_PORT = os.environ.get('DNS_API_PORT')
 DNS_SHARED_SECRET = os.environ.get('DNS_SHARED_SECRET')
 DNS_ALLOW_AGENT = os.environ.get('DNS_ALLOW_AGENT')
 # Shown in the footer and on the login page; bump together with the git tag.
-PYDDNS_VERSION = '2.2.0'
+PYDDNS_VERSION = '2.2.1'
 
 DNS_DOMAIN = os.environ.get('DNS_DOMAIN')
 OWN_ADMIN = os.environ.get('OWN_ADMIN')
